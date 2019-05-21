@@ -81,12 +81,12 @@
       var attr_side =
         'Über diese <a href="https://github.com/ToastHawaii/osm-public-bookcase">Seite</a>';
       var attr_osm =
-        'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors';
+        'Map data &copy; <a href="https://openstreetmap.org/">OpenStreetMap</a> contributors';
       var attr_overpass =
-        'POI via <a href="http://www.overpass-api.de/">Overpass API</a>';
+        'POI via <a href="https://www.overpass-api.de/">Overpass API</a>';
 
       var osm = new L.TileLayer(
-        "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         {
           opacity: 0.7,
           attribution: [attr_side, attr_osm, attr_overpass].join(", ")
@@ -206,7 +206,7 @@
        }  <br>
           <div class="geo">
            <small>
-           <a href="http://maps.apple.com/?ll=${address.latitude},${
+           <a href="https://maps.apple.com/?ll=${address.latitude},${
                         address.longitude
                       }&q=${address.name}">
              <span class="latitude">${address.latitude}</span>,
