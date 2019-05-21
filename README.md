@@ -1,6 +1,6 @@
 # Öffentliche Bücherschränke
 
-Hier gehts zur Karte: https://toasthawaii.github.io/osm-public-bookcase/index.html
+Hier gehts zur Karte: https://toasthawaii.github.io/
 
 Dies ist eine einfache Karte, welche Bücherschränke in ihrer Nähe anzeigt. Die Informationen werden von OpenStreetMap https://www.openstreetmap.org geladen.
 
