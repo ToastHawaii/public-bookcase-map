@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Öffentliche Bücherschränke</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/osm-public-bookcase/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/osm-public-bookcase/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/osm-public-bookcase/icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/osm-public-bookcase/icons/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="/osm-public-bookcase/icons/safari-pinned-tab.svg"
+      color="#734a08"
+    />
+    <link rel="shortcut icon" href="/osm-public-bookcase/icons/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#ffc40d" />
+    <meta
+      name="msapplication-config"
+      content="/osm-public-bookcase/icons/browserconfig.xml"
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="lib/OverPassLayer.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+      integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+      integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+      crossorigin=""
+    ></script>
+    <script src="lib/OverPassLayer.bundle.js"></script>
+    <script src="lib/simple-opening-hours.js"></script>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+
+      html,
+      body,
+      #map {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      var days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
+
+      var attr_side =
+        'Über diese <a href="https://github.com/ToastHawaii/osm-public-bookcase">Seite</a>';
+      var attr_osm =
+        'Map data &copy; <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors';
+      var attr_overpass =
+        'POI via <a href="http://www.overpass-api.de/">Overpass API</a>';
+
+      var osm = new L.TileLayer(
+        "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+          opacity: 0.7,
+          attribution: [attr_side, attr_osm, attr_overpass].join(", ")
+        }
+      );
+
+      var map = new L.Map("map").addLayer(osm).setView(new L.LatLng(47, 8), 10);
+
+      var opl = new L.OverPassLayer({
+        markerIcon: L.icon({
+          iconUrl:
+            "https://wiki.openstreetmap.org/w/images/b/b2/Public_bookcase-14.svg",
+          iconSize: [28, 28]
+        }),
+        minZoomIndicatorEnabled: false,
+        minZoom: 10,
+        query: '(node["amenity"="public_bookcase"]({{bbox}}););out qt;',
+        onSuccess(data) {
+          for (let i = 0; i < data.elements.length; i++) {
+            let pos;
+            let marker;
+            const e = data.elements[i];
+
+            if (e.id in this._ids) {
+              continue;
+            }
+
+            this._ids[e.id] = true;
+
+            if (e.type === "node") {
+              pos = L.latLng(e.lat, e.lon);
+            } else {
+              pos = L.latLng(e.center.lat, e.center.lon);
+            }
+
+            if (this.options.markerIcon) {
+              marker = L.marker(pos, { icon: this.options.markerIcon });
+            } else {
+              marker = L.circle(pos, 20, {
+                stroke: false,
+                fillColor: "#E54041",
+                fillOpacity: 0.9
+              });
+            }
+
+            marker.bindPopup(
+              function() {
+                let el = document.createElement("div");
+
+                let request = new XMLHttpRequest();
+
+                request.onreadystatechange = function() {
+                  if (request.readyState === 4) {
+                    if (request.status === 200) {
+                      let result = JSON.parse(request.responseText);
+                      let address = {
+                        name:
+                          e.tags.name ||
+                          e.tags.operator ||
+                          e.tags.brand ||
+                          result.namedetails.name ||
+                          result.namedetails.official_name ||
+                          "",
+                        country: result.address.country_code || "",
+                        postcode: result.address.postcode || "",
+                        locality:
+                          result.address.city ||
+                          result.address.town ||
+                          result.address.village ||
+                          result.address.suburb ||
+                          result.address.neighbourhood ||
+                          result.address.state ||
+                          result.address.county ||
+                          "",
+                        street:
+                          result.address.path ||
+                          result.address.footway ||
+                          result.address.road ||
+                          result.address.cycleway ||
+                          result.address.pedestrian ||
+                          result.address.farmyard ||
+                          result.address.construction ||
+                          result.namedetails.name ||
+                          result.namedetails.official_name ||
+                          result.address.neighbourhood ||
+                          "",
+                        houseNumber: result.address.house_number || "",
+                        houseName:
+                          result.namedetails.name ||
+                          result.namedetails.official_name ||
+                          "",
+                        latitude: e.lat,
+                        longitude: e.lon
+                      };
+
+                      var opening = new SimpleOpeningHours(
+                        e.tags.opening_hours || ""
+                      );
+
+                      el.innerHTML = `<div id="hcard-Name" class="vcard">
+          ${address.name ? `<strong class="fn">${address.name}</strong>` : ""}
+          <div class="adr">
+           <div class="street-address">${address.street} ${
+                        address.houseNumber
+                      }</div>
+      				<span class="postal-code">${address.postcode}</span>
+           <span class="region">${address.locality}</span>
+          </div>
+       ${
+         e.tags.opening_hours
+           ? `<br><div>${
+               opening.isOpenNow() ? `Jetzt geöffnet` : `Geschlossen`
+             } ${opening
+               .getTable()
+               [days[new Date().getDay()]].join(`, `)}</div>`
+           : ``
+       }  <br>
+          <div class="geo">
+           <small>
+           <a href="http://maps.apple.com/?ll=${address.latitude},${
+                        address.longitude
+                      }&q=${address.name}">
+             <span class="latitude">${address.latitude}</span>,
+             <span class="longitude">${address.longitude}</span>
+           </a>
+           </small>
+          </div>
+         </div>`;
+                    }
+                  }
+                };
+
+                request.open(
+                  "Get",
+                  "https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&namedetails=1&lat=" +
+                    e.lat +
+                    "&lon=" +
+                    e.lon
+                );
+
+                request.send();
+
+                el.innerHTML = e.lat + ", " + e.lon;
+                return el;
+              },
+              {
+                minWidth: 200
+              }
+            );
+
+            this._markers.addLayer(marker);
+          }
+        }
+      });
+
+      // placeholders for the L.marker and L.circle representing user's current position and accuracy
+      var current_position, current_accuracy;
+
+      function onLocationFound(e) {
+        // if position defined, then remove the existing position marker and accuracy circle from the map
+        if (current_position) {
+          map.removeLayer(current_position);
+          map.removeLayer(current_accuracy);
+        }
+
+        var radius = e.accuracy / 2;
+
+        current_position = L.marker(e.latlng).addTo(map);
+
+        current_accuracy = L.circle(e.latlng, radius).addTo(map);
+
+        map.locate({ watch: true, maxZoom: 16 });
+
+        map.addLayer(opl);
+      }
+
+      function onLocationError(e) {
+        map.addLayer(opl);
+      }
+
+      map.on("locationfound", onLocationFound);
+      map.on("locationerror", onLocationError);
+
+      map.locate({ setView: true, maxZoom: 16 });
+
+      function locate() {
+        map.stopLocate();
+        map.locate({ setView: true, maxZoom: 16 });
+
+        return false;
+      }
+
+      function search() {
+        let request = new XMLHttpRequest();
+
+        request.onreadystatechange = function() {
+          if (request.readyState === 4) {
+            if (request.status === 200) {
+              let result = JSON.parse(request.responseText)[0];
+              if (!result) return;
+
+              map.flyToBounds([
+                [result.boundingbox[0], result.boundingbox[2]],
+                [result.boundingbox[1], result.boundingbox[3]]
+              ]);
+            }
+          }
+        };
+
+        request.open(
+          "Get",
+          `https://nominatim.openstreetmap.org/search?format=json&q=${
+            document.getElementById("osm-search").value
+          }&limit=1`
+        );
+
+        request.send();
+
+        return false;
+      }
+    </script>
+    <h1>
+      Öffentliche Bücherschränke
+    </h1>
+    <div class="box">
+      <div class="container">
+        <form onsubmit="return search();">
+          <button class="geo" type="button" onclick="return locate();">
+            <i class="fa fa-dot-circle-o"></i>
+          </button>
+          <input type="search" id="osm-search" placeholder="Suche" />
+          <button class="icon" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
