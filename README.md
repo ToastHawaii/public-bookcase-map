@@ -1,3 +1,6 @@
+---
+---
+
 # Öffentliche Bücherschränke
 
 [Hier gehts zur Karte](https://toasthawaii.github.io/map.html)

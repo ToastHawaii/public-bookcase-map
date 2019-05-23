@@ -4,3 +4,9 @@ description: Karte mit öffentlichen Bücherschränken basierend auf OSM Daten.
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+
+defaults:
+  - scope:
+      path: "README.md"
+    values:
+      permalink: "README.html"
