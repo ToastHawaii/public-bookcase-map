@@ -9,4 +9,4 @@ defaults:
   - scope:
       path: "README.md"
     values:
-      permalink: "README.html"
+      permalink: "index.html"
