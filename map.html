@@ -4,6 +4,10 @@
     <title>Öffentliche Bücherschränke</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Dies ist eine einfache Karte, welche öffentliche Bücherschränke in ihrer Nähe anzeigt."
+    />
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link
@@ -136,11 +140,10 @@
             let model = {
               address: {
                 name: e.tags.name || e.tags.operator || e.tags.brand || "",
-                country: "",
-                postcode: "",
-                locality: "",
-                street: "",
-                houseNumber: "",
+                postcode: e.tags["addr:postcode"] || "",
+                locality: e.tags["addr:city"] || "",
+                street: e.tags["addr:street"] || "",
+                houseNumber: e.tags["addr:housenumber"] || "",
                 houseName: "",
                 latitude: e.lat,
                 longitude: e.lon
@@ -148,7 +151,15 @@
               hasOpeningHours: !!e.tags.opening_hours,
               opening: new SimpleOpeningHours(e.tags.opening_hours || ""),
               img: "",
-              imgExtern: false
+              imgExtern: false,
+
+              wheelchair: false,
+              light: false,
+              indoor: false,
+
+              website: "",
+              email: "",
+              phone: ""
             };
 
             if (!model.img && e.tags.mapillary)
@@ -162,7 +173,25 @@
               toWikimediaCommensUrl(e.tags.wikimedia_commons) ||
               e.tags.flickr ||
               e.tags.image ||
-              e.tags.wikimedia_commons;
+              e.tags.wikimedia_commons ||
+              e.tags.picture;
+
+            model.wheelchair = e.tags.wheelchair === "yes";
+            model.light = e.tags.lit === "yes";
+            model.indoor =
+              e.tags.location === "indoor" || e.tags.indoor === "yes";
+            model.website =
+              model.website ||
+              e.tags.website ||
+              (e.tags.wikipedia
+                ? `https://wikipedia.org/wiki/${e.tags.wikipedia}`
+                : ``) ||
+              e.tags.url ||
+              e.tags["contact:website"];
+            model.email =
+              model.email || e.tags.email || e.tags["contact:email"];
+            model.phone =
+              model.phone || e.tags.phone || e.tags["contact:phone"];
 
             let loaded = false;
             const popup = L.popup({
@@ -186,8 +215,6 @@
                     result.namedetails.name ||
                     result.namedetails.official_name ||
                     "";
-                  model.address.country =
-                    model.address.country || result.address.country_code || "";
                   model.address.postcode =
                     model.address.postcode || result.address.postcode || "";
                   model.address.locality =
@@ -247,6 +274,25 @@
                             : ""
                         }
                         <div class="adr">
+                        
+                        ${
+                          model.indoor
+                            ? `<i style="float:right;margin-left:5px;" class="fa fa-building-o"></i>`
+                            : ``
+                        }
+                        
+                        ${
+                          model.light
+                            ? `<i style="float:right;margin-left:5px;" class="fa fa-lightbulb-o"></i>`
+                            : ``
+                        }
+
+                        ${
+                          model.wheelchair
+                            ? `<i style="float:right;margin-left:5px;" class="fa fa-wheelchair"></i>`
+                            : ``
+                        }
+                        
                          <div class="street-address">${model.address.street} ${
                 model.address.houseNumber
               }</div>
@@ -278,15 +324,43 @@
                         ${
                           model.img
                             ? !model.imgExtern
-                              ? `<br /><img style="max-width:300px;" src="${
+                              ? `<br /><img style="max-width:300px;max-height:300px;" src="${
                                   model.img
                                 }"/>`
                               : `<br /><a href="${
                                   model.img
-                                }" target="_blank"><img style="width:20px;" src="https://wiki.openstreetmap.org/w/images/thumb/4/4a/Photo-14.svg/240px-Photo-14.svg"/></a>`
+                                }" target="_blank"><i class="fa fa-photo fa-2x"></i></a>`
                             : ``
                         }
-                       </div>`;
+                        ${
+                          model.website || model.email || model.phone
+                            ? `
+                        <div>
+                          <br />
+                          ${
+                            model.website
+                              ? `<a href="${
+                                  model.website
+                                }" target="_blank"><i class="fa fa-globe fa-lg"></i></a>&ensp;`
+                              : ``
+                          } 
+                          ${
+                            model.email
+                              ? `<a href="mailto:${
+                                  model.email
+                                }" target="_blank"><i class="fa fa-envelope fa-lg"></i></a>&ensp;`
+                              : ``
+                          } 
+                          ${
+                            model.phone
+                              ? `<a href="tel:${
+                                  model.phone
+                                }" target="_blank"><i class="fa fa-phone fa-lg"></i></a>&ensp;`
+                              : ``
+                          }
+                       </div>`
+                            : ``
+                        }</div>`;
 
               return el;
             });
