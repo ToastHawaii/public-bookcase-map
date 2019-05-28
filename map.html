@@ -133,56 +133,63 @@
               });
             }
 
-            let html = `<div id="hcard-Name" class="vcard">
+            let model = {
+              address: {
+                name: e.tags.name || e.tags.operator || e.tags.brand || "",
+                country: "",
+                postcode: "",
+                locality: "",
+                street: "",
+                houseNumber: "",
+                houseName: "",
+                latitude: e.lat,
+                longitude: e.lon
+              },
+              hasOpeningHours: !!e.tags.opening_hours,
+              opening: new SimpleOpeningHours(e.tags.opening_hours || ""),
+              img: "",
+              imgExtern: false
+            };
 
-                            <div class="adr">
-                             <div class="street-address"></div>
-                        				<span class="postal-code"></span>
-                             <span class="region"></span>
-                            </div>
-                          <br>
-                            <div class="geo">
-                             <small>
-                             <a href="https://maps.apple.com/?ll=${e.lat},${
-              e.lon
-            }">
-                               Routen
-                             </a>
-                             </small>
-                            </div>
-                           </div>`;
-            let img = "";
+            if (!model.img && e.tags.mapillary)
+              model.img = `https://d1cuyjsrcm0gby.cloudfront.net/${
+                e.tags.mapillary
+              }/thumb-320.jpg`;
+
+            model.img =
+              model.img ||
+              toWikimediaCommensUrl(e.tags.image) ||
+              toWikimediaCommensUrl(e.tags.wikimedia_commons) ||
+              e.tags.flickr ||
+              e.tags.image ||
+              e.tags.wikimedia_commons;
+
             let loaded = false;
             const popup = L.popup({
               minWidth: 200
             }).setContent(function() {
-              const el = document.createElement("div");
+              if (!loaded) {
+                loaded = true;
 
-              if (loaded) {
-                el.innerHTML = html;
-                return el;
-              }
+                let request = new XMLHttpRequest();
 
-              loaded = true;
+                request.onreadystatechange = function() {
+                  if (request.readyState !== 4) return;
+                  if (request.status !== 200) return;
 
-              let request = new XMLHttpRequest();
+                  let result = JSON.parse(request.responseText);
 
-              request.onreadystatechange = function() {
-                if (request.readyState !== 4) return;
-                if (request.status !== 200) return;
-
-                let result = JSON.parse(request.responseText);
-                let address = {
-                  name:
-                    e.tags.name ||
-                    e.tags.operator ||
-                    e.tags.brand ||
+                  model.address.name =
+                    model.address.name ||
                     result.namedetails.name ||
                     result.namedetails.official_name ||
-                    "",
-                  country: result.address.country_code || "",
-                  postcode: result.address.postcode || "",
-                  locality:
+                    "";
+                  model.address.country =
+                    model.address.country || result.address.country_code || "";
+                  model.address.postcode =
+                    model.address.postcode || result.address.postcode || "";
+                  model.address.locality =
+                    model.address.locality ||
                     result.address.city ||
                     result.address.town ||
                     result.address.village ||
@@ -190,8 +197,9 @@
                     result.address.neighbourhood ||
                     result.address.state ||
                     result.address.county ||
-                    "",
-                  street:
+                    "";
+                  model.address.street =
+                    model.address.street ||
                     result.address.path ||
                     result.address.footway ||
                     result.address.road ||
@@ -202,97 +210,101 @@
                     result.namedetails.name ||
                     result.namedetails.official_name ||
                     result.address.neighbourhood ||
-                    "",
-                  houseNumber: result.address.house_number || "",
-                  houseName:
+                    "";
+                  model.address.houseNumber =
+                    model.address.houseNumber ||
+                    result.address.house_number ||
+                    "";
+                  model.address.houseName =
+                    model.address.houseName ||
                     result.namedetails.name ||
                     result.namedetails.official_name ||
-                    "",
-                  latitude: e.lat,
-                  longitude: e.lon
+                    "";
+
+                  popup.update();
                 };
 
-                var opening = new SimpleOpeningHours(
-                  e.tags.opening_hours || ""
+                request.open(
+                  "Get",
+                  "https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&namedetails=1&lat=" +
+                    e.lat +
+                    "&lon=" +
+                    e.lon
                 );
 
-                if (!img && e.tags.mapillary)
-                  img = `https://d1cuyjsrcm0gby.cloudfront.net/${
-                    e.tags.mapillary
-                  }/thumb-320.jpg`;
+                request.send();
+              }
 
-                if (
-                  !img &&
-                  e.tags.wikimedia_commons &&
-                  e.tags.wikimedia_commons
-                    .toUpperCase()
-                    .startsWith("File:".toUpperCase())
-                )
-                  img = toWikimediaCommensUrl(e.tags.wikimedia_commons);
+              const el = document.createElement("div");
+              el.innerHTML = `<div id="hcard-Name" class="vcard">
+                        ${
+                          model.address.name
+                            ? `<strong class="fn">${
+                                model.address.name
+                              }</strong>`
+                            : ""
+                        }
+                        <div class="adr">
+                         <div class="street-address">${model.address.street} ${
+                model.address.houseNumber
+              }</div>
+                            <span class="postal-code">${
+                              model.address.postcode
+                            }</span>
+                         <span class="region">${model.address.locality}</span>
+                        </div>
+                     ${
+                       model.hasOpeningHours
+                         ? `<br><div>${
+                             model.opening.isOpenNow()
+                               ? `Jetzt geöffnet`
+                               : `Geschlossen`
+                           } ${model.opening
+                             .getTable()
+                             [days[new Date().getDay()]].join(`, `)}</div>`
+                         : ``
+                     }  <br>
+                        <div class="geo">
+                         <small>
+                         <a href="https://maps.apple.com/?ll=${
+                           model.address.latitude
+                         },${model.address.longitude}&q=${model.address.name}">
+                           Routen
+                         </a>
+                         </small>
+                        </div>
+                        ${
+                          model.img
+                            ? !model.imgExtern
+                              ? `<br /><img style="max-width:300px;" src="${
+                                  model.img
+                                }"/>`
+                              : `<br /><a href="${
+                                  model.img
+                                }" target="_blank"><img style="width:20px;" src="https://wiki.openstreetmap.org/w/images/thumb/4/4a/Photo-14.svg/240px-Photo-14.svg"/></a>`
+                            : ``
+                        }
+                       </div>`;
 
-                if (!img && e.tags.image)
-                  if (
-                    e.tags.image.toUpperCase().startsWith("File:".toUpperCase())
-                  )
-                    img = toWikimediaCommensUrl(e.tags.image);
-                  else img = e.tags.image;
-
-                img = img || e.tags.flickr;
-
-                html = `<div id="hcard-Name" class="vcard">
-            ${address.name ? `<strong class="fn">${address.name}</strong>` : ""}
-            <div class="adr">
-             <div class="street-address">${address.street} ${
-                  address.houseNumber
-                }</div>
-                <span class="postal-code">${address.postcode}</span>
-             <span class="region">${address.locality}</span>
-            </div>
-         ${
-           e.tags.opening_hours
-             ? `<br><div>${
-                 opening.isOpenNow() ? `Jetzt geöffnet` : `Geschlossen`
-               } ${opening
-                 .getTable()
-                 [days[new Date().getDay()]].join(`, `)}</div>`
-             : ``
-         }  <br>
-            <div class="geo">
-             <small>
-             <a href="https://maps.apple.com/?ll=${address.latitude},${
-                  address.longitude
-                }&q=${address.name}">
-               Routen
-             </a>
-             </small>
-            </div>
-            ${img ? `<br /><img src="${img}" />` : ``}
-           </div>`;
-
-                popup.update();
-
-                if (img) {
-                  const imageElement = new Image();
-                  imageElement.onload = function() {
-                    popup.update();
-                  };
-                  imageElement.src = img;
-                }
-              };
-
-              request.open(
-                "Get",
-                "https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&namedetails=1&lat=" +
-                  e.lat +
-                  "&lon=" +
-                  e.lon
-              );
-
-              request.send();
-
-              el.innerHTML = html;
               return el;
             });
+
+            if (model.img) {
+              const imageElement = new Image();
+              imageElement.onload = function() {
+                setTimeout(function() {
+                  popup.update();
+                }, 1);
+              };
+              imageElement.onerror = function() {
+                model.imgExtern = true;
+                setTimeout(function() {
+                  popup.update();
+                }, 1);
+              };
+              imageElement.src = model.img;
+            }
+
             marker.bindPopup(popup);
             this._markers.addLayer(marker);
           }
@@ -366,7 +378,14 @@
       }
 
       function toWikimediaCommensUrl(source) {
-        const fileName = source.substring(5, source.length);
+        if (!source) return "";
+
+        let fileName = "";
+
+        if (source.toUpperCase().startsWith("File:".toUpperCase()))
+          fileName = source.substring(5, source.length);
+
+        if (!fileName) return "";
 
         const hash = md5(fileName);
         return `https://upload.wikimedia.org/wikipedia/commons/thumb/${hash.substring(
