@@ -50,6 +50,7 @@
       crossorigin=""
     ></script>
     <script src="lib/OverPassLayer.bundle.js"></script>
+    <script src="lib/md5.js"></script>
     <script src="lib/simple-opening-hours.js"></script>
     <style>
       body {
@@ -132,111 +133,167 @@
               });
             }
 
-            marker.bindPopup(
-              function() {
-                let el = document.createElement("div");
+            let html = `<div id="hcard-Name" class="vcard">
 
-                let request = new XMLHttpRequest();
+                            <div class="adr">
+                             <div class="street-address"></div>
+                        				<span class="postal-code"></span>
+                             <span class="region"></span>
+                            </div>
+                          <br>
+                            <div class="geo">
+                             <small>
+                             <a href="https://maps.apple.com/?ll=${e.lat},${
+              e.lon
+            }">
+                               Routen
+                             </a>
+                             </small>
+                            </div>
+                           </div>`;
+            let img = "";
+            let loaded = false;
+            const popup = L.popup({
+              minWidth: 200
+            }).setContent(function() {
+              const el = document.createElement("div");
 
-                request.onreadystatechange = function() {
-                  if (request.readyState === 4) {
-                    if (request.status === 200) {
-                      let result = JSON.parse(request.responseText);
-                      let address = {
-                        name:
-                          e.tags.name ||
-                          e.tags.operator ||
-                          e.tags.brand ||
-                          result.namedetails.name ||
-                          result.namedetails.official_name ||
-                          "",
-                        country: result.address.country_code || "",
-                        postcode: result.address.postcode || "",
-                        locality:
-                          result.address.city ||
-                          result.address.town ||
-                          result.address.village ||
-                          result.address.suburb ||
-                          result.address.neighbourhood ||
-                          result.address.state ||
-                          result.address.county ||
-                          "",
-                        street:
-                          result.address.path ||
-                          result.address.footway ||
-                          result.address.road ||
-                          result.address.cycleway ||
-                          result.address.pedestrian ||
-                          result.address.farmyard ||
-                          result.address.construction ||
-                          result.namedetails.name ||
-                          result.namedetails.official_name ||
-                          result.address.neighbourhood ||
-                          "",
-                        houseNumber: result.address.house_number || "",
-                        houseName:
-                          result.namedetails.name ||
-                          result.namedetails.official_name ||
-                          "",
-                        latitude: e.lat,
-                        longitude: e.lon
-                      };
+              if (loaded) {
+                el.innerHTML = html;
+                return el;
+              }
 
-                      var opening = new SimpleOpeningHours(
-                        e.tags.opening_hours || ""
-                      );
+              loaded = true;
 
-                      el.innerHTML = `<div id="hcard-Name" class="vcard">
-          ${address.name ? `<strong class="fn">${address.name}</strong>` : ""}
-          <div class="adr">
-           <div class="street-address">${address.street} ${
-                        address.houseNumber
-                      }</div>
-      				<span class="postal-code">${address.postcode}</span>
-           <span class="region">${address.locality}</span>
-          </div>
-       ${
-         e.tags.opening_hours
-           ? `<br><div>${
-               opening.isOpenNow() ? `Jetzt geöffnet` : `Geschlossen`
-             } ${opening
-               .getTable()
-               [days[new Date().getDay()]].join(`, `)}</div>`
-           : ``
-       }  <br>
-          <div class="geo">
-           <small>
-           <a href="https://maps.apple.com/?ll=${address.latitude},${
-                        address.longitude
-                      }&q=${address.name}">
-             <span class="latitude">${address.latitude}</span>,
-             <span class="longitude">${address.longitude}</span>
-           </a>
-           </small>
-          </div>
-         </div>`;
-                    }
-                  }
+              let request = new XMLHttpRequest();
+
+              request.onreadystatechange = function() {
+                if (request.readyState !== 4) return;
+                if (request.status !== 200) return;
+
+                let result = JSON.parse(request.responseText);
+                let address = {
+                  name:
+                    e.tags.name ||
+                    e.tags.operator ||
+                    e.tags.brand ||
+                    result.namedetails.name ||
+                    result.namedetails.official_name ||
+                    "",
+                  country: result.address.country_code || "",
+                  postcode: result.address.postcode || "",
+                  locality:
+                    result.address.city ||
+                    result.address.town ||
+                    result.address.village ||
+                    result.address.suburb ||
+                    result.address.neighbourhood ||
+                    result.address.state ||
+                    result.address.county ||
+                    "",
+                  street:
+                    result.address.path ||
+                    result.address.footway ||
+                    result.address.road ||
+                    result.address.cycleway ||
+                    result.address.pedestrian ||
+                    result.address.farmyard ||
+                    result.address.construction ||
+                    result.namedetails.name ||
+                    result.namedetails.official_name ||
+                    result.address.neighbourhood ||
+                    "",
+                  houseNumber: result.address.house_number || "",
+                  houseName:
+                    result.namedetails.name ||
+                    result.namedetails.official_name ||
+                    "",
+                  latitude: e.lat,
+                  longitude: e.lon
                 };
 
-                request.open(
-                  "Get",
-                  "https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&namedetails=1&lat=" +
-                    e.lat +
-                    "&lon=" +
-                    e.lon
+                var opening = new SimpleOpeningHours(
+                  e.tags.opening_hours || ""
                 );
 
-                request.send();
+                if (!img && e.tags.mapillary)
+                  img = `https://d1cuyjsrcm0gby.cloudfront.net/${
+                    e.tags.mapillary
+                  }/thumb-320.jpg`;
 
-                el.innerHTML = e.lat + ", " + e.lon;
-                return el;
-              },
-              {
-                minWidth: 200
-              }
-            );
+                if (
+                  !img &&
+                  e.tags.wikimedia_commons &&
+                  e.tags.wikimedia_commons
+                    .toUpperCase()
+                    .startsWith("File:".toUpperCase())
+                )
+                  img = toWikimediaCommensUrl(e.tags.wikimedia_commons);
 
+                if (!img && e.tags.image)
+                  if (
+                    e.tags.image.toUpperCase().startsWith("File:".toUpperCase())
+                  )
+                    img = toWikimediaCommensUrl(e.tags.image);
+                  else img = e.tags.image;
+
+                img = img || e.tags.flickr;
+
+                html = `<div id="hcard-Name" class="vcard">
+            ${address.name ? `<strong class="fn">${address.name}</strong>` : ""}
+            <div class="adr">
+             <div class="street-address">${address.street} ${
+                  address.houseNumber
+                }</div>
+                <span class="postal-code">${address.postcode}</span>
+             <span class="region">${address.locality}</span>
+            </div>
+         ${
+           e.tags.opening_hours
+             ? `<br><div>${
+                 opening.isOpenNow() ? `Jetzt geöffnet` : `Geschlossen`
+               } ${opening
+                 .getTable()
+                 [days[new Date().getDay()]].join(`, `)}</div>`
+             : ``
+         }  <br>
+            <div class="geo">
+             <small>
+             <a href="https://maps.apple.com/?ll=${address.latitude},${
+                  address.longitude
+                }&q=${address.name}">
+               Routen
+             </a>
+             </small>
+            </div>
+            ${img ? `<br /><img src="${img}" />` : ``}
+           </div>`;
+
+                popup.update();
+
+                if (img) {
+                  const imageElement = new Image();
+                  imageElement.onload = function() {
+                    popup.update();
+                  };
+                  imageElement.src = img;
+                }
+              };
+
+              request.open(
+                "Get",
+                "https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&namedetails=1&lat=" +
+                  e.lat +
+                  "&lon=" +
+                  e.lon
+              );
+
+              request.send();
+
+              el.innerHTML = html;
+              return el;
+            });
+            marker.bindPopup(popup);
             this._markers.addLayer(marker);
           }
         }
@@ -306,6 +363,16 @@
         request.send();
 
         return false;
+      }
+
+      function toWikimediaCommensUrl(source) {
+        const fileName = source.substring(5, source.length);
+
+        const hash = md5(fileName);
+        return `https://upload.wikimedia.org/wikipedia/commons/thumb/${hash.substring(
+          0,
+          1
+        )}/${hash.substring(0, 2)}/${fileName}/320px-${fileName}`;
       }
     </script>
     <h1>
