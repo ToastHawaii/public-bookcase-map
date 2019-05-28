@@ -166,7 +166,9 @@
 
             let loaded = false;
             const popup = L.popup({
-              minWidth: 200
+              minWidth: 200,
+              autoPanPaddingTopLeft: [10, 85],
+              autoPanPaddingBottomRight: [10, 10]
             }).setContent(function() {
               if (!loaded) {
                 loaded = true;
