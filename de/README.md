@@ -1,4 +1,5 @@
 ---
+layout: default
 title: Öffentliche Bücherschränke
 description: Karte mit öffentlichen Bücherschränken basierend auf OSM Daten.
 ---
