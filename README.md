@@ -1,5 +1,4 @@
 ---
-layout: default
 title: Public bookcases
 description: Map with public bookcases based on OSM data.
 ---

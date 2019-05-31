@@ -1,4 +1,4 @@
-name:
+title: Public bookcases
 
 plugins:
   - jekyll-seo-tag
