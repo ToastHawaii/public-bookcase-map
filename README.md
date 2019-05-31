@@ -30,3 +30,6 @@ Yes. Use the note button in [OpenStreetMap](https://www.openstreetmap.org).
 ## I have a website, can I use this map?
 
 Yes, the code is free for use, copying and modification.
+
+--
+[Deutsch](/de)
