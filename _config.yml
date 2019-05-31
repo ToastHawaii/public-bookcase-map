@@ -1,6 +1,3 @@
-title: Öffentliche Bücherschränke
-description: Karte mit öffentlichen Bücherschränken basierend auf OSM Daten.
-
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
@@ -10,3 +7,13 @@ defaults:
       path: "README.md"
     values:
       permalink: ""
+      lang: "en"
+      title: Public bookcases
+      description: Map with public bookcases based on OSM data.
+  - scope:
+      path: "de/README.md"
+    values:
+      permalink: "de"
+      lang: "de"
+      title: Öffentliche Bücherschränke
+      description: Karte mit öffentlichen Bücherschränken basierend auf OSM Daten.

@@ -1,27 +1,27 @@
-# Öffentliche Bücherschränke
+# Public bookcase
 
-[Hier gehts zur Karte](https://public-bookcase.github.io/map.html)
+[Click here for the map](https://public-bookcase.github.io/map.html)
 
-Dies ist eine einfache Karte, welche öffentliche Bücherschränke in ihrer Nähe anzeigt. Die Informationen werden von [OpenStreetMap](https://www.openstreetmap.org) geladen.
+This simple map shows public bookcases near you. The information is loaded from [OpenStreetMap](https://www.openstreetmap.org).
 
-## Wieso diese Karte?
+## Why this map?
 
-Ich habe keine Karte gefunden, welche die offene Bücherschranke, Strassenbibliotheken, Bücherboxen, Leseboxen, offene Bücherregal und Lesebanken etc. anzeigt, welche so zahlreich von den fleissigen Karten Zeichner von OSM eingetragen wurden. Um diesen zu würdigen und weil ich die öffentliche Bücherschränke eine gute Sache finde und diese unterstützen möchte, habe ich diese Karte erstellt.
+I have not found a map showing the open bookcases, street libraries, bookboxes, reading boxes, open bookshelves and reading banks from OSM. In order to appreciate this and because I find the public bookcases a good thing and want to support it, I have created this map.
 
-## Gibt es diese Karte auch als App?
+## Is this map also available as an app?
 
-Die Karte ist so gestaltet, dass sie im Browser des Smartphones geöffnet und verwenden werden kann. Über die Funktion "Zum Home-Bildschirm" des Browser (iOS, Android, etc.) kann die Webseite der Startseite hinzufügt werden.
+You can add this map to your homescreen from your smartphone. Use the "add to homescreen" function in your browser (iOS, Android, etc.)
 
-## Wie kann ich einen öffentlichen Bücherschrank eintragen?
+## How can I register a public bookcase?
 
-Vielen Dank für deinen Einsatz! [OpenStreetMap](https://www.openstreetmap.org) ist ein Projekt, bei welchem jeder mitarbeiten kann. Alles geht über die Webseite, die Tools sind dabei so einfach gestaltet, dass jeder sie verwenden kann.
+Thank you very much for your commitment! [OpenStreetMap](https://www.openstreetmap.org) is a project that anyone can participate in. Everything goes through the website, the tools are designed so simple that anyone can use them.
 
-Wie ein öffentlicher Bücherschrank dokumentiert werden soll ist auf dieser [Wiki Seite](https://wiki.openstreetmap.org/wiki/DE:Tag:amenity%3Dpublic_bookcase) beschrieben.
+How to document a public bookcase is described on this [wiki page](https://wiki.openstreetmap.org/wiki/DE:Tag:amenity%3Dpublic_bookcase).
 
-## Geht das auch ohne Registrierung?
+## Can I do this without registering?
 
-Ja klar. Auf [OpenStreetMap](https://www.openstreetmap.org) gibt es auch einen Knopf, über welchen ein Hinweis hinterlegt werden kann.
+Yes. Use the note button in [OpenStreetMap](https://www.openstreetmap.org).
 
-## Ich habe eine Webseite, kann ich diese Karte einbauen?
+## I have a website, can I use this map?
 
-Ja, der Code steht frei zur Verwendung, Kopierung und Modifizierung.
+Yes, the code is free for use, copying and modification.

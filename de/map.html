@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
-    <title>Public bookcase</title>
+    <title>Öffentliche Bücherschränke</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -9,7 +9,7 @@
     />
     <meta
       name="description"
-      content="This simple map shows public bookcases near you."
+      content="Dies ist eine einfache Karte, welche öffentliche Bücherschränke in ihrer Nähe anzeigt."
     />
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -87,7 +87,7 @@
       var days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
 
       var attr_side =
-        '<a href="https://public-bookcase.github.io/">About this side</a>';
+        '<a href="https://public-bookcase.github.io/de/">Über diese Seite</a>';
       var attr_osm =
         'Map data &copy; <a href="https://openstreetmap.org/">OpenStreetMap</a> contributors';
       var attr_overpass =
@@ -308,8 +308,8 @@
                        model.hasOpeningHours
                          ? `<br><div>${
                              model.opening.isOpenNow()
-                               ? `Now open`
-                               : `Closed`
+                               ? `Jetzt geöffnet`
+                               : `Geschlossen`
                            } ${model.opening
                              .getTable()
                              [days[new Date().getDay()]].join(`, `)}</div>`
@@ -474,7 +474,7 @@
       }
     </script>
     <h1>
-      Public bookcase
+      Öffentliche Bücherschränke
     </h1>
     <div class="box">
       <div class="container">
@@ -482,7 +482,7 @@
           <button class="geo" type="button" onclick="return locate();">
             <i class="fa fa-dot-circle-o"></i>
           </button>
-          <input type="search" id="osm-search" placeholder="Search" />
+          <input type="search" id="osm-search" placeholder="Suche" />
           <button class="icon" type="submit">
             <i class="fa fa-search"></i>
           </button>
