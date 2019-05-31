@@ -397,7 +397,7 @@
 
         current_accuracy = L.circle(e.latlng, radius).addTo(map);
 
-        map.locate({ watch: true, maxZoom: 16 });
+        map.locate({ watch: false, maxZoom: 16 });
 
         map.addLayer(opl);
       }
