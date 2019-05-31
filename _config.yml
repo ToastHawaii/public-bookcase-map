@@ -10,5 +10,3 @@ defaults:
       path: "README.md"
     values:
       permalink: ""
-
-theme: jekyll-theme-minimal
