@@ -8,12 +8,12 @@ defaults:
     values:
       permalink: ""
       lang: "en"
-      title: Public bookcases
-      description: Map with public bookcases based on OSM data.
+      title: "Public bookcases"
+      description: "Map with public bookcases based on OSM data."
   - scope:
       path: "de/README.md"
     values:
       permalink: "de"
       lang: "de"
-      title: Öffentliche Bücherschränke
-      description: Karte mit öffentlichen Bücherschränken basierend auf OSM Daten.
+      title: "Öffentliche Bücherschränke"
+      description: "Karte mit öffentlichen Bücherschränken basierend auf OSM Daten."
