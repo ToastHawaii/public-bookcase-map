@@ -1,3 +1,8 @@
+---
+title: Öffentliche Bücherschränke
+description: Karte mit öffentlichen Bücherschränken basierend auf OSM Daten.
+---
+
 # Öffentliche Bücherschränke
 
 [Hier gehts zur Karte](https://public-bookcase.github.io/de/map.html)
