@@ -307,9 +307,7 @@
                      ${
                        model.hasOpeningHours
                          ? `<br><div>${
-                             model.opening.isOpenNow()
-                               ? `Now open`
-                               : `Closed`
+                             model.opening.isOpenNow() ? `Now open` : `Closed`
                            } ${model.opening
                              .getTable()
                              [days[new Date().getDay()]].join(`, `)}</div>`
@@ -320,7 +318,7 @@
                          <a href="https://maps.apple.com/?ll=${
                            model.address.latitude
                          },${model.address.longitude}&q=${model.address.name}">
-                           Routen
+                           Route
                          </a>
                          </small>
                         </div>
