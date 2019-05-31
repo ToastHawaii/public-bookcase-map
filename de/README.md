@@ -30,3 +30,7 @@ Ja klar. Auf [OpenStreetMap](https://www.openstreetmap.org) gibt es auch einen K
 ## Ich habe eine Webseite, kann ich diese Karte einbauen?
 
 Ja, der Code steht frei zur Verwendung, Kopierung und Modifizierung.
+
+---
+
+[English](/)
