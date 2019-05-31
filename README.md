@@ -2,11 +2,11 @@
 
 [Hier gehts zur Karte](https://toasthawaii.github.io/map.html)
 
-Dies ist eine einfache Karte, welche Bücherschränke in ihrer Nähe anzeigt. Die Informationen werden von [OpenStreetMap](https://www.openstreetmap.org) geladen.
+Dies ist eine einfache Karte, welche öffentliche Bücherschränke in ihrer Nähe anzeigt. Die Informationen werden von [OpenStreetMap](https://www.openstreetmap.org) geladen.
 
 ## Wieso diese Karte?
 
-Ich habe keine Karte gefunden, welche die öffentliche Bücherschranke, Strassenbibliotheken, Bücherboxen, etc. anzeigt, welche so zahlreich von den fleissigen Karten Zeichner von OSM eingetragen wurden. Um diesen zu würdigen und weil ich die öffentliche Bücherschränke eine gute Sache finde und diese unterstützen möchte, habe ich diese Karte erstellt.
+Ich habe keine Karte gefunden, welche die offene Bücherschranke, Strassenbibliotheken, Bücherboxen, Leseboxen, offene Bücherregal und Lesebanken etc. anzeigt, welche so zahlreich von den fleissigen Karten Zeichner von OSM eingetragen wurden. Um diesen zu würdigen und weil ich die öffentliche Bücherschränke eine gute Sache finde und diese unterstützen möchte, habe ich diese Karte erstellt.
 
 ## Gibt es diese Karte auch als App?
 
