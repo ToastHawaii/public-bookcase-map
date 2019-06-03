@@ -169,7 +169,7 @@ function publicBookCaseMap(local) {
               popup.update();
               setTimeout(function() {
                 popup.update();
-              }, 1);
+              }, 100);
               if (model.img) {
                 const imageElement = new Image();
                 imageElement.onload = function() {
