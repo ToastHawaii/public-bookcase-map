@@ -1,3 +1,6 @@
+var search;
+var locate;
+
 function publicBookCaseMap(local) {
   moment.locale(local.code || "en");
 
@@ -337,14 +340,14 @@ function publicBookCaseMap(local) {
 
   map.locate({ setView: true, maxZoom: 16 });
 
-  var locate = function() {
+  locate = function() {
     map.stopLocate();
     map.locate({ setView: true, maxZoom: 16 });
 
     return false;
   };
 
-  var search = function() {
+  search = function() {
     let request = new XMLHttpRequest();
 
     request.onreadystatechange = function() {
