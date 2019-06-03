@@ -11,7 +11,7 @@ Dies ist eine einfache Karte, welche öffentliche Bücherschränke in ihrer Näh
 
 ## Wieso diese Karte?
 
-Ich habe keine Karte gefunden, welche die offene Bücherschranke, Strassenbibliotheken, Bücherboxen, Leseboxen, offene Bücherregal und Lesebanken etc. anzeigt, welche so zahlreich von den fleissigen Karten Zeichner von OSM eingetragen wurden. Um diesen zu würdigen und weil ich die öffentliche Bücherschränke eine gute Sache finde und diese unterstützen möchte, habe ich diese Karte erstellt.
+Ich habe keine Karte gefunden, welche die offene Bücherschränke, Strassenbibliotheken, Bücherboxen, Leseboxen, offene Bücherregal, Hol-und-Bring Bibliotheken, Tauschbibliotheken, Lesebanken etc. anzeigt, welche so zahlreich von den fleissigen Karten Zeichner von OSM eingetragen wurden. Um diesen zu würdigen und weil ich die öffentlichen Bücherschränke eine gute Sache finde und diese unterstützen möchte, habe ich diese Karte erstellt.
 
 ## Gibt es diese Karte auch als App?
 

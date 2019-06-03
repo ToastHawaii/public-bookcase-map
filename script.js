@@ -405,13 +405,16 @@ function publicBookCaseMap(local) {
           : `<span class="closed">${local.closed}</span>`) +
         (oh.getComment() ? ' "' + oh.getComment() + '"' : "");
     }
-    output += " - ";
-    if (typeof oh.getNextChange() !== "undefined")
+    if (typeof oh.getNextChange() !== "undefined") {
+      output += " - ";
+
       if (oh.getUnknown(oh.getNextChange()))
         output += oh.getState() ? local.maybeCloses : local.maybeOpens;
       else output += oh.getState() ? local.closes : local.opens;
 
-    output += " " + moment(oh.getNextChange()).calendar();
+      output += " " + moment(oh.getNextChange()).calendar();
+    }
+
     return output;
   }
 }
