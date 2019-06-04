@@ -176,21 +176,10 @@ function publicBookCaseMap(local) {
                   "";
               }
 
-              popup.update();
               setTimeout(function() {
                 popup.update();
-              }, 100);
-              if (model.img) {
-                const imageElement = new Image();
-                imageElement.onload = function() {
-                  setTimeout(function() {
-                    popup.update();
-                  }, 1);
-                };
-                imageElement.src = model.img;
-              }
+              }, 0);
             };
-
             request.open(
               "Get",
               "https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&namedetails=1&lat=" +
@@ -198,8 +187,16 @@ function publicBookCaseMap(local) {
                 "&lon=" +
                 e.lon
             );
-
             request.send();
+
+            if (model.img) {
+              onImageLoaded(model.img, function(loaded) {
+                model.imgExtern = !loaded;
+                setTimeout(function() {
+                  popup.update();
+                }, 0);
+              });
+            }
           }
 
           const el = document.createElement("div");
@@ -300,22 +297,6 @@ function publicBookCaseMap(local) {
 
           return el;
         });
-
-        if (model.img) {
-          const imageElement = new Image();
-          imageElement.onload = function() {
-            setTimeout(function() {
-              popup.update();
-            }, 1);
-          };
-          imageElement.onerror = function() {
-            model.imgExtern = true;
-            setTimeout(function() {
-              popup.update();
-            }, 1);
-          };
-          imageElement.src = model.img;
-        }
 
         marker.bindPopup(popup);
         this._markers.addLayer(marker);
@@ -461,11 +442,8 @@ function publicBookCaseMap(local) {
     }
     if (
       typeof oh.getNextChange() !== `undefined` &&
-      oh.getState() !==
-        oh.getState(
-          oh.getNextChange() &&
-            moment().diff(moment(oh.getNextChange()), "weeks") > 2
-        )
+      oh.getState() !== oh.getState(oh.getNextChange()) &&
+      moment(oh.getNextChange()).diff(moment(), "weeks") <= 2
     ) {
       output += ` - `;
 
@@ -489,5 +467,27 @@ function publicBookCaseMap(local) {
       return "http://" + url;
     }
     return url;
+  }
+
+  function onImageLoaded(src, handler) {
+    var loaded = false;
+
+    const img = new Image();
+    img.addEventListener("load", function() {
+      if (loaded) return;
+      loaded = true;
+      handler(true);
+    });
+    img.addEventListener("error", function() {
+      if (loaded) return;
+      loaded = true;
+      handler(false);
+    });
+    img.src = src;
+    if (img.complete) {
+      if (loaded) return;
+      loaded = true;
+      handler(true);
+    }
   }
 }
