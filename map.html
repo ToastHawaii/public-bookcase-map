@@ -49,9 +49,9 @@
       integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
       crossorigin=""
     ></script>
-    <script src="lib/OverPassLayer.bundle.js"></script>
-    <script src="lib/md5.js"></script>
-    <script src="lib/moment-with-locales.min.js"></script>
+    <script src="/lib/OverPassLayer.bundle.js"></script>
+    <script src="/lib/md5.js"></script>
+    <script src="/lib/moment-with-locales.min.js"></script>
     <script src="https://openingh.openstreetmap.de/opening_hours.js/opening_hours+deps.min.js"></script>
 
     <link
@@ -59,12 +59,28 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="/style.css" media="screen" type="text/css" />
+    <script src="/script.js"></script>
   </head>
 
   <body>
     <div id="map"></div>
+    <h1>
+      Public bookcase
+    </h1>
+    <div class="box">
+      <div class="container">
+        <form onsubmit="return search();">
+          <button class="geo" type="button" onclick="return locate();">
+            <i class="fa fa-dot-circle-o"></i>
+          </button>
+          <input type="search" id="osm-search" placeholder="Search" />
+          <button class="icon" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+      </div>
+    </div>
 
     <script>
       publicBookCaseMap({
@@ -82,12 +98,12 @@
         type: {
           default: "Public bookcase",
 
-          building: "Public library",
+          building: "Public bookcase",
           glass_cabinet: "Public bookcase",
           metal_cabinet: "Public bookcase",
           movable_cabinet: "Public bookcase",
           phone_box: "Public bookcase",
-          reading_box: "Public reading box",
+          reading_box: "Public bookcase",
           sculpture: "Public bookcase",
           shelf: "Public bookcase",
           shelter: "Public bookcase",
@@ -95,21 +111,5 @@
         }
       });
     </script>
-    <h1>
-      Public bookcase
-    </h1>
-    <div class="box">
-      <div class="container">
-        <form onsubmit="return search();">
-          <button class="geo" type="button" onclick="return locate();">
-            <i class="fa fa-dot-circle-o"></i>
-          </button>
-          <input type="search" id="osm-search" placeholder="Search" />
-          <button class="icon" type="submit">
-            <i class="fa fa-search"></i>
-          </button>
-        </form>
-      </div>
-    </div>
   </body>
 </html>

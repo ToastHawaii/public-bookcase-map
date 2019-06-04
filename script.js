@@ -351,8 +351,6 @@ function publicBookCaseMap(local) {
   map.on("locationfound", onLocationFound);
   map.on("locationerror", onLocationError);
 
-  map.locate({ setView: true, maxZoom: 16 });
-
   locate = function() {
     map.stopLocate();
     map.locate({ setView: true, maxZoom: 16 });
@@ -360,7 +358,9 @@ function publicBookCaseMap(local) {
     return false;
   };
 
-  search = function() {
+  search = function(value) {
+    value = value || document.getElementById("osm-search").value;
+
     let request = new XMLHttpRequest();
 
     request.onreadystatechange = function() {
@@ -377,17 +377,43 @@ function publicBookCaseMap(local) {
       }
     };
 
+    setHash(value);
+
     request.open(
       "Get",
-      `https://nominatim.openstreetmap.org/search?format=json&q=${
-        document.getElementById("osm-search").value
-      }&limit=1`
+      `https://nominatim.openstreetmap.org/search?format=json&q=${value}&limit=1`
     );
 
     request.send();
 
     return false;
   };
+
+  function hashchange() {
+    if (window.location.hash && window.location.hash.substr(1))
+      search(window.location.hash.substr(1));
+  }
+
+  function setHash(hash) {
+    window.removeEventListener("hashchange", hashchange);
+    window.location.hash = "#" + hash;
+    setTimeout(function() {
+      window.addEventListener("hashchange", hashchange);
+    }, 0);
+  }
+
+  window.addEventListener("hashchange", hashchange);
+
+  if (window.location.hash && window.location.hash.substr(1)) {
+    search(window.location.hash.substr(1));
+    map.locate({ setView: false, maxZoom: 16 });
+  } else map.locate({ setView: true, maxZoom: 16 });
+
+  map.on("popupopen", function(e) {
+    const marker = e.popup._source;
+    const latLng = marker.getLatLng();
+    setHash(`${latLng.lat},${latLng.lng}`);
+  });
 
   function toWikimediaCommensUrl(source) {
     if (!source) return "";
