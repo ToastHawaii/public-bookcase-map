@@ -459,7 +459,10 @@ function publicBookCaseMap(local) {
           : `<span class="closed">${local.closed}</span>`) +
         (oh.getComment() ? ' "' + oh.getComment() + '"' : "");
     }
-    if (typeof oh.getNextChange() !== "undefined") {
+    if (
+      typeof oh.getNextChange() !== "undefined" &&
+      oh.getState() !== oh.getState(oh.getNextChange())
+    ) {
       output += " - ";
 
       if (oh.getUnknown(oh.getNextChange()))
