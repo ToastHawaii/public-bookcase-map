@@ -192,9 +192,6 @@ function publicBookCaseMap(local) {
             if (model.img) {
               onImageLoaded(model.img, function(loaded) {
                 model.imgExtern = !loaded;
-                setTimeout(function() {
-                  popup.update();
-                }, 0);
               });
             }
           }
@@ -490,4 +487,18 @@ function publicBookCaseMap(local) {
       handler(true);
     }
   }
+
+  document.querySelector(".leaflet-popup-pane").addEventListener(
+    "load",
+    function(event) {
+      var tagName = event.target.tagName,
+        popup = map._popup;
+      // Also check if flag is already set.
+      if (tagName === "IMG" && popup && !popup._updated) {
+        popup._updated = true; // Set flag to prevent looping.
+        popup.update();
+      }
+    },
+    true
+  );
 }
