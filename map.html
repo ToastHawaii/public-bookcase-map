@@ -49,9 +49,9 @@
       integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
       crossorigin=""
     ></script>
-    <script src="/lib/OverPassLayer.bundle.js"></script>
-    <script src="/lib/md5.js"></script>
-    <script src="/lib/moment-with-locales.min.js"></script>
+    <script src="lib/OverPassLayer.bundle.js"></script>
+    <script src="lib/md5.js"></script>
+    <script src="lib/moment-with-locales.min.js"></script>
     <script src="https://openingh.openstreetmap.de/opening_hours.js/opening_hours+deps.min.js"></script>
 
     <link
@@ -60,7 +60,7 @@
     />
 
     <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
   </head>
 
   <body>
@@ -78,7 +78,21 @@
         opens: "Opens",
         closes: "Closes",
         thatDependsOn: "That depends on",
-        route: "Route"
+        route: "Route",
+        type: {
+          default: "Public bookcase",
+
+          building: "Public library",
+          glass_cabinet: "Public bookcase",
+          metal_cabinet: "Public bookcase",
+          movable_cabinet: "Public bookcase",
+          phone_box: "Public bookcase",
+          reading_box: "Public reading box",
+          sculpture: "Public bookcase",
+          shelf: "Public bookcase",
+          shelter: "Public bookcase",
+          wooden_cabinet: "Public bookcase"
+        }
       });
     </script>
     <h1>

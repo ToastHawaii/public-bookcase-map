@@ -61,12 +61,16 @@ function publicBookCaseMap(local) {
 
         let model = {
           address: {
-            name: e.tags.name || e.tags.operator || e.tags.brand || "",
+            name:
+              e.tags.name ||
+              e.tags.operator ||
+              e.tags.brand ||
+              local.type[e.tags["public_bookcase:type"]] ||
+              local.type.default,
             postcode: e.tags["addr:postcode"] || "",
             locality: e.tags["addr:city"] || "",
             street: e.tags["addr:street"] || "",
             houseNumber: e.tags["addr:housenumber"] || "",
-            houseName: "",
             latitude: e.lat,
             longitude: e.lon
           },
@@ -80,6 +84,7 @@ function publicBookCaseMap(local) {
           wheelchair: false,
           light: false,
           indoor: false,
+          capacity: "",
 
           website: "",
           email: "",
@@ -103,6 +108,7 @@ function publicBookCaseMap(local) {
         model.wheelchair = e.tags.wheelchair === "yes";
         model.light = e.tags.lit === "yes";
         model.indoor = e.tags.location === "indoor" || e.tags.indoor === "yes";
+        model.capacity = e.tags.capacity;
         model.website =
           model.website ||
           e.tags.website ||
@@ -132,10 +138,13 @@ function publicBookCaseMap(local) {
               let result = JSON.parse(request.responseText);
 
               model.address.name =
-                model.address.name ||
+                e.tags.name ||
+                e.tags.operator ||
+                e.tags.brand ||
                 result.namedetails.name ||
                 result.namedetails.official_name ||
-                "";
+                local.type[e.tags["public_bookcase:type"]] ||
+                local.type.default;
               model.address.postcode =
                 model.address.postcode || result.address.postcode || "";
               model.address.locality =
@@ -148,26 +157,24 @@ function publicBookCaseMap(local) {
                 result.address.state ||
                 result.address.county ||
                 "";
-              model.address.street =
-                model.address.street ||
-                result.address.path ||
-                result.address.footway ||
-                result.address.road ||
-                result.address.cycleway ||
-                result.address.pedestrian ||
-                result.address.farmyard ||
-                result.address.construction ||
-                result.namedetails.name ||
-                result.namedetails.official_name ||
-                result.address.neighbourhood ||
-                "";
-              model.address.houseNumber =
-                model.address.houseNumber || result.address.house_number || "";
-              model.address.houseName =
-                model.address.houseName ||
-                result.namedetails.name ||
-                result.namedetails.official_name ||
-                "";
+              if (!model.address.street) {
+                model.address.street =
+                  result.address.path ||
+                  result.address.footway ||
+                  result.address.road ||
+                  result.address.cycleway ||
+                  result.address.pedestrian ||
+                  result.address.farmyard ||
+                  result.address.construction ||
+                  result.namedetails.name ||
+                  result.namedetails.official_name ||
+                  result.address.neighbourhood ||
+                  "";
+                model.address.houseNumber =
+                  model.address.houseNumber ||
+                  result.address.house_number ||
+                  "";
+              }
 
               popup.update();
               setTimeout(function() {
@@ -205,20 +212,28 @@ function publicBookCaseMap(local) {
                   <div class="adr">
                   
                   ${
+                    model.capacity
+                      ? `<span style="float:right;margin-left:5px;"><i class="fa fa-book"></i> ${
+                          model.capacity
+                        }</span>`
+                      : ``
+                  }
+
+                  ${
                     model.indoor
-                      ? `<i style="float:right;margin-left:5px;" class="fa fa-building-o"></i>`
+                      ? `<span style="float:right;margin-left:5px;"><i class="fa fa-building-o"></i></span>`
                       : ``
                   }
                   
                   ${
                     model.light
-                      ? `<i style="float:right;margin-left:5px;" class="fa fa-lightbulb-o"></i>`
+                      ? `<span style="float:right;margin-left:5px;"><i class="fa fa-lightbulb-o"></i></span>`
                       : ``
                   }
 
                   ${
                     model.wheelchair
-                      ? `<i style="float:right;margin-left:5px;" class="fa fa-wheelchair"></i>`
+                      ? `<span style="float:right;margin-left:5px;"><i class="fa fa-wheelchair"></i></span>`
                       : ``
                   }
                   
@@ -230,9 +245,7 @@ function publicBookCaseMap(local) {
                   </div>
                ${
                  model.hasOpeningHours
-                   ? `<br><div>${
-                       getDisplayString(model.opening) //.getState() ? local.nowOpen : local.closed
-                     }</div>`
+                   ? `<br><div>${getDisplayString(model.opening)}</div>`
                    : ``
                }  <br>
                   <div class="geo">
@@ -250,9 +263,9 @@ function publicBookCaseMap(local) {
                         ? `<br /><img style="max-width:300px;max-height:300px;" src="${
                             model.img
                           }"/>`
-                        : `<br /><a href="${
+                        : `<br /><a href="${validateUrl(
                             model.img
-                          }" target="_blank"><i class="fa fa-photo fa-2x"></i></a>`
+                          )}" target="_blank"><i class="fa fa-photo fa-2x"></i></a>`
                       : ``
                   }
                   ${
@@ -262,9 +275,9 @@ function publicBookCaseMap(local) {
                     <br />
                     ${
                       model.website
-                        ? `<a href="${
+                        ? `<a href="${validateUrl(
                             model.website
-                          }" target="_blank"><i class="fa fa-globe fa-lg"></i></a>&ensp;`
+                          )}" target="_blank"><i class="fa fa-globe fa-lg"></i></a>&ensp;`
                         : ``
                     } 
                     ${
@@ -383,6 +396,18 @@ function publicBookCaseMap(local) {
 
     if (source.toUpperCase().startsWith("File:".toUpperCase()))
       fileName = source.substring(5, source.length);
+    else if (
+      decodeURI(source)
+        .toUpperCase()
+        .startsWith("https://commons.wikimedia.org/wiki/File:".toUpperCase())
+    )
+      fileName = decodeURI(source).substring(40, source.length);
+    else if (
+      decodeURI(source)
+        .toUpperCase()
+        .startsWith("http://commons.wikimedia.org/wiki/File:".toUpperCase())
+    )
+      fileName = decodeURI(source).substring(39, source.length);
 
     if (!fileName) return "";
 
@@ -419,5 +444,13 @@ function publicBookCaseMap(local) {
     }
 
     return output;
+  }
+
+  function validateUrl(url) {
+    url = decodeURI(url);
+    if (!/^https?:\/\//i.test(url)) {
+      return "http://" + url;
+    }
+    return url;
   }
 }
