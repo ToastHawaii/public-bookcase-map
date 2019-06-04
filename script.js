@@ -457,19 +457,27 @@ function publicBookCaseMap(local) {
         (oh.getState()
           ? `<span class="open">${local.open}</span>`
           : `<span class="closed">${local.closed}</span>`) +
-        (oh.getComment() ? ' "' + oh.getComment() + '"' : "");
+        (oh.getComment() ? ` "${oh.getComment()}"` : ``);
     }
     if (
-      typeof oh.getNextChange() !== "undefined" &&
-      oh.getState() !== oh.getState(oh.getNextChange())
+      typeof oh.getNextChange() !== `undefined` &&
+      oh.getState() !==
+        oh.getState(
+          oh.getNextChange() &&
+            moment().diff(moment(oh.getNextChange()), "weeks") > 2
+        )
     ) {
-      output += " - ";
+      output += ` - `;
 
       if (oh.getUnknown(oh.getNextChange()))
         output += oh.getState() ? local.maybeCloses : local.maybeOpens;
       else output += oh.getState() ? local.closes : local.opens;
 
-      output += " " + moment(oh.getNextChange()).calendar();
+      output += ` ${moment(oh.getNextChange()).calendar()} ${
+        oh.getComment(oh.getNextChange())
+          ? ` "${oh.getComment(oh.getNextChange())}"`
+          : ``
+      }`;
     }
 
     return output;
