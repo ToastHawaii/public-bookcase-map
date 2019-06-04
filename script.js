@@ -79,7 +79,6 @@ function publicBookCaseMap(local) {
             locale: local.code || "en"
           }),
           img: "",
-          imgExtern: false,
 
           wheelchair: false,
           light: false,
@@ -120,14 +119,107 @@ function publicBookCaseMap(local) {
         model.email = model.email || e.tags.email || e.tags["contact:email"];
         model.phone = model.phone || e.tags.phone || e.tags["contact:phone"];
 
-        let loaded = false;
+        let isLoaded = false;
+        const contentElement = document.createElement("div");
+
+        contentElement.innerHTML = `<div id="hcard-Name" class="vcard">
+        ${
+          model.address.name
+            ? `<strong class="name fn">${model.address.name}</strong>`
+            : ""
+        }
+        <div class="adr">
+        
+        ${
+          model.capacity
+            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-book"></i> ${
+                model.capacity
+              }</span>`
+            : ``
+        }
+
+        ${
+          model.indoor
+            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-building-o"></i></span>`
+            : ``
+        }
+        
+        ${
+          model.light
+            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-lightbulb-o"></i></span>`
+            : ``
+        }
+
+        ${
+          model.wheelchair
+            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-wheelchair"></i></span>`
+            : ``
+        }
+        
+         <div class="street-address">${model.address.street} ${
+          model.address.houseNumber
+        }</div>
+            <span class="postal-code">${model.address.postcode}</span>
+         <span class="region">${model.address.locality}</span>
+        </div>
+     ${
+       model.hasOpeningHours
+         ? `<br><div>${getDisplayString(model.opening)}</div>`
+         : ``
+     }  <br>
+        <div class="geo">
+         <small>
+         <a href="https://maps.apple.com/?ll=${model.address.latitude},${
+          model.address.longitude
+        }&q=${model.address.name}">
+           ${local.route}
+         </a>
+         </small>
+        </div>
+        ${
+          model.img
+            ? `<br /><img class="img" style="max-width:300px;max-height:300px;" src="${
+                model.img
+              }"/>`
+            : ``
+        }
+        ${
+          model.website || model.email || model.phone
+            ? `
+        <div>
+          <br />
+          ${
+            model.website
+              ? `<a href="${validateUrl(
+                  model.website
+                )}" target="_blank"><i class="fa fa-globe fa-lg"></i></a>&ensp;`
+              : ``
+          } 
+          ${
+            model.email
+              ? `<a href="mailto:${
+                  model.email
+                }" target="_blank"><i class="fa fa-envelope fa-lg"></i></a>&ensp;`
+              : ``
+          } 
+          ${
+            model.phone
+              ? `<a href="tel:${
+                  model.phone
+                }" target="_blank"><i class="fa fa-phone fa-lg"></i></a>&ensp;`
+              : ``
+          }
+       </div>`
+            : ``
+        }</div>`;
+
         const popup = L.popup({
           minWidth: 200,
           autoPanPaddingTopLeft: [10, 85],
           autoPanPaddingBottomRight: [10, 10]
         }).setContent(function() {
-          if (!loaded) {
-            loaded = true;
+          if (!isLoaded) {
+            isLoaded = true;
 
             let request = new XMLHttpRequest();
 
@@ -176,9 +268,17 @@ function publicBookCaseMap(local) {
                   "";
               }
 
-              setTimeout(function() {
-                popup.update();
-              }, 0);
+              contentElement.querySelector(".name").innerHTML =
+                model.address.name;
+              contentElement.querySelector(".street-address").innerHTML = `${
+                model.address.street
+              } ${model.address.houseNumber}`;
+              contentElement.querySelector(".postal-code").innerHTML =
+                model.address.postcode;
+              contentElement.querySelector(".region").innerHTML =
+                model.address.locality;
+
+              popup.update();
             };
             request.open(
               "Get",
@@ -191,108 +291,20 @@ function publicBookCaseMap(local) {
 
             if (model.img) {
               onImageLoaded(model.img, function(loaded) {
-                model.imgExtern = !loaded;
+                if (!loaded) {
+                  contentElement.querySelector(
+                    ".img"
+                  ).outerHTML = `<a class="img" href="${validateUrl(
+                    model.img
+                  )}" target="_blank"><i class="fa fa-photo fa-2x"></i></a>`;
+                }
+
+                popup.update();
               });
             }
           }
 
-          const el = document.createElement("div");
-          el.innerHTML = `<div id="hcard-Name" class="vcard">
-                  ${
-                    model.address.name
-                      ? `<strong class="fn">${model.address.name}</strong>`
-                      : ""
-                  }
-                  <div class="adr">
-                  
-                  ${
-                    model.capacity
-                      ? `<span style="float:right;margin-left:5px;"><i class="fa fa-book"></i> ${
-                          model.capacity
-                        }</span>`
-                      : ``
-                  }
-
-                  ${
-                    model.indoor
-                      ? `<span style="float:right;margin-left:5px;"><i class="fa fa-building-o"></i></span>`
-                      : ``
-                  }
-                  
-                  ${
-                    model.light
-                      ? `<span style="float:right;margin-left:5px;"><i class="fa fa-lightbulb-o"></i></span>`
-                      : ``
-                  }
-
-                  ${
-                    model.wheelchair
-                      ? `<span style="float:right;margin-left:5px;"><i class="fa fa-wheelchair"></i></span>`
-                      : ``
-                  }
-                  
-                   <div class="street-address">${model.address.street} ${
-            model.address.houseNumber
-          }</div>
-                      <span class="postal-code">${model.address.postcode}</span>
-                   <span class="region">${model.address.locality}</span>
-                  </div>
-               ${
-                 model.hasOpeningHours
-                   ? `<br><div>${getDisplayString(model.opening)}</div>`
-                   : ``
-               }  <br>
-                  <div class="geo">
-                   <small>
-                   <a href="https://maps.apple.com/?ll=${
-                     model.address.latitude
-                   },${model.address.longitude}&q=${model.address.name}">
-                     ${local.route}
-                   </a>
-                   </small>
-                  </div>
-                  ${
-                    model.img
-                      ? !model.imgExtern
-                        ? `<br /><img style="max-width:300px;max-height:300px;" src="${
-                            model.img
-                          }"/>`
-                        : `<br /><a href="${validateUrl(
-                            model.img
-                          )}" target="_blank"><i class="fa fa-photo fa-2x"></i></a>`
-                      : ``
-                  }
-                  ${
-                    model.website || model.email || model.phone
-                      ? `
-                  <div>
-                    <br />
-                    ${
-                      model.website
-                        ? `<a href="${validateUrl(
-                            model.website
-                          )}" target="_blank"><i class="fa fa-globe fa-lg"></i></a>&ensp;`
-                        : ``
-                    } 
-                    ${
-                      model.email
-                        ? `<a href="mailto:${
-                            model.email
-                          }" target="_blank"><i class="fa fa-envelope fa-lg"></i></a>&ensp;`
-                        : ``
-                    } 
-                    ${
-                      model.phone
-                        ? `<a href="tel:${
-                            model.phone
-                          }" target="_blank"><i class="fa fa-phone fa-lg"></i></a>&ensp;`
-                        : ``
-                    }
-                 </div>`
-                      : ``
-                  }</div>`;
-
-          return el;
+          return contentElement;
         });
 
         marker.bindPopup(popup);
@@ -467,38 +479,16 @@ function publicBookCaseMap(local) {
   }
 
   function onImageLoaded(src, handler) {
-    var loaded = false;
-
     const img = new Image();
     img.addEventListener("load", function() {
-      if (loaded) return;
-      loaded = true;
       handler(true);
     });
     img.addEventListener("error", function() {
-      if (loaded) return;
-      loaded = true;
       handler(false);
     });
     img.src = src;
     if (img.complete) {
-      if (loaded) return;
-      loaded = true;
       handler(true);
     }
   }
-
-  document.querySelector(".leaflet-popup-pane").addEventListener(
-    "load",
-    function(event) {
-      var tagName = event.target.tagName,
-        popup = map._popup;
-      // Also check if flag is already set.
-      if (tagName === "IMG" && popup && !popup._updated) {
-        popup._updated = true; // Set flag to prevent looping.
-        popup.update();
-      }
-    },
-    true
-  );
 }
