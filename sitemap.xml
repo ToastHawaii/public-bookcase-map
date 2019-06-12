@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<url>
+<loc>https://public-bookcase.github.io/</loc>
+  <xhtml:link 
+               rel="alternate"
+               hreflang="de"
+               href="https://public-bookcase.github.io/de"/>
+    <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="https://public-bookcase.github.io"/>
+
+</url>
+<url>
+<loc>https://public-bookcase.github.io/map.html</loc>
+  <xhtml:link 
+               rel="alternate"
+               hreflang="de"
+               href="https://public-bookcase.github.io/de/map.html"/>
+    <xhtml:link 
+               rel="alternate"
+               hreflang="en"
+               href="https://public-bookcase.github.io/map.html"/>
+
+</url>
+</urlset>

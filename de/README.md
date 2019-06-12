@@ -1,13 +1,11 @@
----
-title: Öffentliche Bücherschränke
-description: Karte mit öffentlichen Bücherschränken basierend auf OSM Daten.
----
-
 # Öffentliche Bücherschränke
 
 [Hier gehts zur Karte](https://public-bookcase.github.io/de/map.html)
 
 Dies ist eine einfache Karte, welche öffentliche Bücherschränke in ihrer Nähe anzeigt. Die Informationen werden von [OpenStreetMap](https://www.openstreetmap.org) geladen.
+
+## Was sind öffentliche Bücherschränke?
+Ein öffentlicher oder offener Bücherschrank ist ein Schrank, Regal oder Box mit Büchern zum Tauschen. Der öffentliche Bücherschrank steht der Allgemeinheit zur Verfügung. Es können Bücher gebracht und mitgenommen werden. Das Tauschen ist kostenlos, anonym und ohne jegliche Formalitäten.
 
 ## Wieso diese Karte?
 
@@ -23,7 +21,7 @@ Vielen Dank für deinen Einsatz! [OpenStreetMap](https://www.openstreetmap.org) 
 
 Wie ein öffentlicher Bücherschrank dokumentiert werden soll ist auf dieser [Wiki Seite](https://wiki.openstreetmap.org/wiki/DE:Tag:amenity%3Dpublic_bookcase) beschrieben.
 
-## Geht das auch ohne Registrierung?
+### Geht das auch ohne Registrierung?
 
 Ja klar. Auf [OpenStreetMap](https://www.openstreetmap.org) gibt es auch einen Knopf, über welchen ein Hinweis hinterlegt werden kann.
 
