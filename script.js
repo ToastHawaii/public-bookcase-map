@@ -83,6 +83,8 @@ function publicBookCaseMap(local) {
           wheelchair: false,
           light: false,
           indoor: false,
+          freeToTakeOrGive: false,
+          freeToTake: false,
           capacity: "",
 
           website: "",
@@ -107,6 +109,9 @@ function publicBookCaseMap(local) {
         model.wheelchair = e.tags.wheelchair === "yes";
         model.light = e.tags.lit === "yes";
         model.indoor = e.tags.location === "indoor" || e.tags.indoor === "yes";
+        model.freeToTake = e.tags["reuse:policy"] === "free_to_take";
+        model.freeToTakeOrGive =
+          e.tags["reuse:policy"] === "free_to_take_or_give";
         model.capacity = e.tags.capacity;
         model.website =
           model.website ||
@@ -139,6 +144,18 @@ function publicBookCaseMap(local) {
         }
 
         ${
+          model.freeToTake
+            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-long-arrow-left"></i></span>`
+            : ``
+        }
+        
+        ${
+          model.freeToTakeOrGive
+            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-exchange"></i></span>`
+            : ``
+        }
+        
+        ${
           model.indoor
             ? `<span style="float:right;margin-left:5px;"><i class="fa fa-building-o"></i></span>`
             : ``
@@ -149,6 +166,8 @@ function publicBookCaseMap(local) {
             ? `<span style="float:right;margin-left:5px;"><i class="fa fa-lightbulb-o"></i></span>`
             : ``
         }
+        
+       
 
         ${
           model.wheelchair
