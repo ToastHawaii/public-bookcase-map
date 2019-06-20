@@ -62,6 +62,7 @@ function publicBookCaseMap(local) {
         let model = {
           address: {
             name:
+              e.tags["name:" + local.code] ||
               e.tags.name ||
               e.tags.operator ||
               e.tags.brand ||
@@ -85,11 +86,14 @@ function publicBookCaseMap(local) {
           indoor: false,
           freeToTakeOrGive: false,
           freeToTake: false,
+          customersOnly: false,
           capacity: "",
 
           website: "",
           email: "",
-          phone: ""
+          phone: "",
+
+          description: ""
         };
 
         if (!model.img && e.tags.mapillary)
@@ -112,6 +116,7 @@ function publicBookCaseMap(local) {
         model.freeToTake = e.tags["reuse:policy"] === "free_to_take";
         model.freeToTakeOrGive =
           e.tags["reuse:policy"] === "free_to_take_or_give";
+        model.customersOnly = e.tags["access"] === "customers";
         model.capacity = e.tags.capacity;
         model.website =
           model.website ||
@@ -123,6 +128,14 @@ function publicBookCaseMap(local) {
           e.tags["contact:website"];
         model.email = model.email || e.tags.email || e.tags["contact:email"];
         model.phone = model.phone || e.tags.phone || e.tags["contact:phone"];
+        model.description = [
+          e.tags["description:" + local.code] || e.tags.description,
+          e.tags["wheelchair:description"]
+        ]
+          .filter(function(el) {
+            return el;
+          })
+          .join(" ");
 
         let isLoaded = false;
         const contentElement = document.createElement("div");
@@ -154,7 +167,7 @@ function publicBookCaseMap(local) {
             ? `<span style="float:right;margin-left:5px;"><i class="fa fa-exchange"></i></span>`
             : ``
         }
-        
+
         ${
           model.indoor
             ? `<span style="float:right;margin-left:5px;"><i class="fa fa-building-o"></i></span>`
@@ -167,7 +180,11 @@ function publicBookCaseMap(local) {
             : ``
         }
         
-       
+        ${
+          model.customersOnly
+            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-ticket"></i></span>`
+            : ``
+        }
 
         ${
           model.wheelchair
@@ -200,6 +217,13 @@ function publicBookCaseMap(local) {
             ? `<br /><img class="img" style="max-width:300px;max-height:300px;" src="${
                 model.img
               }"/>`
+            : ``
+        }
+        ${
+          model.description
+            ? `<div>${!model.img ? `<br />` : ``}<small>${
+                model.description
+              }</small></div>`
             : ``
         }
         ${
@@ -445,6 +469,8 @@ function publicBookCaseMap(local) {
       fileName = decodeURI(source).substring(39, source.length);
 
     if (!fileName) return "";
+
+    fileName = fileName.replace(/ /g, "_");
 
     const hash = md5(fileName);
     return `https://upload.wikimedia.org/wikipedia/commons/thumb/${hash.substring(
