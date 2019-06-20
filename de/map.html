@@ -95,6 +95,15 @@
         closes: "Schliesst",
         thatDependsOn: "Das hängt ab von",
         route: "Routen",
+        floor: function(level) {
+          return `(${level}. OG)`;
+        },
+        basement: function(level) {
+          return `(EG)`;
+        },
+        groundFloor: function(level) {
+          return `(${Math.abs(level)}. UG)`;
+        },
         type: {
           default: "Öffentlicher Bücherschrank",
 

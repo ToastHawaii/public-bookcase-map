@@ -72,6 +72,7 @@ function publicBookCaseMap(local) {
             locality: e.tags["addr:city"] || "",
             street: e.tags["addr:street"] || "",
             houseNumber: e.tags["addr:housenumber"] || "",
+            level: e.tags["level"] || "",
             latitude: e.lat,
             longitude: e.lon
           },
@@ -194,7 +195,7 @@ function publicBookCaseMap(local) {
         
          <div class="street-address">${model.address.street} ${
           model.address.houseNumber
-        }</div>
+        } ${toDisplayLevel(parseFloat(model.address.level), local)}</div>
             <span class="postal-code">${model.address.postcode}</span>
          <span class="region">${model.address.locality}</span>
         </div>
@@ -315,7 +316,10 @@ function publicBookCaseMap(local) {
                 model.address.name;
               contentElement.querySelector(".street-address").innerHTML = `${
                 model.address.street
-              } ${model.address.houseNumber}`;
+              } ${model.address.houseNumber} ${toDisplayLevel(
+                parseFloat(model.address.level),
+                local
+              )}`;
               contentElement.querySelector(".postal-code").innerHTML =
                 model.address.postcode;
               contentElement.querySelector(".region").innerHTML =
@@ -535,5 +539,21 @@ function publicBookCaseMap(local) {
     if (img.complete) {
       handler(true);
     }
+  }
+
+  function toDisplayLevel(level, local) {
+    if (!isNumeric(level)) return ``;
+
+    if (level === 0) return local.groundFloor(level);
+
+    if (level < 0) return local.basement(level);
+
+    if (level > 0) return local.floor(level);
+
+    return ``;
+  }
+
+  function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
   }
 }
