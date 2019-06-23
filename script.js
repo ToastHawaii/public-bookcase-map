@@ -37,11 +37,19 @@ function publicBookCaseMap(local) {
     minZoom: 12,
     query: `
     (
+      // Public bookcases
       node["amenity"="public_bookcase"]({{bbox}});
       way["amenity"="public_bookcase"]({{bbox}});  
+
+      // Reuse facility for books
+      node["reuse:books"]({{bbox}});
+      way["reuse:books"]({{bbox}});
+      
+      // Vending machine with free books
       node["amenity"="vending_machine"]["vending"="books"]["fee"="no"]({{bbox}});
       way["amenity"="vending_machine"]["vending"="books"]["fee"="no"]({{bbox}});
       
+      // Charity book shop
       node["shop"="books"]["charity"="yes"]({{bbox}});
       way["shop"="books"]["charity"="yes"]({{bbox}});
       node["shop"="charity"]["books"]({{bbox}});
@@ -131,7 +139,11 @@ function publicBookCaseMap(local) {
 
         model.wheelchair = e.tags.wheelchair === "yes";
         model.light = e.tags.lit === "yes";
-        model.indoor = e.tags.location === "indoor" || e.tags.indoor === "yes";
+        model.indoor =
+          e.tags.location === "indoor" ||
+          e.tags["public_bookcase:type"] === "building" ||
+          (e.tags.indoor && e.tags.indoor !== "no") ||
+          (e.tags.building && e.tags.building !== "no");
         model.freeToTake = e.tags["reuse:policy"] === "free_to_take";
         model.freeToTakeOrGive =
           e.tags["reuse:policy"] === "free_to_take_or_give";
