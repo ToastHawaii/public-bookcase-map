@@ -79,7 +79,7 @@ function publicBookCaseMap(local) {
         let model = {
           address: {
             name:
-              e.tags["name:" + local.code] ||
+              e.tags["name:" + (local.code || "en")] ||
               e.tags.name ||
               e.tags.operator ||
               e.tags.brand ||
@@ -147,9 +147,13 @@ function publicBookCaseMap(local) {
           e.tags.url ||
           e.tags["contact:website"];
         model.email = model.email || e.tags.email || e.tags["contact:email"];
-        model.phone = model.phone || e.tags.phone || e.tags["contact:phone"];
+        model.phone =
+          model.phone ||
+          e.tags.phone ||
+          e.tags["contact:phone"] ||
+          e.tags["contact:mobile"];
         model.description = [
-          e.tags["description:" + local.code] || e.tags.description,
+          e.tags["description:" + (local.code || "en")] || e.tags.description,
           e.tags["wheelchair:description"]
         ]
           .filter(function(el) {
@@ -170,7 +174,9 @@ function publicBookCaseMap(local) {
         
         ${
           model.capacity
-            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-book"></i> ${
+            ? `<span title="${
+                local.capacity
+              }" style="float:right;margin-left:5px;"><i class="fa fa-book"></i> ${
                 model.capacity
               }</span>`
             : ``
@@ -178,43 +184,57 @@ function publicBookCaseMap(local) {
 
         ${
           model.freeToTake
-            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-long-arrow-left"></i></span>`
+            ? `<span title="${
+                local.freeToTake
+              }" style="float:right;margin-left:5px;"><i class="fa fa-long-arrow-left"></i></span>`
             : ``
         }
         
         ${
           model.freeToTakeOrGive
-            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-exchange"></i></span>`
+            ? `<span title="${
+                local.freeToTakeOrGive
+              }" style="float:right;margin-left:5px;"><i class="fa fa-exchange"></i></span>`
             : ``
         }
 
         ${
           model.indoor
-            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-building-o"></i></span>`
+            ? `<span title="${
+                local.indoor
+              }" style="float:right;margin-left:5px;"><i class="fa fa-building-o"></i></span>`
             : ``
         }
         
         ${
           model.light
-            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-lightbulb-o"></i></span>`
+            ? `<span title="${
+                local.light
+              }" style="float:right;margin-left:5px;"><i class="fa fa-lightbulb-o"></i></span>`
             : ``
         }
         
         ${
           model.customersOnly
-            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-ticket"></i></span>`
+            ? `<span title="${
+                local.customersOnly
+              }" style="float:right;margin-left:5px;"><i class="fa fa-ticket"></i></span>`
             : ``
         }
 
         ${
           model.wheelchair
-            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-wheelchair"></i></span>`
+            ? `<span title="${
+                local.wheelchair
+              }" style="float:right;margin-left:5px;"><i class="fa fa-wheelchair"></i></span>`
             : ``
         }
 
         ${
           model.fee
-            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-money"></i></span>`
+            ? `<span title="${
+                local.fee
+              }" style="float:right;margin-left:5px;"><i class="fa fa-money"></i></span>`
             : ``
         }
         
