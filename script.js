@@ -30,16 +30,15 @@ function publicBookCaseMap(local) {
     }),
     minZoomIndicatorEnabled: false,
     minZoom: 10,
-    query: '(node["amenity"="public_bookcase"]({{bbox}}););out qt;',
+    query:
+      '(node["amenity"="public_bookcase"]({{bbox}});way["amenity"="public_bookcase"]({{bbox}}););out center qt;',
     onSuccess(data) {
       for (let i = 0; i < data.elements.length; i++) {
         let pos;
         let marker;
         const e = data.elements[i];
 
-        if (e.id in this._ids) {
-          continue;
-        }
+        if (e.id in this._ids) continue;
 
         this._ids[e.id] = true;
 
