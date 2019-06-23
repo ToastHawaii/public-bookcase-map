@@ -20,7 +20,7 @@ function publicBookCaseMap(local) {
     }
   );
 
-  var map = new L.Map("map").addLayer(osm).setView(new L.LatLng(47, 8), 10);
+  var map = new L.Map("map").addLayer(osm).setView(new L.LatLng(47.4, 8.5), 12);
 
   var opl = new L.OverPassLayer({
     markerIcon: L.icon({
@@ -28,10 +28,26 @@ function publicBookCaseMap(local) {
         "https://wiki.openstreetmap.org/w/images/b/b2/Public_bookcase-14.svg",
       iconSize: [28, 28]
     }),
-    minZoomIndicatorEnabled: false,
-    minZoom: 10,
-    query:
-      '(node["amenity"="public_bookcase"]({{bbox}});way["amenity"="public_bookcase"]({{bbox}}););out center qt;',
+    minZoomIndicatorEnabled: true,
+    minZoomIndicatorOptions: {
+      position: "topleft",
+      minZoomMessageNoLayer: local.minZoomMessageNoLayer,
+      minZoomMessage: local.minZoomMessage
+    },
+    minZoom: 12,
+    query: `
+    (
+      node["amenity"="public_bookcase"]({{bbox}});
+      way["amenity"="public_bookcase"]({{bbox}});  
+      node["amenity"="vending_machine"]["vending"="books"]["fee"="no"]({{bbox}});
+      way["amenity"="vending_machine"]["vending"="books"]["fee"="no"]({{bbox}});
+      
+      node["shop"="books"]["charity"="yes"]({{bbox}});
+      way["shop"="books"]["charity"="yes"]({{bbox}});
+      node["shop"="charity"]["books"]({{bbox}});
+      way["shop"="charity"]["books"]({{bbox}});
+    );
+    out center qt;`,
     onSuccess(data) {
       for (let i = 0; i < data.elements.length; i++) {
         let pos;
@@ -39,6 +55,8 @@ function publicBookCaseMap(local) {
         const e = data.elements[i];
 
         if (e.id in this._ids) continue;
+
+        if (e.tags.books === "no") continue;
 
         this._ids[e.id] = true;
 
@@ -88,6 +106,7 @@ function publicBookCaseMap(local) {
           freeToTake: false,
           customersOnly: false,
           capacity: "",
+          fee: false,
 
           website: "",
           email: "",
@@ -118,6 +137,7 @@ function publicBookCaseMap(local) {
           e.tags["reuse:policy"] === "free_to_take_or_give";
         model.customersOnly = e.tags["access"] === "customers";
         model.capacity = e.tags.capacity;
+        model.fee = e.tags.fee === "yes" || !!e.tags.shop;
         model.website =
           model.website ||
           e.tags.website ||
@@ -189,6 +209,12 @@ function publicBookCaseMap(local) {
         ${
           model.wheelchair
             ? `<span style="float:right;margin-left:5px;"><i class="fa fa-wheelchair"></i></span>`
+            : ``
+        }
+
+        ${
+          model.fee
+            ? `<span style="float:right;margin-left:5px;"><i class="fa fa-money"></i></span>`
             : ``
         }
         
