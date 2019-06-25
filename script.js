@@ -44,11 +44,19 @@ function publicBookCaseMap(local) {
       // Reuse facility for books
       node["reuse:books"]({{bbox}});
       way["reuse:books"]({{bbox}});
+
+      // Library for booksharing
+      node["library"="booksharing"]({{bbox}});
+      way["library"="booksharing"]({{bbox}});
+
+      // Library free of charge
+      node["amenity"="library"]["fee"="no"]({{bbox}});
+      way["amenity"="library"]["fee"="no"]({{bbox}});
       
       // Vending machine with free books
       node["amenity"="vending_machine"]["vending"="books"]["fee"="no"]({{bbox}});
       way["amenity"="vending_machine"]["vending"="books"]["fee"="no"]({{bbox}});
-      
+
       // Charity book shop
       node["shop"="books"]["charity"="yes"]({{bbox}});
       way["shop"="books"]["charity"="yes"]({{bbox}});
