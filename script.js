@@ -4,15 +4,15 @@ var locate;
 function publicBookCaseMap(local) {
   moment.locale(local.code || "en");
 
-  var attr_side = `<a href="https://public-bookcase.github.io/${local.code}">${
+  let attr_side = `<a href="https://public-bookcase.github.io/${local.code}">${
     local.aboutThisSide
   }</a>`;
-  var attr_osm =
+  let attr_osm =
     'Map data &copy; <a href="https://openstreetmap.org/">OpenStreetMap</a> contributors';
-  var attr_overpass =
+  let attr_overpass =
     'POI via <a href="https://www.overpass-api.de/">Overpass API</a>';
 
-  var osm = new L.TileLayer(
+  let osm = new L.TileLayer(
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
       opacity: 0.7,
@@ -20,9 +20,9 @@ function publicBookCaseMap(local) {
     }
   );
 
-  var map = new L.Map("map").addLayer(osm).setView(new L.LatLng(47.4, 8.5), 12);
+  let map = new L.Map("map").addLayer(osm).setView(new L.LatLng(47.4, 8.5), 12);
 
-  var opl = new L.OverPassLayer({
+  let opl = new L.OverPassLayer({
     markerIcon: L.icon({
       iconUrl:
         "https://wiki.openstreetmap.org/w/images/b/b2/Public_bookcase-14.svg",
@@ -204,7 +204,13 @@ function publicBookCaseMap(local) {
         contentElement.innerHTML = `<div id="hcard-Name" class="vcard">
         ${
           model.address.name
-            ? `<strong class="name fn">${model.address.name}</strong>`
+            ? `<strong class="name fn">${model.address.name}</strong>${
+                new URL(window.location.href).searchParams.get("edit")
+                  ? ` <a href="https://www.openstreetmap.org/edit?${e.type}=${
+                      e.id
+                    }"><i class="fa fa-pencil"></i></a>`
+                  : ""
+              }`
             : ""
         }
         <div class="adr">
@@ -459,7 +465,7 @@ function publicBookCaseMap(local) {
   });
 
   // placeholders for the L.marker and L.circle representing user's current position and accuracy
-  var current_position, current_accuracy;
+  let current_position, current_accuracy;
 
   function onLocationFound(e) {
     // if position defined, then remove the existing position marker and accuracy circle from the map
@@ -468,7 +474,7 @@ function publicBookCaseMap(local) {
       map.removeLayer(current_accuracy);
     }
 
-    var radius = e.accuracy / 2;
+    let radius = e.accuracy / 2;
 
     current_position = L.marker(e.latlng).addTo(map);
 
