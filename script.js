@@ -364,12 +364,20 @@ function publicBookCaseMap(local) {
               let result = JSON.parse(request.responseText);
 
               model.address.name =
+                e.tags["name:" + (local.code || "en")] ||
                 e.tags.name ||
                 e.tags.operator ||
                 e.tags.brand ||
                 result.namedetails.name ||
                 result.namedetails.official_name ||
                 local.type[e.tags["public_bookcase:type"]] ||
+                (e.tags.amenity !== "public_bookcase" &&
+                e.tags.amenity === "library" &&
+                e.tags.library !== "booksharing" &&
+                e.tags.fee === "no"
+                  ? local.type.library
+                  : "") ||
+                (e.tags.shop === "books" ? local.type.bookshop : "") ||
                 local.type.default;
               model.address.postcode =
                 model.address.postcode || result.address.postcode || "";
