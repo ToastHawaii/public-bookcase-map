@@ -49,6 +49,10 @@ function publicBookCaseMap(local) {
       node["library"="booksharing"]({{bbox}});
       way["library"="booksharing"]({{bbox}});
 
+      // Givebox
+      node["amenity"="givebox"]({{bbox}});
+      way["amenity"="givebox"]({{bbox}});
+
       // Library free of charge
       node["amenity"="library"]["fee"="no"]({{bbox}});
       way["amenity"="library"]["fee"="no"]({{bbox}});
@@ -100,6 +104,13 @@ function publicBookCaseMap(local) {
               e.tags.operator ||
               e.tags.brand ||
               local.type[e.tags["public_bookcase:type"]] ||
+              (e.tags.amenity !== "public_bookcase" &&
+              e.tags.amenity === "library" &&
+              e.tags.library !== "booksharing" &&
+              e.tags.fee === "no"
+                ? local.type.library
+                : "") ||
+              (e.tags.shop === "books" ? local.type.bookshop : "") ||
               local.type.default,
             postcode: e.tags["addr:postcode"] || "",
             locality: e.tags["addr:city"] || "",
@@ -120,6 +131,7 @@ function publicBookCaseMap(local) {
           indoor: false,
           freeToTakeOrGive: false,
           freeToTake: false,
+          borrow: false,
           customersOnly: false,
           capacity: "",
           fee: false,
@@ -155,6 +167,11 @@ function publicBookCaseMap(local) {
         model.freeToTake = e.tags["reuse:policy"] === "free_to_take";
         model.freeToTakeOrGive =
           e.tags["reuse:policy"] === "free_to_take_or_give";
+        model.borrow =
+          e.tags.amenity !== "public_bookcase" &&
+          e.tags.amenity === "library" &&
+          e.tags.library !== "booksharing" &&
+          e.tags.fee === "no";
         model.customersOnly = e.tags["access"] === "customers";
         model.capacity = e.tags.capacity;
         model.fee = e.tags.fee === "yes" || !!e.tags.shop;
@@ -215,6 +232,14 @@ function publicBookCaseMap(local) {
             ? `<span title="${
                 local.freeToTakeOrGive
               }" style="float:right;margin-left:5px;"><i class="fa fa-exchange"></i></span>`
+            : ``
+        }
+
+        ${
+          model.borrow
+            ? `<span title="${
+                local.borrow
+              }" style="float:right;margin-left:5px;"><i class="fa fa-repeat"></i></span>`
             : ``
         }
 
