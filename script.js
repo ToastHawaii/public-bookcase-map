@@ -274,18 +274,18 @@ function publicBookCaseMap(local) {
         }
 
         ${
-          model.wheelchair
-            ? `<span title="${
-                local.wheelchair
-              }" style="float:right;margin-left:5px;"><i class="fa fa-wheelchair"></i></span>`
-            : ``
-        }
-
-        ${
           model.fee
             ? `<span title="${
                 local.fee
               }" style="float:right;margin-left:5px;"><i class="fa fa-money"></i></span>`
+            : ``
+        }
+
+        ${
+          model.wheelchair
+            ? `<span title="${
+                local.wheelchair
+              }" style="float:right;margin-left:5px;"><i class="fa fa-wheelchair"></i></span>`
             : ``
         }
         

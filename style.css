@@ -13,6 +13,7 @@ body,
 .closed {
   color: red;
 }
+
 .open {
   color: green;
 }
@@ -26,6 +27,7 @@ h1 {
   z-index: 1000;
   color: #333;
 }
+
 .box {
   width: 250px;
   height: 30px;
@@ -42,6 +44,7 @@ h1 {
   vertical-align: middle;
   white-space: nowrap;
 }
+
 .container input#osm-search {
   width: 250px;
   height: 30px;
@@ -66,17 +69,21 @@ h1 {
 .container input#osm-search::-webkit-input-placeholder {
   color: #999;
 }
+
 .container input#osm-search:-moz-placeholder {
   /* Firefox 18- */
   color: #999;
 }
+
 .container input#osm-search::-moz-placeholder {
   /* Firefox 19+ */
   color: #999;
 }
+
 .container input#osm-search:-ms-input-placeholder {
   color: #999;
 }
+
 .container button.geo {
   position: absolute;
   left: -40px;
