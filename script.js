@@ -97,28 +97,30 @@ function publicBookCaseMap(local) {
         }
 
         let model = {
+          name:
+            e.tags["name:" + (local.code || "en")] ||
+            e.tags.name ||
+            e.tags.operator ||
+            e.tags.brand,
+          type:
+            local.type[e.tags["public_bookcase:type"]] ||
+            (e.tags.amenity !== "public_bookcase" &&
+            e.tags.amenity === "library" &&
+            e.tags.library !== "booksharing" &&
+            e.tags.fee === "no"
+              ? local.type.library
+              : "") ||
+            (e.tags.shop === "books" ? local.type.bookshop : "") ||
+            local.type.default,
           address: {
-            name:
-              e.tags["name:" + (local.code || "en")] ||
-              e.tags.name ||
-              e.tags.operator ||
-              e.tags.brand ||
-              local.type[e.tags["public_bookcase:type"]] ||
-              (e.tags.amenity !== "public_bookcase" &&
-              e.tags.amenity === "library" &&
-              e.tags.library !== "booksharing" &&
-              e.tags.fee === "no"
-                ? local.type.library
-                : "") ||
-              (e.tags.shop === "books" ? local.type.bookshop : "") ||
-              local.type.default,
+            name: "",
             postcode: e.tags["addr:postcode"] || "",
             locality: e.tags["addr:city"] || "",
             street: e.tags["addr:street"] || "",
             houseNumber: e.tags["addr:housenumber"] || "",
             level: e.tags["level"] || "",
-            latitude: e.lat,
-            longitude: e.lon
+            latitude: pos.lat,
+            longitude: pos.lng
           },
           hasOpeningHours: !!e.tags.opening_hours,
           opening: new opening_hours(e.tags.opening_hours || "Th", null, {
@@ -202,17 +204,15 @@ function publicBookCaseMap(local) {
         const contentElement = document.createElement("div");
 
         contentElement.innerHTML = `<div id="hcard-Name" class="vcard">
-        ${
-          model.address.name
-            ? `<strong class="name fn">${model.address.name}</strong>${
-                new URL(window.location.href).searchParams.get("edit")
-                  ? ` <a href="https://www.openstreetmap.org/edit?${e.type}=${
-                      e.id
-                    }"><i class="fa fa-pencil"></i></a>`
-                  : ""
-              }`
+        ${`<strong class="name">${model.name ||
+          model.address.name ||
+          model.type}</strong>${
+          new URL(window.location.href).searchParams.get("edit")
+            ? ` <a href="https://www.openstreetmap.org/edit?${e.type}=${
+                e.id
+              }"><i class="fa fa-pencil"></i></a>`
             : ""
-        }
+        }`}
         <div class="adr">
         
         ${
@@ -302,13 +302,15 @@ function publicBookCaseMap(local) {
      }  <br>
         <div class="geo">
          <small>
-         <a href="https://maps.apple.com/?ll=${model.address.latitude},${
-          model.address.longitude
-        }&q=${model.address.name}">
+         <a href="https://maps.apple.com/?${utilQsString({
+           ll: `${model.address.latitude},${model.address.longitude}`,
+           q: model.name || model.address.name || model.type
+         })}">
            ${local.route}
          </a>
          </small>
         </div>
+        <div class="img-container">
         ${
           model.img
             ? `<br /><img class="img" style="max-width:300px;max-height:300px;" src="${
@@ -316,17 +318,18 @@ function publicBookCaseMap(local) {
               }"/>`
             : ``
         }
+        </div>
+        <div class="description">
         ${
           model.description
-            ? `<div>${!model.img ? `<br />` : ``}<small>${
-                model.description
-              }</small></div>`
+            ? `${!model.img ? `<br />` : ``}<small>${model.description}</small>`
             : ``
         }
+        </div>
+        <div class="contact">
         ${
           model.website || model.email || model.phone
             ? `
-        <div>
           <br />
           ${
             model.website
@@ -348,10 +351,11 @@ function publicBookCaseMap(local) {
                   model.phone
                 }" target="_blank"><i class="fa fa-phone fa-lg"></i></a>&ensp;`
               : ``
-          }
-       </div>`
+          }`
             : ``
-        }</div>`;
+        }
+        </div>
+        </div>`;
 
         const popup = L.popup({
           minWidth: 200,
@@ -361,84 +365,250 @@ function publicBookCaseMap(local) {
           if (!isLoaded) {
             isLoaded = true;
 
-            let request = new XMLHttpRequest();
+            {
+              // Enrich Address
 
-            request.onreadystatechange = function() {
-              if (request.readyState !== 4) return;
-              if (request.status !== 200) return;
+              let request = new XMLHttpRequest();
 
-              let result = JSON.parse(request.responseText);
+              request.onreadystatechange = function() {
+                if (request.readyState !== 4) return;
+                if (request.status !== 200) return;
 
-              model.address.name =
-                e.tags["name:" + (local.code || "en")] ||
-                e.tags.name ||
-                e.tags.operator ||
-                e.tags.brand ||
-                result.namedetails.name ||
-                result.namedetails.official_name ||
-                local.type[e.tags["public_bookcase:type"]] ||
-                (e.tags.amenity !== "public_bookcase" &&
-                e.tags.amenity === "library" &&
-                e.tags.library !== "booksharing" &&
-                e.tags.fee === "no"
-                  ? local.type.library
-                  : "") ||
-                (e.tags.shop === "books" ? local.type.bookshop : "") ||
-                local.type.default;
-              model.address.postcode =
-                model.address.postcode || result.address.postcode || "";
-              model.address.locality =
-                model.address.locality ||
-                result.address.city ||
-                result.address.town ||
-                result.address.village ||
-                result.address.suburb ||
-                result.address.neighbourhood ||
-                result.address.state ||
-                result.address.county ||
-                "";
-              if (!model.address.street) {
-                model.address.street =
-                  result.address.path ||
-                  result.address.footway ||
-                  result.address.road ||
-                  result.address.cycleway ||
-                  result.address.pedestrian ||
-                  result.address.farmyard ||
-                  result.address.construction ||
-                  result.namedetails.name ||
-                  result.namedetails.official_name ||
+                let result = JSON.parse(request.responseText);
+
+                model.address.name =
+                  result.namedetails.name || result.namedetails.official_name;
+                model.address.postcode =
+                  model.address.postcode || result.address.postcode || "";
+                model.address.locality =
+                  model.address.locality ||
+                  result.address.city ||
+                  result.address.town ||
+                  result.address.village ||
+                  result.address.suburb ||
                   result.address.neighbourhood ||
+                  result.address.state ||
+                  result.address.county ||
                   "";
-                model.address.houseNumber =
-                  model.address.houseNumber ||
-                  result.address.house_number ||
-                  "";
-              }
+                if (!model.address.street) {
+                  model.address.street =
+                    result.address.path ||
+                    result.address.footway ||
+                    result.address.road ||
+                    result.address.cycleway ||
+                    result.address.pedestrian ||
+                    result.address.farmyard ||
+                    result.address.construction ||
+                    result.namedetails.name ||
+                    result.namedetails.official_name ||
+                    result.address.neighbourhood ||
+                    "";
+                  model.address.houseNumber =
+                    model.address.houseNumber ||
+                    result.address.house_number ||
+                    "";
+                }
 
-              contentElement.querySelector(".name").innerHTML =
-                model.address.name;
-              contentElement.querySelector(".street-address").innerHTML = `${
-                model.address.street
-              } ${model.address.houseNumber} ${toDisplayLevel(
-                parseFloat(model.address.level),
-                local
-              )}`;
-              contentElement.querySelector(".postal-code").innerHTML =
-                model.address.postcode;
-              contentElement.querySelector(".region").innerHTML =
-                model.address.locality;
+                contentElement.querySelector(".name").innerHTML =
+                  model.name || model.address.name || model.type;
+                contentElement.querySelector(".street-address").innerHTML = `${
+                  model.address.street
+                } ${model.address.houseNumber} ${toDisplayLevel(
+                  parseFloat(model.address.level),
+                  local
+                )}`;
+                contentElement.querySelector(".postal-code").innerHTML =
+                  model.address.postcode;
+                contentElement.querySelector(".region").innerHTML =
+                  model.address.locality;
 
-              popup.update();
-            };
-            request.open(
-              "Get",
-              "https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&namedetails=1&lat=" +
-                e.lat +
-                "&lon=" +
-                e.lon
-            );
-            request.send();
+                popup.update();
+              };
+              request.open(
+                "Get",
+                "https://nominatim.openstreetmap.org/reverse?" +
+                  utilQsString({
+                    format: "json",
+                    addressdetails: "1",
+                    namedetails: "1",
+                    lat: pos.lat,
+                    lon: pos.lng
+                  })
+              );
+              request.send();
+            }
+
+            {
+              // Enrich Data
+              let qid = e.tags.wikidata;
+
+              let request = new XMLHttpRequest();
+
+              request.onreadystatechange = function() {
+                if (request.readyState !== 4) return;
+                if (request.status !== 200) return;
+
+                let r = JSON.parse(request.responseText);
+
+                if (r && r.error) return;
+                if (!r.entities[qid]) return;
+
+                let entity = r.entities[qid];
+
+                var i;
+                var description;
+                if (
+                  entity.descriptions &&
+                  Object.keys(entity.descriptions).length > 0
+                ) {
+                  description =
+                    entity.descriptions[Object.keys(entity.descriptions)[0]]
+                      .value;
+                }
+                var label;
+                if (entity.labels && Object.keys(entity.labels).length > 0) {
+                  label = entity.labels[Object.keys(entity.labels)[0]].value;
+                }
+
+                // prepare result
+                // {
+                //   title:        'string',
+                //   description:  'string',
+                //   imageURL:     'string',
+                //   wiki:         { title: 'string', url: 'string' }
+                // }
+                var result = {
+                  title: label,
+                  description: description
+                };
+
+                // add image
+                if (entity.claims) {
+                  var imageroot = "https://commons.wikimedia.org/w/index.php";
+                  var props = ["P154", "P18"]; // logo image, image
+                  var prop, image;
+                  for (i = 0; i < props.length; i++) {
+                    prop = entity.claims[props[i]];
+                    if (prop && Object.keys(prop).length > 0) {
+                      image =
+                        prop[Object.keys(prop)[0]].mainsnak.datavalue.value;
+                      if (image) {
+                        result.imageURL =
+                          imageroot +
+                          "?" +
+                          utilQsString({
+                            title: "Special:Redirect/file/" + image,
+                            width: 300
+                          });
+                      }
+                      break;
+                    }
+                  }
+                }
+
+                if (entity.sitelinks) {
+                  // check each, in order of preference
+                  var w = (local.code || "en") + "wiki";
+                  if (entity.sitelinks[w]) {
+                    var title = entity.sitelinks[w].title;
+
+                    result.wiki = {
+                      title: title,
+                      url:
+                        "https://" +
+                        (local.code || "en") +
+                        ".wikipedia.org/wiki/" +
+                        title.replace(/ /g, "_")
+                    };
+                  }
+                }
+
+                model.name =
+                  model.name ||
+                  result.title ||
+                  (result.wiki && result.wiki.title);
+                model.description = model.description || result.description;
+                model.img = model.img || result.imageURL;
+                model.website =
+                  model.website || (result.wiki && result.wiki.url);
+
+                contentElement.querySelector(".name").innerHTML =
+                  model.name || model.address.name || model.type;
+                contentElement.querySelector(
+                  ".description"
+                ).innerHTML = model.description
+                  ? `${!model.img ? `<br />` : ``}<small>${
+                      model.description
+                    }</small>`
+                  : ``;
+                contentElement.querySelector(
+                  ".img-container"
+                ).innerHTML = model.img
+                  ? `<br /><img class="img" style="max-width:300px;max-height:300px;" src="${
+                      model.img
+                    }"/>`
+                  : ``;
+
+                contentElement.querySelector(".contact").innerHTML =
+                  model.website || model.email || model.phone
+                    ? `
+                  <br />
+                  ${
+                    model.website
+                      ? `<a href="${validateUrl(
+                          model.website
+                        )}" target="_blank"><i class="fa fa-globe fa-lg"></i></a>&ensp;`
+                      : ``
+                  } 
+                  ${
+                    model.email
+                      ? `<a href="mailto:${
+                          model.email
+                        }" target="_blank"><i class="fa fa-envelope fa-lg"></i></a>&ensp;`
+                      : ``
+                  } 
+                  ${
+                    model.phone
+                      ? `<a href="tel:${
+                          model.phone
+                        }" target="_blank"><i class="fa fa-phone fa-lg"></i></a>&ensp;`
+                      : ``
+                  }`
+                    : ``;
+
+                if (model.img) {
+                  onImageLoaded(model.img, function(loaded) {
+                    if (!loaded) {
+                      contentElement.querySelector(
+                        ".img"
+                      ).outerHTML = `<a class="img" href="${validateUrl(
+                        model.img
+                      )}" target="_blank"><i class="fa fa-photo fa-2x"></i></a>`;
+                    }
+
+                    popup.update();
+                  });
+                }
+
+                popup.update();
+              };
+              request.open(
+                "Get",
+                "https://www.wikidata.org/w/api.php?" +
+                  utilQsString({
+                    format: "json",
+                    action: "wbgetentities",
+                    formatversion: "2",
+                    ids: qid,
+                    props: "labels|descriptions|claims|sitelinks",
+                    sitefilter: (local.code || "en") + "wiki",
+                    languages: local.code || "en",
+                    languagefallback: "0",
+                    origin: "*"
+                  })
+              );
+              request.send();
+            }
 
             if (model.img) {
               onImageLoaded(model.img, function(loaded) {
@@ -659,5 +829,27 @@ function publicBookCaseMap(local) {
 
   function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
+  }
+  
+  function utilQsString(obj, noencode) {
+    // encode everything except special characters used in certain hash parameters:
+    // "/" in map states, ":", ",", {" and "}" in background
+    function softEncode(s) {
+      return encodeURIComponent(s).replace(
+        /(%2F|%3A|%2C|%7B|%7D)/g,
+        decodeURIComponent
+      );
+    }
+
+    return Object.keys(obj)
+      .sort()
+      .map(function(key) {
+        return (
+          encodeURIComponent(key) +
+          "=" +
+          (noencode ? softEncode(obj[key]) : encodeURIComponent(obj[key]))
+        );
+      })
+      .join("&");
   }
 }
