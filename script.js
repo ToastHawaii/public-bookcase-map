@@ -159,7 +159,22 @@ function publicBookCaseMap(local) {
           e.tags.wikimedia_commons ||
           e.tags.picture;
 
-        model.wheelchair = e.tags.wheelchair === "yes";
+        model.wheelchair = e.tags.wheelchair !== undefined;
+        switch(e.tags.wheelchair) {
+          case "yes":
+            model.wheelchairAccesIcon = "fa-check-circle";
+            break;
+          case "limited":
+            model.wheelchairAccesIcon = "fa-exclamation-circle";
+            break;
+          case "no":
+            model.wheelchairAccesIcon = "fa-times-circle";
+            break;
+          default:
+            model.wheelchairAccesIcon = "";
+            break;
+        }
+
         model.light = e.tags.lit === "yes";
         model.indoor =
           e.tags.location === "indoor" ||
@@ -285,7 +300,9 @@ function publicBookCaseMap(local) {
           model.wheelchair
             ? `<span title="${
                 local.wheelchair
-              }" style="float:right;margin-left:5px;"><i class="fa fa-wheelchair"></i></span>`
+              }" style="float:right;margin-left:5px;"><i class="fa fa-wheelchair"></i> <i class="fa ${
+                model.wheelchairAccesIcon
+              }"></i></span>`
             : ``
         }
         
