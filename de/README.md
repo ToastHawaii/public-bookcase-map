@@ -12,6 +12,8 @@ Ein öffentlicher oder offener Bücherschrank ist ein Schrank, Regal oder Box mi
 
 Ich habe keine Karte gefunden, welche die offene Bücherschränke, Strassenbibliotheken, Bücherboxen, Leseboxen, offene Bücherregal, Hol-und-Bring Bibliotheken, Tauschbibliotheken, Lesebanken etc. anzeigt, welche so zahlreich von den fleissigen Karten Zeichner von OSM eingetragen wurden. Um diesen zu würdigen und weil ich die öffentlichen Bücherschränke eine gute Sache finde und diese unterstützen möchte, habe ich diese Karte erstellt.
 
+[Quellcode dieser Karte auf GitHub anzeigen](https://github.com/public-bookcase/public-bookcase.github.io)
+
 ### Legende
 
 - <i class="fa fa-money"></i> Verkauf
