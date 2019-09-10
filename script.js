@@ -159,19 +159,23 @@ function publicBookCaseMap(local) {
           e.tags.wikimedia_commons ||
           e.tags.picture;
 
-        model.wheelchair = e.tags.wheelchair !== undefined;
         switch(e.tags.wheelchair) {
           case "yes":
+          case "designated":
+            model.wheelchair = true;
             model.wheelchairAccesIcon = "fa-check-circle";
             break;
           case "limited":
+            model.wheelchair = true;
             model.wheelchairAccesIcon = "fa-exclamation-circle";
             break;
           case "no":
+            model.wheelchair = true;
             model.wheelchairAccesIcon = "fa-times-circle";
             break;
           default:
-            model.wheelchairAccesIcon = "";
+            // do not display icon for others values or undefined
+            model.wheelchair = false;
             break;
         }
 
