@@ -4,8 +4,8 @@ var locate;
 function publicBookCaseMap(local) {
   moment.locale(local.code || "en");
 
-  let attr_side = `<a href="https://public-bookcase.github.io/${local.code}">${
-    local.aboutThisSide
+  let attr_site = `<a href="https://public-bookcase.github.io/${local.code}">${
+    local.aboutThisSite
   }</a>`;
   let attr_osm =
     'Map data &copy; <a href="https://openstreetmap.org/">OpenStreetMap</a> contributors';
@@ -16,7 +16,7 @@ function publicBookCaseMap(local) {
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
       opacity: 0.7,
-      attribution: [attr_side, attr_osm, attr_overpass].join(" | ")
+      attribution: [attr_site, attr_osm, attr_overpass].join(" | ")
     }
   );
 
