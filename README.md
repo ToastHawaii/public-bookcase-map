@@ -12,6 +12,8 @@ A public or open bookcase is a cabinet, shelf or box used for the exchange and s
 
 I have not found a map showing the open bookcases, street libraries, bookboxes, reading boxes, open bookshelves and reading banks from OSM. Because I find the public bookcases a good thing and want to support it, I have created this map.
 
+[View source code of this map on GitHub](https://github.com/public-bookcase/public-bookcase.github.io)
+
 ### Legend
 
 - <i class="fa fa-money"></i> Sale
