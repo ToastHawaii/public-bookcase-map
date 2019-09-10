@@ -313,7 +313,7 @@ function publicBookCaseMap(local) {
         <div class="img-container">
         ${
           model.img
-            ? `<br /><img class="img" style="max-width:300px;max-height:300px;" src="${
+            ? `<br /><img class="img" style="max-width:300px;max-height:300px;image-orientation:from-image;" src="${
                 model.img
               }"/>`
             : ``
@@ -544,7 +544,7 @@ function publicBookCaseMap(local) {
                 contentElement.querySelector(
                   ".img-container"
                 ).innerHTML = model.img
-                  ? `<br /><img class="img" style="max-width:300px;max-height:300px;" src="${
+                  ? `<br /><img class="img" style="max-width:300px;max-height:300px;image-orientation:from-image;" src="${
                       model.img
                     }"/>`
                   : ``;
