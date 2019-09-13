@@ -46,8 +46,8 @@ Klar, helfende Hände sind mir immer willkommen:
 - Finde Bücherschränke und trage diese in [OSM](https://www.openstreetmap.org) ein. Überprüfe aber immer ob diese wirklich existieren in dem du sie besuchst.
 	- Recherchiere im Internet.
 	- Halte Ausschau wenn du unterwegs bist. 
-	- Schau dir [die schöne Karte von Binnette](https://umap.openstreetmap.fr/fr/map/osm-bookcases-and-boite-a-lire_362287#15/45.2010/5.7389) an, welche auf den Daten von [boite-a-lire](https://www.boite-a-lire.com/ basiert. [Hier geht es zur Projekt Webseite von Binnette's bookcases-to-check](https://github.com/Binnette/bookcases-to-check)
-- Verbessere diese Karte oder mache Vorschläge wie sie verbessert werden kann. [Hier geht es zur Projekt Webseite von public-bookcase]](https://github.com/public-bookcase/public-bookcase.github.io)
+	- Schau dir [die schöne Karte von Binnette](https://umap.openstreetmap.fr/fr/map/osm-bookcases-and-boite-a-lire_362287#15/45.2010/5.7389) an, welche auf den Daten von [boite-a-lire](https://www.boite-a-lire.com/) basiert. [Hier geht es zur Projekt Webseite von Binnette's bookcases-to-check](https://github.com/Binnette/bookcases-to-check)
+- Verbessere diese Karte oder mache Vorschläge wie sie verbessert werden kann. [Hier geht es zur Projekt Webseite von public-bookcase](https://github.com/public-bookcase/public-bookcase.github.io)
 - Tausche Bücher.
 - Geniesse das Lesen und Leben. ;)
 
