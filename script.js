@@ -4,9 +4,7 @@ var locate;
 function publicBookCaseMap(local) {
   moment.locale(local.code || "en");
 
-  let attr_site = `<a href="https://public-bookcase.github.io/${local.code}">${
-    local.aboutThisSite
-  }</a>`;
+  let attr_site = `<a href="https://public-bookcase.github.io/${local.code}">${local.aboutThisSite}</a>`;
   let attr_osm =
     'Map data &copy; <a href="https://openstreetmap.org/">OpenStreetMap</a> contributors';
   let attr_overpass =
@@ -146,20 +144,18 @@ function publicBookCaseMap(local) {
         };
 
         if (!model.img && e.tags.mapillary)
-          model.img = `https://d1cuyjsrcm0gby.cloudfront.net/${
-            e.tags.mapillary
-          }/thumb-320.jpg`;
+          model.img = `https://d1cuyjsrcm0gby.cloudfront.net/${e.tags.mapillary}/thumb-320.jpg`;
 
         model.img =
           model.img ||
-          toWikimediaCommensUrl(e.tags.image) ||
-          toWikimediaCommensUrl(e.tags.wikimedia_commons) ||
+          toWikimediaCommonsUrl(e.tags.image) ||
+          toWikimediaCommonsUrl(e.tags.wikimedia_commons) ||
           e.tags.flickr ||
           e.tags.image ||
           e.tags.wikimedia_commons ||
           e.tags.picture;
 
-        switch(e.tags.wheelchair) {
+        switch (e.tags.wheelchair) {
           case "yes":
           case "designated":
             model.wheelchair = true;
@@ -227,86 +223,62 @@ function publicBookCaseMap(local) {
           model.address.name ||
           model.type}</strong>${
           new URL(window.location.href).searchParams.get("edit")
-            ? ` <a href="https://www.openstreetmap.org/edit?${e.type}=${
-                e.id
-              }"><i class="fa fa-pencil"></i></a>`
+            ? ` <a href="https://www.openstreetmap.org/edit?${e.type}=${e.id}"><i class="fa fa-pencil"></i></a>`
             : ""
         }`}
         <div class="adr">
         
         ${
           model.capacity
-            ? `<span title="${
-                local.capacity
-              }" style="float:right;margin-left:5px;"><i class="fa fa-book"></i> ${
-                model.capacity
-              }</span>`
+            ? `<span title="${local.capacity}" style="float:right;margin-left:5px;"><i class="fa fa-book"></i> ${model.capacity}</span>`
             : ``
         }
 
         ${
           model.freeToTake
-            ? `<span title="${
-                local.freeToTake
-              }" style="float:right;margin-left:5px;"><i class="fa fa-long-arrow-left"></i></span>`
+            ? `<span title="${local.freeToTake}" style="float:right;margin-left:5px;"><i class="fa fa-long-arrow-left"></i></span>`
             : ``
         }
         
         ${
           model.freeToTakeOrGive
-            ? `<span title="${
-                local.freeToTakeOrGive
-              }" style="float:right;margin-left:5px;"><i class="fa fa-exchange"></i></span>`
+            ? `<span title="${local.freeToTakeOrGive}" style="float:right;margin-left:5px;"><i class="fa fa-exchange"></i></span>`
             : ``
         }
 
         ${
           model.borrow
-            ? `<span title="${
-                local.borrow
-              }" style="float:right;margin-left:5px;"><i class="fa fa-repeat"></i></span>`
+            ? `<span title="${local.borrow}" style="float:right;margin-left:5px;"><i class="fa fa-repeat"></i></span>`
             : ``
         }
 
         ${
           model.indoor
-            ? `<span title="${
-                local.indoor
-              }" style="float:right;margin-left:5px;"><i class="fa fa-building-o"></i></span>`
+            ? `<span title="${local.indoor}" style="float:right;margin-left:5px;"><i class="fa fa-building-o"></i></span>`
             : ``
         }
         
         ${
           model.light
-            ? `<span title="${
-                local.light
-              }" style="float:right;margin-left:5px;"><i class="fa fa-lightbulb-o"></i></span>`
+            ? `<span title="${local.light}" style="float:right;margin-left:5px;"><i class="fa fa-lightbulb-o"></i></span>`
             : ``
         }
         
         ${
           model.customersOnly
-            ? `<span title="${
-                local.customersOnly
-              }" style="float:right;margin-left:5px;"><i class="fa fa-ticket"></i></span>`
+            ? `<span title="${local.customersOnly}" style="float:right;margin-left:5px;"><i class="fa fa-ticket"></i></span>`
             : ``
         }
 
         ${
           model.fee
-            ? `<span title="${
-                local.fee
-              }" style="float:right;margin-left:5px;"><i class="fa fa-money"></i></span>`
+            ? `<span title="${local.fee}" style="float:right;margin-left:5px;"><i class="fa fa-money"></i></span>`
             : ``
         }
 
         ${
           model.wheelchair
-            ? `<span title="${
-                local.wheelchair
-              }" style="float:right;margin-left:5px;"><i class="fa fa-wheelchair"></i> <i class="fa ${
-                model.wheelchairAccesIcon
-              }"></i></span>`
+            ? `<span title="${local.wheelchair}" style="float:right;margin-left:5px;"><i class="fa fa-wheelchair"></i> <i class="fa ${model.wheelchairAccesIcon}"></i></span>`
             : ``
         }
         
@@ -334,9 +306,7 @@ function publicBookCaseMap(local) {
         <div class="img-container">
         ${
           model.img
-            ? `<br /><img class="img" style="max-width:300px;max-height:300px;image-orientation:from-image;" src="${
-                model.img
-              }"/>`
+            ? `<br /><img class="img" style="max-width:300px;max-height:300px;image-orientation:from-image;" src="${model.img}"/>`
             : ``
         }
         </div>
@@ -361,16 +331,12 @@ function publicBookCaseMap(local) {
           } 
           ${
             model.email
-              ? `<a href="mailto:${
-                  model.email
-                }" target="_blank"><i class="fa fa-envelope fa-lg"></i></a>&ensp;`
+              ? `<a href="mailto:${model.email}" target="_blank"><i class="fa fa-envelope fa-lg"></i></a>&ensp;`
               : ``
           } 
           ${
             model.phone
-              ? `<a href="tel:${
-                  model.phone
-                }" target="_blank"><i class="fa fa-phone fa-lg"></i></a>&ensp;`
+              ? `<a href="tel:${model.phone}" target="_blank"><i class="fa fa-phone fa-lg"></i></a>&ensp;`
               : ``
           }`
             : ``
@@ -565,9 +531,7 @@ function publicBookCaseMap(local) {
                 contentElement.querySelector(
                   ".img-container"
                 ).innerHTML = model.img
-                  ? `<br /><img class="img" style="max-width:300px;max-height:300px;image-orientation:from-image;" src="${
-                      model.img
-                    }"/>`
+                  ? `<br /><img class="img" style="max-width:300px;max-height:300px;image-orientation:from-image;" src="${model.img}"/>`
                   : ``;
 
                 contentElement.querySelector(".contact").innerHTML =
@@ -583,16 +547,12 @@ function publicBookCaseMap(local) {
                   } 
                   ${
                     model.email
-                      ? `<a href="mailto:${
-                          model.email
-                        }" target="_blank"><i class="fa fa-envelope fa-lg"></i></a>&ensp;`
+                      ? `<a href="mailto:${model.email}" target="_blank"><i class="fa fa-envelope fa-lg"></i></a>&ensp;`
                       : ``
                   } 
                   ${
                     model.phone
-                      ? `<a href="tel:${
-                          model.phone
-                        }" target="_blank"><i class="fa fa-phone fa-lg"></i></a>&ensp;`
+                      ? `<a href="tel:${model.phone}" target="_blank"><i class="fa fa-phone fa-lg"></i></a>&ensp;`
                       : ``
                   }`
                     : ``;
@@ -747,8 +707,30 @@ function publicBookCaseMap(local) {
     setHash(`${latLng.lat},${latLng.lng}`);
   });
 
-  function toWikimediaCommensUrl(source) {
+  function toWikimediaCommonsUrl(source) {
     if (!source) return "";
+
+    let category = "";
+
+    if (source.toUpperCase().startsWith("Category:".toUpperCase()))
+      category = source.substring(9, source.length);
+    else if (
+      decodeURI(source)
+        .toUpperCase()
+        .startsWith(
+          "https://commons.wikimedia.org/wiki/Category:".toUpperCase()
+        )
+    )
+      category = decodeURI(source).substring(44, source.length);
+    else if (
+      decodeURI(source)
+        .toUpperCase()
+        .startsWith("http://commons.wikimedia.org/wiki/Category:".toUpperCase())
+    )
+      category = decodeURI(source).substring(43, source.length);
+
+    if (category)
+      return "https://commons.wikimedia.org/wiki/Category:" + category;
 
     let fileName = "";
 
@@ -851,7 +833,7 @@ function publicBookCaseMap(local) {
   function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
   }
-  
+
   function utilQsString(obj, noencode) {
     // encode everything except special characters used in certain hash parameters:
     // "/" in map states, ":", ",", {" and "}" in background
