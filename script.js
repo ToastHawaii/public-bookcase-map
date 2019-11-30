@@ -4,7 +4,7 @@ var locate;
 function publicBookCaseMap(local) {
   moment.locale(local.code || "en");
 
-  let attr_site = `<a href="https://public-bookcase.github.io/${local.code}">${local.aboutThisSite}</a>`;
+  let attr_site = `<a href="https://book-exchange.zottelig.ch/${local.code}">${local.aboutThisSite}</a>`;
   let attr_osm =
     'Map data &copy; <a href="https://openstreetmap.org/">OpenStreetMap</a> contributors';
   let attr_overpass =

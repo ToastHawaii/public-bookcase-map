@@ -1,6 +1,6 @@
 # Public bookcase
 
-[Click here for the map](https://public-bookcase.github.io/map.html)
+[Click here for the map](https://book-exchange.zottelig.ch/map.html)
 
 This simple map shows public bookcases near you. The information is loaded from [OpenStreetMap](https://www.openstreetmap.org).
 
@@ -43,10 +43,11 @@ Yes. Use the note button in [OpenStreetMap](https://www.openstreetmap.org).
 ## Is there anything else to do?
 
 Sure, helping hands are always welcome:
+
 - Find bookcases and add them in [OSM](https://www.openstreetmap.org). But always check if they really exist in real life, on the field.
-    - Research on the Internet.
-    - Look out for bookcases when you're on the go. 
-    - Look at [the beautiful map from Binnette](https://umap.openstreetmap.fr/fr/map/osm-bookcases-and-boite-a-lire_362287#15/45.2010/5.7389), which is based on the data of [boite-a-lire](https://www.boite-a-lire.com/). [Click here for the project website from Binnette's bookcases-to-check](https://github.com/Binnette/bookcases-to-check).
+  - Research on the Internet.
+  - Look out for bookcases when you're on the go.
+  - Look at [the beautiful map from Binnette](https://umap.openstreetmap.fr/fr/map/osm-bookcases-and-boite-a-lire_362287#15/45.2010/5.7389), which is based on the data of [boite-a-lire](https://www.boite-a-lire.com/). [Click here for the project website from Binnette's bookcases-to-check](https://github.com/Binnette/bookcases-to-check).
 - Improve this map by your self or make suggestions. [Click here for the project website from public-bookcase](https://github.com/public-bookcase/public-bookcase.github.io)
 - Exchange books.
 - Enjoy reading and life. ;)

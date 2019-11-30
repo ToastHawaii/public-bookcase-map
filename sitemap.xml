@@ -3,27 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
 <url>
-<loc>https://public-bookcase.github.io/</loc>
+<loc>https://book-exchange.zottelig.ch/</loc>
   <xhtml:link 
                rel="alternate"
                hreflang="de"
-               href="https://public-bookcase.github.io/de"/>
+               href="https://book-exchange.zottelig.ch/de"/>
     <xhtml:link 
                rel="alternate"
                hreflang="en"
-               href="https://public-bookcase.github.io"/>
+               href="https://book-exchange.zottelig.ch"/>
 
 </url>
 <url>
-<loc>https://public-bookcase.github.io/map.html</loc>
+<loc>https://book-exchange.zottelig.ch/map.html</loc>
   <xhtml:link 
                rel="alternate"
                hreflang="de"
-               href="https://public-bookcase.github.io/de/map.html"/>
+               href="https://book-exchange.zottelig.ch/de/map.html"/>
     <xhtml:link 
                rel="alternate"
                hreflang="en"
-               href="https://public-bookcase.github.io/map.html"/>
+               href="https://book-exchange.zottelig.ch/map.html"/>
 
 </url>
 </urlset>
