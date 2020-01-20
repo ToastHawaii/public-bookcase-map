@@ -58,7 +58,7 @@ Yes, the code is free for use, copying and modification.
 
 ## More
 
-A map with public and free facilities and offers: [Priceless](http://unbezahlbar.github.io/map/)
+A map with public and free facilities and offers: [Priceless](http://unbezahlbar.github.io/map.html)
 
 ---
 

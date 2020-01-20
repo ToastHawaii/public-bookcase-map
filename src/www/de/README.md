@@ -55,7 +55,7 @@ Ja, der Code steht frei zur Verwendung, Kopierung und Modifizierung.
 
 ## Weiteres
 
-Eine Karte mit öffentlichen und kostenlosen Einrichtungen und Angebote: [Unbezahlbar](http://unbezahlbar.github.io/de/map/)
+Eine Karte mit öffentlichen und kostenlosen Einrichtungen und Angebote: [Unbezahlbar](http://unbezahlbar.github.io/de/map.html)
 
 ---
 
