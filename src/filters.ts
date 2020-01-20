@@ -30,17 +30,19 @@ ${nw(`["amenity"="givebox"]`)}
 // Library free of charge
 ${nw(`["amenity"="library"]["fee"="no"]`)}
 
-// Give-away shop
-${nw(`["shop"]["payment:none"="yes"]`)}
+// Give-away shop & Charity book shop
+${nw(`["shop"="charity"]["payment:none"="yes"]`)}
+${nw(`["shop"]["charity"="yes"]["payment:none"="yes"]`)}
+${nw(`["shop"="second_hand"]["payment:none"="yes"]`)}
+${nw(`["shop"]["second_hand"="yes"]["payment:none"="yes"]`)}
 
-${nw(`["shop"]["fee"="no"]`)}
+${nw(`["shop"="charity"]["fee"="no"]`)}
+${nw(`["shop"]["charity"="yes"]["fee"="no"]`)}
+${nw(`["shop"="second_hand"]["fee"="no"]`)}
+${nw(`["shop"]["second_hand"="yes"]["fee"="no"]`)}
 
 // Vending machine with free books 
-${nw(`["amenity"="vending_machine"]["vending"="books"]["fee"="no"]`)}
-
-// Charity book shop
-${nw(`["shop"="books"]["charity"="yes"]["fee"="no"]`)}
-${nw(`["shop"="charity"]["books"]["fee"="no"]`)}`,
+${nw(`["amenity"="vending_machine"]["vending"="books"]["fee"="no"]`)}`,
     color: "#A0522D",
     edit: ["amenity=public_bookcase", "amenity=library", "amenity", "shop"]
   }
