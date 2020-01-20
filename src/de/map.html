@@ -37,102 +37,43 @@
     <meta name="msapplication-config" content="/icons/browserconfig.xml" />
     <meta name="theme-color" content="#ffffff" />
 
-    <link rel="stylesheet" href="/lib/OverPassLayer.css" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
-      integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-      crossorigin=""
-    />
-    <script
-      src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-      integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-      crossorigin=""
-    ></script>
-    <script src="/lib/OverPassLayer.bundle.js"></script>
-    <script src="/lib/md5.js"></script>
-    <script src="/lib/moment-with-locales.min.js"></script>
-    <script src="https://openingh.openstreetmap.de/opening_hours.js/opening_hours+deps.min.js"></script>
+    <link rel="stylesheet" href="/lib/leaflet.css" type="text/css" />
+    <link rel="stylesheet" href="/lib/OverPassLayer.css" type="text/css" />
 
     <link
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
       rel="stylesheet"
+      type="text/css"
     />
 
     <link rel="stylesheet" href="/style.css" media="screen" type="text/css" />
-    <script src="/script.js"></script>
   </head>
 
   <body>
     <div id="map"></div>
     <h1>
-      Öffentliche Bücherschränke
+      <a href="/de">
+        Öffentliche Bücherschränke
+      </a>
     </h1>
+  
     <div class="box">
       <div class="container">
-        <form onsubmit="return search();">
-          <button class="geo" type="button" onclick="return locate();">
-            <i class="fa fa-dot-circle-o"></i>
+        <form class="search">
+          <button class="geo" type="button">
+            <i class="far fa-dot-circle"></i>
           </button>
           <input type="search" id="osm-search" placeholder="Suche" />
           <button class="icon" type="submit">
-            <i class="fa fa-search"></i>
+            <i class="fas fa-search"></i>
           </button>
         </form>
       </div>
     </div>
+   
+    <button class="edit" type="button">
+      <i class="fas fa-pencil-alt"></i>
+    </button>
 
-    <script>
-      publicBookCaseMap({
-        code: "de",
-        minZoomMessageNoLayer: "Keine Ebene zugewiesen",
-        minZoomMessage: "Vergrössern, um Standorte zu laden",
-        aboutThisSite: "Über diese Seite",
-        capacity: "Kapazität",
-        freeToTake: "Nur mitnehmen",
-        freeToTakeOrGive: "Mitnehmen und bringen",
-        borrow: "Nur ausleihen",
-        indoor: "Drinnen",
-        light: "Beleuchtet",
-        customersOnly: "Nur für Besucher",
-        wheelchair: "Rollstuhlgerecht",
-        fee: "Verkauf",
-        open: "Geöffnet",
-        closed: "Geschlossen",
-        maybeOpen: "Vielleicht geöffnet",
-        maybeOpens: "Öffnet vielleicht",
-        maybeCloses: "Schliesst vielleicht",
-        opens: "Öffnet",
-        closes: "Schliesst",
-        thatDependsOn: "Das hängt ab von",
-        route: "Routen",
-        floor: function(level) {
-          return `(${level}. OG)`;
-        },
-        groundFloor: function(level) {
-          return `(EG)`;
-        },
-        basement: function(level) {
-          return `(${Math.abs(level)}. UG)`;
-        },
-        type: {
-          default: "Öffentlicher Bücherschrank",
-
-          building: "Öffentliche Tauschbibliothek",
-          glass_cabinet: "Öffentlicher Bücherschrank",
-          metal_cabinet: "Öffentlicher Bücherschrank",
-          movable_cabinet: "Öffentlicher Bücherschrank",
-          phone_box: "Öffentliche Buchkabine",
-          reading_box: "Öffentliche Bücherbox",
-          sculpture: "Öffentlicher Bücherschrank",
-          shelf: "Öffentliches Bücherregal",
-          shelter: "Öffentliches Bücherregal",
-          wooden_cabinet: "Öffentlicher Bücherschrank",
-
-          bookshop: "Buchhandlung",
-          library: "Kostenlose Bibliothek"
-        }
-      });
-    </script>
   </body>
 </html>
