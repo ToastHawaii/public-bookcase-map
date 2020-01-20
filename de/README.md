@@ -16,15 +16,15 @@ Ich habe keine Karte gefunden, welche die offene Bücherschränke, Strassenbibli
 
 ### Legende
 
-- <i class="fa fa-money"></i> Verkauf
-- <i class="fa fa-wheelchair"></i> Rollstuhlgerecht
-- <i class="fa fa-ticket"></i> Nur für Besucher
-- <i class="fa fa-lightbulb-o"></i> Beleuchtet
-- <i class="fa fa-building-o"></i> Drinnen
-- <i class="fa fa-repeat"></i> Nur ausleihen
-- <i class="fa fa-exchange"></i> Mitnehmen und bringen
-- <i class="fa fa-long-arrow-left"></i> Nur mitnehmen
-- <i class="fa fa-book"></i> Kapazität
+- <i class="far fa-money-bill-alt"></i> Verkauf
+- <i class="fab fa-accessible-icon"></i> Rollstuhlgerecht
+- <i class="fas fa-ticket-alt"></i> Nur für Besucher
+- <i class="far fa-lightbulb"></i> Beleuchtet
+- <i class="far fa-building"></i> Drinnen
+- <i class="fas fa-redo-alt"></i> Nur ausleihen
+- <i class="fas fa-exchange-alt"></i> Mitnehmen und bringen
+- <i class="fas fa-long-arrow-alt-left"></i> Nur mitnehmen
+- <i class="fas fa-book"></i> Kapazität
 
 ## Gibt es diese Karte auch als App?
 
@@ -52,6 +52,10 @@ Klar, helfende Hände sind mir immer willkommen:
 ## Ich habe eine Webseite, kann ich diese Karte einbauen?
 
 Ja, der Code steht frei zur Verwendung, Kopierung und Modifizierung.
+
+## Weiteres
+
+Eine Karte mit öffentlichen und kostenlosen Einrichtungen und Angebote: [Unbezahlbar](http://unbezahlbar.github.io/de/map/)
 
 ---
 

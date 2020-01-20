@@ -68,7 +68,7 @@ export function initMap<M>(
     'Map data &copy; <a href="https://openstreetmap.org/">OpenStreetMap</a> contributors';
   const attrOverpass =
     'POI via <a href="https://www.overpass-api.de/">Overpass API</a>';
-  const attrSite = `<a href="https://priceless.zottelig.ch/${local.code}">${local.aboutThisSite}</a>`;
+  const attrSite = `<a href="https://book-exchange.zottelig.ch/${local.code}">${local.aboutThisSite}</a>`;
 
   const osm = new L.TileLayer(
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",

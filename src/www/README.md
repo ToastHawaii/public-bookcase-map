@@ -16,15 +16,15 @@ I have not found a map showing the open bookcases, street libraries, bookboxes, 
 
 ### Legend
 
-- <i class="fa fa-money"></i> Sale
-- <i class="fa fa-wheelchair"></i> Wheelchair accessible
-- <i class="fa fa-ticket"></i> Customers only
-- <i class="fa fa-lightbulb-o"></i> Lit
-- <i class="fa fa-building-o"></i> Indoor
-- <i class="fa fa-repeat"></i> Borrow only
-- <i class="fa fa-exchange"></i> Free to take or give
-- <i class="fa fa-long-arrow-left"></i> Free to take
-- <i class="fa fa-book"></i> Capacity
+- <i class="far fa-money-bill-alt"></i> Sale
+- <i class="fab fa-accessible-icon"></i> Wheelchair accessible
+- <i class="fas fa-ticket-alt"></i> Customers only
+- <i class="far fa-lightbulb"></i> Lit
+- <i class="far fa-building"></i> Indoor
+- <i class="fas fa-redo-alt"></i> Borrow only
+- <i class="fas fa-exchange-alt"></i> Free to take or give
+- <i class="fas fa-long-arrow-alt-left"></i> Free to take
+- <i class="fas fa-book"></i> Capacity
 
 ## Is this map also available as an app?
 
@@ -55,6 +55,10 @@ Sure, helping hands are always welcome:
 ## I have a website, can I use this map?
 
 Yes, the code is free for use, copying and modification.
+
+## More
+
+A map with public and free facilities and offers: [Priceless](http://unbezahlbar.github.io/map/)
 
 ---
 
