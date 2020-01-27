@@ -45,7 +45,7 @@ export const attributes: Attribute<{}>[] = [
     template: local => template(local.light, "far fa-lightbulb")
   },
   {
-    check: tags => tags.fee === "yes",
+    check: tags => (tags.fee && tags.fee !== "no") || !!tags.shop,
     template: local => template(local.fee, "far fa-money-bill-alt")
   },
   {
