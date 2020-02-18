@@ -35,37 +35,14 @@ export function createPricelessOverPassLayer<M>(
       minZoomMessageNoLayer: local.minZoomMessageNoLayer,
       minZoomMessage: local.minZoomMessage
     },
-    minZoom: 14,
+    minZoom: 12,
     query: `(${query});out center;`,
     onSuccess(data: { elements: any[] }) {
       for (let i = 0; i < data.elements.length; i++) {
-        let pos: {
-          lat: number;
-          lng: number;
-        };
+        let pos: { lat: number; lng: number };
         let marker;
         const e = data.elements[i];
-        if (e.id in this._ids) continue;
-        if (
-          e.tags.fee &&
-          e.tags.fee !== "no" &&
-          !parseOpeningHours(e.tags.fee, local.code || "en") &&
-          !e.tags["fee:conditional"]
-        )
-          continue;
-        if (
-          e.tags.access &&
-          e.tags.access !== "yes" &&
-          e.tags.access !== "permissive"
-        )
-          continue;
-        if (
-          value === "toilets" &&
-          e.tags["toilets:access"] &&
-          e.tags["toilets:access"] !== "yes" &&
-          e.tags["toilets:access"] !== "permissive"
-        )
-          this._ids[e.id] = true;
+        if (e.tags.access && e.tags.access === "no") continue;
         if (e.type === "node") {
           pos = L.latLng(e.lat, e.lon);
         } else {
@@ -81,26 +58,18 @@ export function createPricelessOverPassLayer<M>(
           });
         }
         const model = {
-          name:
-            e.tags["name:" + (local.code || "en")] ||
-            e.tags.name ||
-            e.tags["piste:name"],
+          name: e.tags["name:" + (local.code || "en")] || e.tags.name,
           type:
             local["public_bookcase:type"][e.tags["public_bookcase:type"]] ||
-            local["garden:type"][e.tags["garden:type"]] ||
-            local["garden:style"][e.tags["garden:style"]] ||
-            local["castle_type"][e.tags["castle_type"]] ||
-            local["historic"][e.tags["historic"]] ||
-            local["fitness_station"][e.tags["fitness_station"]] ||
-            local["site_type"][e.tags["site_type"]] ||
-            e.tags["species:" + (local.code || "en")] ||
-            e.tags.species ||
-            e.tags["genus:" + (local.code || "en")] ||
-            e.tags.genus ||
-            local.man_made[e.tags["man_made"]] ||
-            local.type[value].name,
-          operator:
-            e.tags.operator || e.tags["heritage:operator"] || e.tags.brand,
+            (e.tags.amenity === "library" &&
+            e.tags.library !== "booksharing" &&
+            e.tags.fee === "no"
+              ? local.library
+              : "") ||
+            (e.tags.shop === "books" ? local.bookshop : "") ||
+            (e.tags.amenity === "give_box" ? local.giveBox : "") ||
+            local.default,
+          operator: e.tags.operator || e.tags.brand,
           address: {
             name: "",
             postcode: e.tags["addr:postcode"] || "",
@@ -114,10 +83,6 @@ export function createPricelessOverPassLayer<M>(
           opening:
             parseOpeningHours(e.tags.service_times, local.code || "en") ||
             parseOpeningHours(e.tags.opening_hours, local.code || "en"),
-          conditionalFee:
-            e.tags.fee &&
-            (parseOpeningHours(e.tags.fee, local.code || "en") ||
-              e.tags["fee:conditional"]),
           img: "",
           description: ""
         };
@@ -128,11 +93,6 @@ export function createPricelessOverPassLayer<M>(
           toUrl(e.tags.flickr) ||
           toWikimediaCommonsUrl(e.tags.image) ||
           toUrl(e.tags.picture) ||
-          toUrl(e.tags["website:webcam"]) ||
-          toUrl(e.tags["webcam"]) ||
-          toUrl(e.tags["contact:webcam"]) ||
-          toUrl(e.tags["webcam:url"]) ||
-          toUrl(e.tags["url:webcam"]) ||
           "";
         model.description =
           e.tags["description:" + (local.code || "en")] || e.tags.description;
@@ -166,9 +126,7 @@ export function createPricelessOverPassLayer<M>(
             ? `<br><div>${toOpenOrClose(model.opening, local)}</div>`
             : ``
         }
-        ${
-          model.conditionalFee ? `<br><div>${local.conditionalFee}</div>` : ``
-        } <br/>
+        <br/>
         <div class="geo">
          <small>
          <a href="https://maps.apple.com/?${utilQsString({
@@ -186,9 +144,9 @@ export function createPricelessOverPassLayer<M>(
           <br />
           <img class="img" dynamic-src="${model.img}"/>`
             : ``
-        }   
+        }
         </div>
-        <div class="description">    
+        <div class="description">
         ${
           model.description
             ? `
@@ -197,33 +155,33 @@ export function createPricelessOverPassLayer<M>(
             ${model.description}
           </small>`
             : ``
-        }    
+        }
         </div>
         <div> 
-          ${
-            !attributDescriptionGenerator.empty(e.tags, value, {}, local)
-              ? `
-          <br />
-          <small>
-            ${attributDescriptionGenerator.render(
-              local,
-              e.tags,
-              value,
-              {},
-              `<br />`
-            )}
-          </small>`
-              : ``
-          }   
-        </div>
+        ${
+          !attributDescriptionGenerator.empty(e.tags, value, {}, local)
+            ? `
+        <br />
+        <small>
+          ${attributDescriptionGenerator.render(
+            local,
+            e.tags,
+            value,
+            {},
+            `<br />`
+          )}
+        </small>`
+            : ``
+        }   
+      </div>
         <div class="contact">
-          ${
-            !linksGenerator.empty(e.tags, value, {}, local)
-              ? `
+        ${
+          !linksGenerator.empty(e.tags, value, {}, local)
+            ? `
           <br />
           ${linksGenerator.render(local, e.tags, value, {})}`
-              : ``
-          }     
+            : ``
+        }
         </div>
         </div>`;
         const popup = L.popup({
@@ -300,7 +258,7 @@ export function createPricelessOverPassLayer<M>(
             }
             {
               // Enrich Data
-              const qid = e.tags.wikidata || e.tags["species:wikidata"];
+              const qid = e.tags.wikidata;
               getJson<any>(
                 "https://www.wikidata.org/w/api.php",
                 {
@@ -416,10 +374,10 @@ export function createPricelessOverPassLayer<M>(
                     local
                   )
                     ? `
-    <br />
-    ${linksGenerator.render(local, e.tags, value, {
-      website: result.wiki ? result.wiki.url : undefined
-    })}`
+                  <br />
+                  ${linksGenerator.render(local, e.tags, value, {
+                    website: result.wiki ? result.wiki.url : undefined
+                  })}`
                     : ``;
                   if (model.img) {
                     onImageLoaded(model.img, (loaded: boolean) => {
