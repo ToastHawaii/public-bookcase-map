@@ -16,7 +16,11 @@ export const attributes: Attribute<{}>[] = [
     template: local => template(local.freeToTake, "fas fa-long-arrow-alt-left")
   },
   {
-    check: tags => tags["reuse:policy"] === "free_to_take_or_give",
+    check: tags =>
+      tags["reuse:policy"] === "free_to_take_or_give" ||
+      (!tags["reuse:policy"] &&
+        (tags["amenity"] === "reuse" ||
+          hasPropThatStartsWith(tags, "reuse:", "yes"))),
     template: local => template(local.freeToTakeOrGive, "fas fa-exchange-alt")
   },
   {
@@ -55,13 +59,44 @@ export const attributes: Attribute<{}>[] = [
   {
     check: tags => !!wheelchairAccesIcon(tags),
     template: (local, tags) =>
-      `<span title="${
-        local.wheelchair
-      }" class="attribut"><i class="fab fa-accessible-icon"></i> <i class="fas fa-${wheelchairAccesIcon(
+      `<span title="${wheelchairAccesText(
+        tags,
+        local
+      )}" class="attribut"><i class="fab fa-accessible-icon"></i> <i class="fas fa-${wheelchairAccesIcon(
         tags
-      )}"></i></span>`
+      )}" style="color: ${wheelchairAccesColor(tags)};"></i></span>`
   }
 ];
+
+function wheelchairAccesText(tags: { wheelchair: string }, local: any) {
+  switch (tags.wheelchair) {
+    case "yes":
+    case "designated":
+      return local.wheelchairYes;
+    case "limited":
+      return local.wheelchairLimited;
+    case "no":
+      return local.wheelchairNo;
+    default:
+      // do not display for others values or undefined
+      return "";
+  }
+}
+
+function wheelchairAccesColor(tags: { wheelchair: string }) {
+  switch (tags.wheelchair) {
+    case "yes":
+    case "designated":
+      return "green";
+    case "limited":
+      return "orange";
+    case "no":
+      return "red";
+    default:
+      // do not display for others values or undefined
+      return "black";
+  }
+}
 
 function wheelchairAccesIcon(tags: { wheelchair: string }) {
   switch (tags.wheelchair) {
@@ -76,4 +111,17 @@ function wheelchairAccesIcon(tags: { wheelchair: string }) {
       // do not display icon for others values or undefined
       return undefined;
   }
+}
+
+function hasPropThatStartsWith(tags: any, name: string, value: string) {
+  for (const tag in tags) {
+    if (
+      tags.hasOwnProperty(tag) &&
+      tag.toUpperCase().startsWith(name.toUpperCase()) &&
+      tags[tag] === value
+    ) {
+      return true;
+    }
+  }
+  return false;
 }

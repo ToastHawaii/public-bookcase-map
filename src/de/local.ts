@@ -5,11 +5,12 @@ export const local = {
   bookshop: "Buchhandlung",
   giveBox: "GiveBox",
   library: "Kostenlose Bibliothek",
-
+  
   minZoomMessageNoLayer: "Keine Ebene zugewiesen",
   minZoomMessage: "Vergrössern, um Standorte zu laden",
   aboutThisSite: "Über diese Seite",
   capacity: "Kapazität",
+  freeToGive: "Nur bringen",
   freeToTake: "Nur mitnehmen",
   freeToTakeOrGive: "Mitnehmen und bringen",
   borrow: "Nur ausleihen",
@@ -17,7 +18,9 @@ export const local = {
   light: "Beleuchtet",
   customersOnly: "Nur für Besucher",
   covered: "Überdacht",
-  wheelchair: "Rollstuhlgerecht",
+  wheelchairYes: "Rollstuhlgerecht",
+  wheelchairLimited: "Limitiert Rollstuhlgerecht",
+  wheelchairNo: "Nicht Rollstuhlgerecht",
   open: "Geöffnet",
   closed: "Geschlossen",
   maybeOpen: "Vielleicht geöffnet",
@@ -36,7 +39,6 @@ export const local = {
   basement: function(level: number) {
     return `(${Math.abs(level)}. UG)`;
   },
-
   "public_bookcase:type": {
     building: "Öffentliche Tauschbibliothek",
     glass_cabinet: "Öffentlicher Bücherschrank",
