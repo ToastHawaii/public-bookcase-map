@@ -1,5 +1,5 @@
 {
-  "name": "public-bookcase.github.io",
+  "name": "public-bookcase-map",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/public-bookcase/public-bookcase.github.io"
+    "url": "git+https://github.com/ToastHawaii/public-bookcase-map"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/public-bookcase/public-bookcase.github.io/issues"
+    "url": "https://github.com/ToastHawaii/public-bookcase-map/issues"
   },
-  "homepage": "https://github.com/public-bookcase/public-bookcase.github.io#readme",
+  "homepage": "https://github.com/ToastHawaii/public-bookcase-map#readme",
   "dependencies": {
     "@types/leaflet": "1.5.5",
     "@types/md5": "2.1.33",

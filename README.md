@@ -12,7 +12,7 @@ A public or open bookcase is a cabinet, shelf or box used for the exchange and s
 
 I have not found a map showing the open bookcases, street libraries, bookboxes, reading boxes, open bookshelves and reading banks from OSM. Because I find the public bookcases a good thing and want to support it, I have created this map.
 
-[View source code of this map on GitHub](https://github.com/public-bookcase/public-bookcase.github.io)
+[View source code of this map on GitHub](https://github.com/ToastHawaii/public-bookcase-map)
 
 ### Legend
 
@@ -48,7 +48,7 @@ Sure, helping hands are always welcome:
   - Research on the Internet.
   - Look out for bookcases when you're on the go.
   - Look at [the beautiful map from Binnette](https://umap.openstreetmap.fr/fr/map/osm-bookcases-and-boite-a-lire_362287#15/45.2010/5.7389), which is based on the data of [boite-a-lire](https://www.boite-a-lire.com/). [Click here for the project website from Binnette's bookcases-to-check](https://github.com/Binnette/bookcases-to-check).
-- Improve this map by your self or make suggestions. [Click here for the project website from public-bookcase](https://github.com/public-bookcase/public-bookcase.github.io)
+- Improve this map by your self or make suggestions. [Click here for the project website from public-bookcase](https://github.com/ToastHawaii/public-bookcase-map)
 - Exchange books.
 - Enjoy reading and life. ;)
 
