@@ -62,4 +62,4 @@ A map with public and free facilities and offers: [Priceless](https://priceless.
 
 ---
 
-[Deutsch](/de)
+[Deutsch](/docs/de)

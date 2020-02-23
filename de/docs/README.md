@@ -59,4 +59,4 @@ Eine Karte mit öffentlichen und kostenlosen Einrichtungen und Angebote: [Unbeza
 
 ---
 
-[English](/)
+[English](/docs)
