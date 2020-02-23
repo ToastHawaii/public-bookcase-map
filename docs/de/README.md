@@ -1,6 +1,6 @@
 # Öffentliche Bücherschränke
 
-[Hier gehts zur Karte](https://book-exchange.zottelig.ch/de/map.html)
+[Hier gehts zur Karte](https://book-exchange.zottelig.ch/de)
 
 Dies ist eine einfache Karte, welche öffentliche Bücherschränke in ihrer Nähe anzeigt. Die Informationen werden von [OpenStreetMap](https://www.openstreetmap.org) geladen.
 
@@ -55,7 +55,7 @@ Ja, der Code steht frei zur Verwendung, Kopierung und Modifizierung.
 
 ## Weiteres
 
-Eine Karte mit öffentlichen und kostenlosen Einrichtungen und Angebote: [Unbezahlbar](http://unbezahlbar.github.io/de/map.html)
+Eine Karte mit öffentlichen und kostenlosen Einrichtungen und Angebote: [Unbezahlbar](https://priceless.zottelig.ch)
 
 ---
 

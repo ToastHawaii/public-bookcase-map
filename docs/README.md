@@ -1,6 +1,6 @@
 # Public bookcase
 
-[Click here for the map](https://book-exchange.zottelig.ch/map.html)
+[Click here for the map](https://book-exchange.zottelig.ch)
 
 This simple map shows public bookcases near you. The information is loaded from [OpenStreetMap](https://www.openstreetmap.org).
 
@@ -58,7 +58,7 @@ Yes, the code is free for use, copying and modification.
 
 ## More
 
-A map with public and free facilities and offers: [Priceless](http://unbezahlbar.github.io/map.html)
+A map with public and free facilities and offers: [Priceless](https://priceless.zottelig.ch)
 
 ---
 
