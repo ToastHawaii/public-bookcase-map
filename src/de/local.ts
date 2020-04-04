@@ -5,10 +5,9 @@ export const local = {
   bookshop: "Buchhandlung",
   giveBox: "GiveBox",
   library: "Kostenlose Bibliothek",
-  
+
   minZoomMessageNoLayer: "Keine Ebene zugewiesen",
   minZoomMessage: "Vergrössern, um Standorte zu laden",
-  aboutThisSite: "Über diese Seite",
   capacity: "Kapazität",
   freeToGive: "Nur bringen",
   freeToTake: "Nur mitnehmen",
@@ -30,13 +29,13 @@ export const local = {
   closes: "Schliesst",
   thatDependsOn: "Das hängt ab von",
   route: "Routen",
-  floor: function(level: number) {
+  floor: function (level: number) {
     return `(${level}. OG)`;
   },
-  groundFloor: function(_level: number) {
+  groundFloor: function (_level: number) {
     return `(EG)`;
   },
-  basement: function(level: number) {
+  basement: function (level: number) {
     return `(${Math.abs(level)}. UG)`;
   },
   "public_bookcase:type": {
@@ -49,6 +48,6 @@ export const local = {
     sculpture: "Öffentlicher Bücherschrank",
     shelf: "Öffentliches Bücherregal",
     shelter: "Öffentliches Bücherregal",
-    wooden_cabinet: "Öffentlicher Bücherschrank"
-  }
+    wooden_cabinet: "Öffentlicher Bücherschrank",
+  },
 };

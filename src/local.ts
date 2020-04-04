@@ -8,7 +8,6 @@ export const local = {
 
   minZoomMessageNoLayer: "No layer assigned",
   minZoomMessage: "Zoom in to load locations",
-  aboutThisSite: "About this site",
   capacity: "Capacity",
   freeToGive: "Free to give",
   freeToTake: "Free to take",
@@ -31,13 +30,13 @@ export const local = {
   closes: "Closes",
   thatDependsOn: "That depends on",
   route: "Route",
-  floor: function(level: number) {
+  floor: function (level: number) {
     return `(${level}F)`;
   },
-  groundFloor: function(_level: number) {
+  groundFloor: function (_level: number) {
     return `(GF)`;
   },
-  basement: function(level: number) {
+  basement: function (level: number) {
     return `(B${Math.abs(level)}F)`;
   },
   "public_bookcase:type": {
@@ -50,6 +49,6 @@ export const local = {
     sculpture: "Public bookcase",
     shelf: "Public bookcase",
     shelter: "Public bookcase",
-    wooden_cabinet: "Public bookcase"
-  }
+    wooden_cabinet: "Public bookcase",
+  },
 };

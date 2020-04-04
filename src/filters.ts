@@ -28,7 +28,6 @@ export const filters: {
     ${nw(`["shop"="charity"]["books"]`)}
     
     // FreeStore
-    
     ${nw(`["shop"="freestore"]`)}
     ${nw(`["shop"="charity"]["payment:none"="yes"]`)}
     ${nw(`["shop"="second_hand"]["payment:none"="yes"]`)}

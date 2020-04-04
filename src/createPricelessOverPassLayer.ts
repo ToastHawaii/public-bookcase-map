@@ -4,7 +4,7 @@ import { links } from "./links";
 import {
   onImageLoaded,
   toWikimediaCommonsUrl,
-  toMapillaryUrl
+  toMapillaryUrl,
 } from "./utilities/image";
 import { toTitle, toLevel, toOpenOrClose } from "./view";
 import { getJson } from "./utilities/jsonRequest";
@@ -24,22 +24,27 @@ export function createPricelessOverPassLayer<M>(
   return new (L as any).OverPassLayer({
     markerIcon: L.divIcon({
       className: "custom-div-icon",
-      html: `<div style="background-color:${color ||
-        "#000000"};" class="marker-pin"></div><img class="${value}-icon" src="${icon}">`,
+      html: `<div style="background-color:${
+        color || "#000000"
+      };" class="marker-pin"></div><img class="${value}-icon" src="${icon}">`,
       iconSize: [36, 48],
-      iconAnchor: [18, 48]
+      iconAnchor: [18, 48],
     }),
     minZoomIndicatorEnabled: true,
     minZoomIndicatorOptions: {
       position: "bottomleft",
       minZoomMessageNoLayer: local.minZoomMessageNoLayer,
-      minZoomMessage: local.minZoomMessage
+      minZoomMessage: local.minZoomMessage,
     },
     minZoom: 12,
     query: `(${query});out center;`,
+    timeout: 30, // Seconds
     onSuccess(data: { elements: any[] }) {
       for (let i = 0; i < data.elements.length; i++) {
-        let pos: { lat: number; lng: number };
+        let pos: {
+          lat: number;
+          lng: number;
+        };
         let marker;
         const e = data.elements[i];
         if (e.tags.access && e.tags.access === "no") continue;
@@ -54,11 +59,11 @@ export function createPricelessOverPassLayer<M>(
           marker = L.circle(pos, 20, {
             stroke: false,
             fillColor: "#E54041",
-            fillOpacity: 0.9
+            fillOpacity: 0.9,
           });
         }
         const model = {
-          name: e.tags["name:" + (local.code || "en")] || e.tags.name,
+          name: extractName(e.tags, local.code || "en"),
           type:
             local["public_bookcase:type"][e.tags["public_bookcase:type"]] ||
             (e.tags.amenity === "library" &&
@@ -69,7 +74,7 @@ export function createPricelessOverPassLayer<M>(
             (e.tags.shop === "books" ? local.bookshop : "") ||
             (e.tags.amenity === "give_box" ? local.giveBox : "") ||
             local.default,
-          operator: e.tags.operator || e.tags.brand,
+          operator: e.tags.operator || e.tags.brand || e.tags.network,
           address: {
             name: "",
             postcode: e.tags["addr:postcode"] || "",
@@ -78,13 +83,13 @@ export function createPricelessOverPassLayer<M>(
             houseNumber: e.tags["addr:housenumber"] || "",
             level: e.tags["level"] || "",
             latitude: pos.lat,
-            longitude: pos.lng
+            longitude: pos.lng,
           },
           opening:
             parseOpeningHours(e.tags.service_times, local.code || "en") ||
             parseOpeningHours(e.tags.opening_hours, local.code || "en"),
           img: "",
-          description: ""
+          description: "",
         };
         model.img =
           model.img ||
@@ -95,7 +100,7 @@ export function createPricelessOverPassLayer<M>(
           toUrl(e.tags.picture) ||
           "";
         model.description =
-          e.tags["description:" + (local.code || "en")] || e.tags.description;
+          e.tags[`description:${local.code || "en"}`] || e.tags.description;
         const attributesGenerator = new Generator<M>(attributes);
         const linksGenerator = new Generator(links);
         const attributDescriptionGenerator = new Generator(
@@ -126,12 +131,12 @@ export function createPricelessOverPassLayer<M>(
             ? `<br><div>${toOpenOrClose(model.opening, local)}</div>`
             : ``
         }
-        <br/>
+       <br/>
         <div class="geo">
          <small>
          <a href="https://maps.apple.com/?${utilQsString({
            ll: `${model.address.latitude},${model.address.longitude}`,
-           q: toTitle(model)
+           q: toTitle(model),
          })}">
            ${local.route}
          </a>
@@ -144,9 +149,9 @@ export function createPricelessOverPassLayer<M>(
           <br />
           <img class="img" dynamic-src="${model.img}"/>`
             : ``
-        }
+        }   
         </div>
-        <div class="description">
+        <div class="description">    
         ${
           model.description
             ? `
@@ -155,39 +160,39 @@ export function createPricelessOverPassLayer<M>(
             ${model.description}
           </small>`
             : ``
-        }
+        }    
         </div>
         <div> 
-        ${
-          !attributDescriptionGenerator.empty(e.tags, value, {}, local)
-            ? `
-        <br />
-        <small>
-          ${attributDescriptionGenerator.render(
-            local,
-            e.tags,
-            value,
-            {},
-            `<br />`
-          )}
-        </small>`
-            : ``
-        }   
-      </div>
+          ${
+            !attributDescriptionGenerator.empty(e.tags, value, {}, local)
+              ? `
+          <br />
+          <small>
+            ${attributDescriptionGenerator.render(
+              local,
+              e.tags,
+              value,
+              {},
+              `<br />`
+            )}
+          </small>`
+              : ``
+          }   
+        </div>
         <div class="contact">
-        ${
-          !linksGenerator.empty(e.tags, value, {}, local)
-            ? `
+          ${
+            !linksGenerator.empty(e.tags, value, {}, local)
+              ? `
           <br />
           ${linksGenerator.render(local, e.tags, value, {})}`
-            : ``
-        }
+              : ``
+          }     
         </div>
         </div>`;
         const popup = L.popup({
           minWidth: 200,
           autoPanPaddingTopLeft: [10, 85],
-          autoPanPaddingBottomRight: [10, 10]
+          autoPanPaddingBottomRight: [10, 10],
         }).setContent(() => {
           if (!isLoaded) {
             isLoaded = true;
@@ -204,11 +209,13 @@ export function createPricelessOverPassLayer<M>(
                   addressdetails: "1",
                   namedetails: "1",
                   lat: pos.lat,
-                  lon: pos.lng
+                  lon: pos.lng,
                 },
-                result => {
-                  model.address.name =
-                    result.namedetails.name || result.namedetails.official_name;
+                (result) => {
+                  model.address.name = extractName(
+                    result.namedetails,
+                    local.code || "en"
+                  );
                   model.address.postcode =
                     model.address.postcode || result.address.postcode || "";
                   model.address.locality =
@@ -230,10 +237,8 @@ export function createPricelessOverPassLayer<M>(
                       result.address.pedestrian ||
                       result.address.farmyard ||
                       result.address.construction ||
-                      result.namedetails.name ||
-                      result.namedetails.official_name ||
-                      result.address.neighbourhood ||
-                      "";
+                      extractName(result.namedetails, local.code || "en");
+                    result.address.neighbourhood || "";
                     model.address.houseNumber =
                       model.address.houseNumber ||
                       result.address.house_number ||
@@ -270,9 +275,9 @@ export function createPricelessOverPassLayer<M>(
                   sitefilter: (local.code || "en") + "wiki",
                   languages: local.code || "en",
                   languagefallback: "0",
-                  origin: "*"
+                  origin: "*",
                 },
-                r => {
+                (r) => {
                   if (r && r.error) return;
                   if (!r.entities[qid]) return;
                   const entity = r.entities[qid];
@@ -300,7 +305,7 @@ export function createPricelessOverPassLayer<M>(
                     };
                   } = {
                     title: label,
-                    description: description
+                    description: description,
                   };
                   // add image
                   if (entity.claims) {
@@ -317,7 +322,7 @@ export function createPricelessOverPassLayer<M>(
                         if (image) {
                           result.imageURL = `${imageroot}?${utilQsString({
                             title: "Special:Redirect/file/" + image,
-                            width: 300
+                            width: 300,
                           })}`;
                         }
                         break;
@@ -331,8 +336,9 @@ export function createPricelessOverPassLayer<M>(
                       const title = entity.sitelinks[w].title;
                       result.wiki = {
                         title: title,
-                        url: `https://${local.code ||
-                          "en"}.wikipedia.org/wiki/${title.replace(/ /g, "_")}`
+                        url: `https://${
+                          local.code || "en"
+                        }.wikipedia.org/wiki/${title.replace(/ /g, "_")}`,
                       };
                     }
                   }
@@ -369,15 +375,15 @@ export function createPricelessOverPassLayer<M>(
                     e.tags,
                     value,
                     {
-                      website: result.wiki ? result.wiki.url : undefined
+                      website: result.wiki ? result.wiki.url : undefined,
                     },
                     local
                   )
                     ? `
-                  <br />
-                  ${linksGenerator.render(local, e.tags, value, {
-                    website: result.wiki ? result.wiki.url : undefined
-                  })}`
+    <br />
+    ${linksGenerator.render(local, e.tags, value, {
+      website: result.wiki ? result.wiki.url : undefined,
+    })}`
                     : ``;
                   if (model.img) {
                     onImageLoaded(model.img, (loaded: boolean) => {
@@ -410,6 +416,29 @@ export function createPricelessOverPassLayer<M>(
         marker.bindPopup(popup);
         this._markers.addLayer(marker);
       }
-    }
+    },
   });
+
+  function extractName(tags: any, langCode: string) {
+    return (
+      tags[`name:${langCode}`] ||
+      tags[`short_name:${langCode}`] ||
+      tags[`official_name:${langCode}`] ||
+      tags[`int_name:${langCode}`] ||
+      tags[`nat_name:${langCode}`] ||
+      tags[`reg_name:${langCode}`] ||
+      tags[`loc_name:${langCode}`] ||
+      tags[`old_name:${langCode}`] ||
+      tags[`alt_name:${langCode}`] ||
+      tags.name ||
+      tags.short_name ||
+      tags.official_name ||
+      tags.int_name ||
+      tags.nat_name ||
+      tags.reg_name ||
+      tags.loc_name ||
+      tags.old_name ||
+      tags.alt_name
+    );
+  }
 }
