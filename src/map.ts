@@ -9,7 +9,7 @@ import { Attribute } from "./Generator";
 import { getJson } from "./utilities/jsonRequest";
 import { get, set } from "./utilities/storage";
 import { getHtmlElement } from "./utilities/html";
-import { createPricelessOverPassLayer } from "./createPricelessOverPassLayer";
+import { createPricelessOverPassLayer } from "./createOverPassLayer";
 
 let map: L.Map;
 const layers: { [name: string]: L.Layer } = {};
