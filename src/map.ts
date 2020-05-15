@@ -25,7 +25,7 @@ export function initMap<M>(
   attributes: Attribute<M>[],
   local: any
 ) {
-  getHtmlElement(".search").addEventListener("submit", (ev) => {
+  getHtmlElement(".search").addEventListener("submit", ev => {
     ev.preventDefault();
     search();
     return false;
@@ -57,8 +57,8 @@ export function initMap<M>(
 
     let presets = "";
     const p = filterOptions
-      .map((o) => o.edit.map((t) => t.replace(/=/gi, "/")).join(","))
-      .filter((o) => o)
+      .map(o => o.edit.map(t => t.replace(/=/gi, "/")).join(","))
+      .filter(o => o)
       .join(",");
     presets += (presets && p ? "," : "") + p;
 
@@ -71,14 +71,14 @@ export function initMap<M>(
 
   const attribution = [
     'Map data &copy; <a href="https://openstreetmap.org/">OpenStreetMap</a> contributors',
-    'POI via <a href="https://www.overpass-api.de/">Overpass API</a>',
+    'POI via <a href="https://www.overpass-api.de/">Overpass API</a>'
   ];
 
   const osm = new L.TileLayer(
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
       opacity: 0.7,
-      attribution: attribution.join(" | "),
+      attribution: attribution.join(" | ")
     }
   );
 
@@ -126,7 +126,7 @@ export function initMap<M>(
 
     setHashParams(
       {
-        location: value,
+        location: value
       },
       hashchange
     );
@@ -136,14 +136,14 @@ export function initMap<M>(
       {
         format: "json",
         q: value,
-        limit: 1,
+        limit: 1
       },
-      (r) => {
+      r => {
         const result = r[0];
         if (!result) return;
         map.flyToBounds([
           [result.boundingbox[0], result.boundingbox[2]],
-          [result.boundingbox[1], result.boundingbox[3]],
+          [result.boundingbox[1], result.boundingbox[3]]
         ]);
       }
     );
@@ -223,7 +223,7 @@ export function parseOpeningHours(openingHours: string, localCode: string) {
 
   try {
     return new opening_hours(openingHours, null, {
-      locale: localCode,
+      locale: localCode
     });
   } catch (e) {
     console.warn(e);

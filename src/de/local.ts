@@ -20,6 +20,7 @@ export const local = {
   wheelchairYes: "Rollstuhlgerecht",
   wheelchairLimited: "Limitiert Rollstuhlgerecht",
   wheelchairNo: "Nicht Rollstuhlgerecht",
+  fee: "Kaufen",
   open: "Geöffnet",
   closed: "Geschlossen",
   maybeOpen: "Vielleicht geöffnet",
@@ -48,6 +49,6 @@ export const local = {
     sculpture: "Öffentlicher Bücherschrank",
     shelf: "Öffentliches Bücherregal",
     shelter: "Öffentliches Bücherregal",
-    wooden_cabinet: "Öffentlicher Bücherschrank",
-  },
+    wooden_cabinet: "Öffentlicher Bücherschrank"
+  }
 };

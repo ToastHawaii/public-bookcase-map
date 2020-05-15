@@ -49,6 +49,6 @@ export const local = {
     sculpture: "Public bookcase",
     shelf: "Public bookcase",
     shelter: "Public bookcase",
-    wooden_cabinet: "Public bookcase",
-  },
+    wooden_cabinet: "Public bookcase"
+  }
 };

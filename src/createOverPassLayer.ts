@@ -4,7 +4,7 @@ import { links } from "./links";
 import {
   onImageLoaded,
   toWikimediaCommonsUrl,
-  toMapillaryUrl,
+  toMapillaryUrl
 } from "./utilities/image";
 import { toTitle, toLevel, toOpenOrClose } from "./view";
 import { getJson } from "./utilities/jsonRequest";
@@ -28,13 +28,13 @@ export function createPricelessOverPassLayer<M>(
         color || "#000000"
       };" class="marker-pin"></div><img class="${value}-icon" src="${icon}">`,
       iconSize: [36, 48],
-      iconAnchor: [18, 48],
+      iconAnchor: [18, 48]
     }),
     minZoomIndicatorEnabled: true,
     minZoomIndicatorOptions: {
       position: "bottomleft",
       minZoomMessageNoLayer: local.minZoomMessageNoLayer,
-      minZoomMessage: local.minZoomMessage,
+      minZoomMessage: local.minZoomMessage
     },
     minZoom: 12,
     query: `(${query});out center;`,
@@ -59,7 +59,7 @@ export function createPricelessOverPassLayer<M>(
           marker = L.circle(pos, 20, {
             stroke: false,
             fillColor: "#E54041",
-            fillOpacity: 0.9,
+            fillOpacity: 0.9
           });
         }
         const model = {
@@ -83,13 +83,13 @@ export function createPricelessOverPassLayer<M>(
             houseNumber: e.tags["addr:housenumber"] || "",
             level: e.tags["level"] || "",
             latitude: pos.lat,
-            longitude: pos.lng,
+            longitude: pos.lng
           },
           opening:
             parseOpeningHours(e.tags.service_times, local.code || "en") ||
             parseOpeningHours(e.tags.opening_hours, local.code || "en"),
           img: "",
-          description: "",
+          description: ""
         };
         model.img =
           model.img ||
@@ -136,7 +136,7 @@ export function createPricelessOverPassLayer<M>(
          <small>
          <a href="https://maps.apple.com/?${utilQsString({
            ll: `${model.address.latitude},${model.address.longitude}`,
-           q: toTitle(model),
+           q: toTitle(model)
          })}">
            ${local.route}
          </a>
@@ -192,7 +192,7 @@ export function createPricelessOverPassLayer<M>(
         const popup = L.popup({
           minWidth: 200,
           autoPanPaddingTopLeft: [10, 85],
-          autoPanPaddingBottomRight: [10, 10],
+          autoPanPaddingBottomRight: [10, 10]
         }).setContent(() => {
           if (!isLoaded) {
             isLoaded = true;
@@ -209,9 +209,9 @@ export function createPricelessOverPassLayer<M>(
                   addressdetails: "1",
                   namedetails: "1",
                   lat: pos.lat,
-                  lon: pos.lng,
+                  lon: pos.lng
                 },
-                (result) => {
+                result => {
                   model.address.name = extractName(
                     result.namedetails,
                     local.code || "en"
@@ -275,9 +275,9 @@ export function createPricelessOverPassLayer<M>(
                   sitefilter: (local.code || "en") + "wiki",
                   languages: local.code || "en",
                   languagefallback: "0",
-                  origin: "*",
+                  origin: "*"
                 },
-                (r) => {
+                r => {
                   if (r && r.error) return;
                   if (!r.entities[qid]) return;
                   const entity = r.entities[qid];
@@ -305,7 +305,7 @@ export function createPricelessOverPassLayer<M>(
                     };
                   } = {
                     title: label,
-                    description: description,
+                    description: description
                   };
                   // add image
                   if (entity.claims) {
@@ -322,7 +322,7 @@ export function createPricelessOverPassLayer<M>(
                         if (image) {
                           result.imageURL = `${imageroot}?${utilQsString({
                             title: "Special:Redirect/file/" + image,
-                            width: 300,
+                            width: 300
                           })}`;
                         }
                         break;
@@ -338,7 +338,7 @@ export function createPricelessOverPassLayer<M>(
                         title: title,
                         url: `https://${
                           local.code || "en"
-                        }.wikipedia.org/wiki/${title.replace(/ /g, "_")}`,
+                        }.wikipedia.org/wiki/${title.replace(/ /g, "_")}`
                       };
                     }
                   }
@@ -375,14 +375,14 @@ export function createPricelessOverPassLayer<M>(
                     e.tags,
                     value,
                     {
-                      website: result.wiki ? result.wiki.url : undefined,
+                      website: result.wiki ? result.wiki.url : undefined
                     },
                     local
                   )
                     ? `
     <br />
     ${linksGenerator.render(local, e.tags, value, {
-      website: result.wiki ? result.wiki.url : undefined,
+      website: result.wiki ? result.wiki.url : undefined
     })}`
                     : ``;
                   if (model.img) {
@@ -416,7 +416,7 @@ export function createPricelessOverPassLayer<M>(
         marker.bindPopup(popup);
         this._markers.addLayer(marker);
       }
-    },
+    }
   });
 
   function extractName(tags: any, langCode: string) {
