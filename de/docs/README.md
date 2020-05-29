@@ -55,6 +55,8 @@ Ja, der Code steht frei zur Verwendung, Kopierung und Modifizierung.
 
 ## Weiteres
 
+Eine Karte, welche Einrichtungen und Angebote anzeigt, die ökologisch-, sozial- und wirtschaftlich nachhaltig sind. [Nachhaltig](https://sustainable.zottelig.ch/de)
+
 Eine Karte mit öffentlichen und kostenlosen Einrichtungen und Angebote: [Unbezahlbar](https://priceless.zottelig.ch)
 
 ---

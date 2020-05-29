@@ -58,7 +58,9 @@ Yes, the code is free for use, copying and modification.
 
 ## More
 
-A map with public and free facilities and offers: [Priceless](https://priceless.zottelig.ch)
+A map that shows facilities and services that are environmentally, socially and economically sustainable. [Sustainable](https://sustainable.zottelig.ch/)
+
+A map with public and free facilities and offers. [Priceless](https://priceless.zottelig.ch)
 
 ---
 
