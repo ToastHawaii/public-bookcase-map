@@ -43,12 +43,16 @@ export function createPricelessOverPassLayer<M>(
     cacheTTL: 86400, // 24h
     onSuccess(data: { elements: any[] }) {
       for (let i = 0; i < data.elements.length; i++) {
+        const e = data.elements[i];
+        if (e.id in this._ids) continue;
+        this._ids[e.id] = true;
+
         let pos: {
           lat: number;
           lng: number;
         };
         let marker;
-        const e = data.elements[i];
+
         if (e.tags.access && e.tags.access === "no") continue;
         if (e.type === "node") {
           pos = L.latLng(e.lat, e.lon);
