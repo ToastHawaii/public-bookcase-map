@@ -44,6 +44,12 @@ export function initMap<M>(
     }/docs`;
   });
 
+  getHtmlElement(".donate").addEventListener("click", () => {
+    window.open(
+      `https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LZB5LRD2MBQUS&source=url`
+    );
+  });
+
   getHtmlElement(".note").addEventListener("click", () => {
     const latlng = map.getCenter();
     const zoom = map.getZoom();
