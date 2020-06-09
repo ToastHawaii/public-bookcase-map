@@ -10,6 +10,7 @@ import { getJson } from "./utilities/jsonRequest";
 import { get, set } from "./utilities/storage";
 import { getHtmlElement } from "./utilities/html";
 import { createPricelessOverPassLayer } from "./createOverPassLayer";
+import { funding } from "./funding";
 
 let map: L.Map;
 const layers: { [name: string]: L.Layer } = {};
@@ -45,9 +46,7 @@ export function initMap<M>(
   });
 
   getHtmlElement(".donate").addEventListener("click", () => {
-    window.open(
-      `https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LZB5LRD2MBQUS&source=url`
-    );
+    window.open(funding[local.code] || funding.en);
   });
 
   getHtmlElement(".note").addEventListener("click", () => {
