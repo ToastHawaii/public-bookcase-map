@@ -8,6 +8,7 @@ export const local = {
 
   minZoomMessageNoLayer: "No layer assigned",
   minZoomMessage: "Zoom in to load locations",
+  emptyIndicator: "No locations found",
   capacity: "Capacity",
   freeToGive: "Free to give",
   freeToTake: "Free to take",

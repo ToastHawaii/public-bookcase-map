@@ -9,7 +9,7 @@ import {
 import { toTitle, toLevel, toOpenOrClose } from "./view";
 import { getJson } from "./utilities/jsonRequest";
 import { getHtmlElement } from "./utilities/html";
-import { parseOpeningHours } from "./map";
+import { parseOpeningHours, updateCount } from "./map";
 import * as L from "leaflet";
 import { attributeDescriptions } from "./attributeDescriptions";
 
@@ -422,6 +422,8 @@ export function createPricelessOverPassLayer<M>(
         marker.bindPopup(popup);
         this._markers.addLayer(marker);
       }
+
+      updateCount(local);
     }
   });
 
