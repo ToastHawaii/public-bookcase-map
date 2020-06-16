@@ -16,3 +16,30 @@ export function getHtmlElement(
 
   return element as HTMLElement;
 }
+
+export function getHtmlElements(
+  selectors: string,
+  contentElement?: ParentNode
+): HTMLElement[];
+export function getHtmlElements(
+  selectors: string,
+  contentElement: ParentNode = document
+): HTMLElement[] {
+  const elements: HTMLElement[] = [];
+  contentElement.querySelectorAll(selectors).forEach(v => {
+    elements.push(v as HTMLElement);
+  });
+
+  return elements;
+}
+
+export function createElement<K extends keyof HTMLElementTagNameMap>(
+  tag: K,
+  innerHTML: string = "",
+  classNames: string[] = []
+) {
+  const element = document.createElement(tag);
+  element.innerHTML = innerHTML;
+  element.classList.add(...classNames);
+  return element;
+}

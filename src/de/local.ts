@@ -9,6 +9,7 @@ export const local = {
   minZoomMessageNoLayer: "Keine Ebene zugewiesen",
   minZoomMessage: "Vergrössern, um Standorte zu laden",
   emptyIndicator: "Keine Orte gefunden",
+  linkCopied: "Link in die Zwischenablage kopiert",
   capacity: "Kapazität",
   freeToGive: "Nur bringen",
   freeToTake: "Nur mitnehmen",

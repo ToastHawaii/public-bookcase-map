@@ -8,8 +8,8 @@ import { setHashParams, getHashParams } from "./utilities/url";
 import { Attribute } from "./Generator";
 import { getJson } from "./utilities/jsonRequest";
 import { get, set } from "./utilities/storage";
-import { getHtmlElement } from "./utilities/html";
-import { createPricelessOverPassLayer } from "./createOverPassLayer";
+import { getHtmlElement, createElement } from "./utilities/html";
+import { createOverPassLayer } from "./createOverPassLayer";
 import { funding } from "./funding";
 
 let map: L.Map;
@@ -137,22 +137,18 @@ export function initMap<M>(
       hashchange
     );
 
-    getJson<{ boundingbox: number[] }[]>(
-      "https://nominatim.openstreetmap.org/search",
-      {
-        format: "json",
-        q: value,
-        limit: 1
-      },
-      r => {
-        const result = r[0];
-        if (!result) return;
-        map.flyToBounds([
-          [result.boundingbox[0], result.boundingbox[2]],
-          [result.boundingbox[1], result.boundingbox[3]]
-        ]);
-      }
-    );
+    getJson("https://nominatim.openstreetmap.org/search", {
+      format: "json",
+      q: value,
+      limit: 1
+    }).then(r => {
+      const result = r[0];
+      if (!result) return;
+      map.flyToBounds([
+        [result.boundingbox[0], result.boundingbox[2]],
+        [result.boundingbox[1], result.boundingbox[3]]
+      ]);
+    });
   }
 
   function hashchange() {
@@ -166,7 +162,6 @@ export function initMap<M>(
   setTimeout(() => {
     for (const f of filterOptions)
       init(f.value, f.icon, f.query, attributes, local, f.color);
-
     hashchange();
   }, 0);
 
@@ -177,7 +172,7 @@ export function initMap<M>(
     map.locate({ setView: false, maxZoom: 16 });
   } else map.locate({ setView: true, maxZoom: 16 });
 
-  map.on("popupopen", function (e) {
+  map.on("popupopen", e => {
     const marker = (e as L.PopupEvent & { popup: { _source: L.Marker } }).popup
       ._source;
     const latLng = marker.getLatLng();
@@ -200,8 +195,7 @@ export function initMap<M>(
     }
   }
 
-  const style = document.createElement("style");
-  style.innerHTML = iconColors;
+  const style = createElement("style", iconColors);
   document.head.appendChild(style);
 }
 
@@ -213,7 +207,7 @@ function init<M>(
   local: any,
   color: string
 ) {
-  layers[value] = createPricelessOverPassLayer(
+  layers[value] = createOverPassLayer(
     value,
     icon,
     query,
@@ -240,12 +234,14 @@ export function parseOpeningHours(openingHours: string, localCode: string) {
 let emptyIndicatorElement: HTMLDivElement | undefined;
 
 export function updateCount(local: any) {
-  const visible =
-    countMarkersInView(map) === 0 &&  map.getZoom() >= 12;
+  const visible = countMarkersInView(map) === 0 && map.getZoom() >= 12;
   if (visible && !emptyIndicatorElement) {
-    emptyIndicatorElement = document.createElement("div");
-    emptyIndicatorElement.className = "leaflet-bottom leaflet-left";
-    emptyIndicatorElement.innerHTML = `<div class="leaflet-control-emptyIndicator leaflet-control">${local.emptyIndicator}</div>`;
+    emptyIndicatorElement = createElement(
+      "div",
+      `<div class="leaflet-control-emptyIndicator leaflet-control">${local.emptyIndicator}</div>`,
+      ["leaflet-bottom", "leaflet-left"]
+    );
+
     getHtmlElement(".leaflet-control-container").appendChild(
       emptyIndicatorElement
     );
