@@ -56,13 +56,25 @@ Sure, helping hands are always welcome:
 
 Yes, the code is free for use, copying and modification.
 
+The code can also be used as a basis for your own theme map.
+
+### I cannot program, how can I create my own theme map?
+
+Try one of the following services:
+
+- [MapContrib](https://www.mapcontrib.xyz/) ([Wiki](https://wiki.openstreetmap.org/wiki/MapContrib))
+- [uMap](https://umap.openstreetmap.fr/en/) ([Wiki](https://wiki.openstreetmap.org/wiki/UMap))
+- [overpass turbo](https://overpass-turbo.eu/) ([Wiki](https://wiki.openstreetmap.org/wiki/Overpass_turbo)) You can use the "Wizard" to create a query, it also understands words like " Lake", " Bakery" and so on
+
+[Other maps based on OpenStreetMap](https://wiki.openstreetmap.org/wiki/List_of_OSM-based_services)
+
 ## More
 
-A map that shows facilities and services that are environmentally, socially and economically sustainable. [Sustainable](https://sustainable.zottelig.ch/)
-
-A map with public and free facilities and offers. [Priceless](https://priceless.zottelig.ch)
+- A map that shows facilities and services that are environmentally, socially and economically sustainable. [Sustainable](https://sustainable.zottelig.ch/)
+- A map with public and free facilities and offers. [Priceless](https://priceless.zottelig.ch)
 
 Support me with coffee and cake:
+
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick" />
 <input type="hidden" name="hosted_button_id" value="JFWXTYPKBD2YA" />
