@@ -9,7 +9,7 @@ import { Attribute } from "./Generator";
 import { getJson } from "./utilities/jsonRequest";
 import { get, set } from "./utilities/storage";
 import { getHtmlElement, createElement } from "./utilities/html";
-import { createOverPassLayer } from "./createOverPassLayer";
+import { createOverPassLayer, shareLink } from "./createOverPassLayer";
 import { funding } from "./funding";
 
 let map: L.Map;
@@ -47,6 +47,26 @@ export function initMap<M>(
 
   getHtmlElement(".donate").addEventListener("click", () => {
     window.open(funding[local.code] || funding.en);
+  });
+
+  const shareButton = getHtmlElement(".share");
+  shareButton.addEventListener("click", e => {
+    e.preventDefault();
+
+    const bbox = map.getBounds();
+    shareLink(
+      `${window.location.origin}${window.location.pathname}#b=${toString(
+        bbox.getSouth(),
+        4
+      )},${toString(bbox.getWest(), 4)},${toString(
+        bbox.getNorth(),
+        4
+      )},${toString(bbox.getEast(), 4)}`,
+      shareButton,
+      local,
+      local.title,
+      local.description
+    );
   });
 
   getHtmlElement(".note").addEventListener("click", () => {
@@ -155,6 +175,13 @@ export function initMap<M>(
     const params = getHashParams();
 
     if (params["location"]) search(params["location"]);
+    else if (params["b"]) {
+      const bounds = params["b"].split(",").map(b => parseFloat(b));
+      map.fitBounds([
+        [bounds[0], bounds[1]],
+        [bounds[2], bounds[3]]
+      ]);
+    }
   }
 
   window.addEventListener("hashchange", hashchange);
@@ -170,13 +197,25 @@ export function initMap<M>(
   if (params["location"]) {
     search(params["location"]);
     map.locate({ setView: false, maxZoom: 16 });
+  } else if (params["b"]) {
+    const bounds = params["b"].split(",").map(b => parseFloat(b));
+    map.fitBounds([
+      [bounds[0], bounds[1]],
+      [bounds[2], bounds[3]]
+    ]);
+    map.locate({ setView: false, maxZoom: 16 });
   } else map.locate({ setView: true, maxZoom: 16 });
 
   map.on("popupopen", e => {
     const marker = (e as L.PopupEvent & { popup: { _source: L.Marker } }).popup
       ._source;
     const latLng = marker.getLatLng();
-    setHashParams({ location: `${latLng.lat},${latLng.lng}` }, hashchange);
+    setHashParams(
+      {
+        location: `${latLng.lat},${latLng.lng}`
+      },
+      hashchange
+    );
   });
 
   let iconColors = "";
@@ -262,4 +301,9 @@ function countMarkersInView(map: L.Map) {
     }
   });
   return count;
+}
+
+function toString(value: number, precision: number) {
+  const power = Math.pow(10, precision || 0);
+  return (Math.round(value * power) / power).toFixed(precision);
 }

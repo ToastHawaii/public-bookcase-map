@@ -197,10 +197,7 @@ h1 {
   display: block;
 }
 
-.edit,
-.note,
-.about,
-.donate {
+button.menu {
   right: 10px;
   bottom: 25px;
   -webkit-border-radius: 50%;
@@ -215,17 +212,21 @@ h1 {
   position: fixed;
   z-index: 1000;
 }
-.donate {
+button.menu.donate {
   bottom: 25px;
 }
-.about {
+button.menu.about {
   bottom: 60px;
 }
-.edit {
+button.menu.share {
   bottom: 95px;
+  z-index: 1001;
 }
-.note {
+button.menu.edit {
   bottom: 130px;
+}
+button.menu.note {
+  bottom: 165px;
 }
 
 button {
@@ -266,7 +267,8 @@ h1 a {
 }
 
 .attribut .title,
-.share .title {
+.share .title,
+button.menu .title {
   position: absolute;
   top: 20px;
   background: white;
@@ -277,7 +279,11 @@ h1 a {
   white-space: nowrap;
   user-select: none;
   pointer-events: none;
-  z-index: 999;
+  z-index: 1100;
+}
+button.menu .title {
+  right: 0;
+  left: auto;
 }
 
 .leaflet-control-emptyIndicator {

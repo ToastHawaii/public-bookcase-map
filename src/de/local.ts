@@ -1,6 +1,10 @@
 export const local = {
   code: "de",
 
+  title: "Öffentliche Bücherschränke Karte",
+  description:
+    "Dies ist eine einfache Karte, welche öffentliche Bücherschränke für das Tauschen von Büchern in ihrer Nähe anzeigt.",
+
   default: "Öffentlicher Bücherschrank",
   bookshop: "Buchhandlung",
   giveBox: "GiveBox",

@@ -1,6 +1,10 @@
 export const local = {
   code: "",
 
+  title: "Public bookcase map",
+  description:
+    "This simple map shows public bookcases for book exchange near you.",
+
   default: "Public bookcase",
   bookshop: "Bookstore",
   giveBox: "GiveBox",
