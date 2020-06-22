@@ -203,7 +203,7 @@ export function createOverPassLayer<M>(
         share.addEventListener("click", function (e) {
           e.preventDefault();
           shareLink(
-            window.location.href,
+            `${window.location.origin}${window.location.pathname}#location=${model.address.latitude},${model.address.longitude}`,
             share,
             local,
             toTitle(model),
