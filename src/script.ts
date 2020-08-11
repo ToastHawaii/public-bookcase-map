@@ -10,20 +10,29 @@ initMap(
   document.documentElement.lang === "de" ? deLocal : local
 );
 
-document.addEventListener("click", function (e) {
-  const target = (e.target as HTMLElement).parentElement;
+import { createElement } from "./utilities/html";
 
+document.addEventListener("click", e => {
   const titleElement = document.querySelector(".attribut .title");
   if (titleElement) titleElement.remove();
 
-  if (target && target.classList.contains("attribut")) {
-    const titleElement = document.createElement("span");
-    titleElement.className = "title";
-    titleElement.innerHTML = target.title;
-    target.append(titleElement);
+  for (const target of e.composedPath()) {
+    if (
+      target &&
+      (target as HTMLElement).classList &&
+      (target as HTMLElement).classList.contains("attribut")
+    ) {
+      const titleElement = createElement(
+        "span",
+        (target as HTMLElement).title,
+        ["title"]
+      );
 
-    setTimeout(() => {
-      titleElement.remove();
-    }, 2000);
+      (target as HTMLElement).append(titleElement);
+
+      setTimeout(() => {
+        titleElement.remove();
+      }, 2000);
+    }
   }
 });

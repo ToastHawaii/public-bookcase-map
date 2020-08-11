@@ -243,7 +243,9 @@ button i {
 
 .attribut {
   float: right;
-  margin-left: 5px;
+  padding: 0 2px;
+  text-align: center;
+  min-width: 8px;
 }
 
 button {
