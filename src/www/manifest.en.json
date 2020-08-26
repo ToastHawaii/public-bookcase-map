@@ -1,0 +1,23 @@
+{
+    "name": "Public bookcase map",
+    "short_name": "Public bookcase",
+    "description": "This map shows public bookcases for book exchange near you.",
+    "lang": "en",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "theme_color": "#734a08",
+    "background_color": "#ffffff",
+    "icons": [
+        {
+            "src": "/icons/favicon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/favicon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
