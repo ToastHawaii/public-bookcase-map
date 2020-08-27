@@ -55,7 +55,18 @@
           | relative_url
       }}"
     />
+    <style>
+      @media (prefers-color-scheme: dark) {
+        html {
+          filter: invert(100%) hue-rotate(180deg);
+        }
 
+        html img,
+        html input[type="image"] {
+          filter: invert(100%) hue-rotate(-180deg);
+        }
+      }
+    </style>
     <script src="/serviceWorkerRegister.js"></script>
   </head>
   <body>
