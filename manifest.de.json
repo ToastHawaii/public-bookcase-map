@@ -2,7 +2,7 @@
     "name": "Öffentliche Bücherschränke Karte",
     "short_name": "Bücherschränke",
     "description": "Diese Karte zeigt öffentliche Bücherschränke für das Tauschen von Büchern in ihrer Nähe an.",
-    "lang": "en",
+    "lang": "de",
     "start_url": "/de/",
     "scope": "/",
     "display": "standalone",
