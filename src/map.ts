@@ -9,7 +9,7 @@ import { Attribute } from "./Generator";
 import { getJson } from "./utilities/jsonRequest";
 import { get, set } from "./utilities/storage";
 import { getHtmlElement, createElement } from "./utilities/html";
-import { createOverPassLayer, shareLink } from "./createOverPassLayer";
+import { createOverPassLayer, isIOS, shareLink } from "./createOverPassLayer";
 import { funding } from "./funding";
 
 let map: L.Map;
@@ -87,9 +87,12 @@ export function initMap<M>(
       .join(",");
     presets += (presets && p ? "," : "") + p;
 
-    window.location.href = `https://www.openstreetmap.org/edit#editor=id&map=${zoom}/${
-      latlng.lat
-    }/${latlng.lng}${presets ? `&presets=${presets}` : ``}`;
+    if (isIOS())
+      window.location.href = `https://gomaposm.com/?center=${latlng.lat},${latlng.lng}&zoom=${zoom}`;
+    else
+      window.location.href = `https://www.openstreetmap.org/edit#editor=id&map=${zoom}/${
+        latlng.lat
+      }/${latlng.lng}${presets ? `&presets=${presets}` : ``}`;
   });
 
   moment.locale(local.code || "en");
