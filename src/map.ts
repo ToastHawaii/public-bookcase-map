@@ -88,7 +88,7 @@ export function initMap<M>(
     presets += (presets && p ? "," : "") + p;
 
     if (isIOS())
-      window.location.href = `https://gomaposm.com/?center=${latlng.lat},${latlng.lng}&zoom=${zoom}`;
+      window.location.href = `https://gomaposm.com/edit?center=${latlng.lat},${latlng.lng}&zoom=${zoom}`;
     else
       window.location.href = `https://www.openstreetmap.org/edit#editor=id&map=${zoom}/${
         latlng.lat
