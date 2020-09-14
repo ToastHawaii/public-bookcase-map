@@ -111,8 +111,9 @@ export function createOverPassLayer<M>(
         let isLoaded = false;
 
         let href: string = "";
+
         if (isIOS())
-          href = `https://gomaposm.com/edit?center=${pos.lat},${pos.lng}&zoom=16`;
+          href = `https://gomaposm.com/edit?center=${pos.lat},${pos.lng}&zoom=20`;
         else href = `https://www.openstreetmap.org/edit?${e.type}=${e.id}`;
 
         const contentElement = createElement(
