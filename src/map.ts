@@ -133,7 +133,7 @@ export function initMap<M>(
   let popopopen = false;
   map
     .on("movestart zoomstart popupopen", () => {
-      clearTimeout(timeoutToken);
+      if (timeoutToken) clearTimeout(timeoutToken);
       getHtmlElement("html").classList.remove("help");
     })
     .on("moveend zoomend popupclose", () => {
