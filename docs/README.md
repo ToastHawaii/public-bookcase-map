@@ -38,7 +38,7 @@ How to document a public bookcase is described on this [wiki page](https://wiki.
 
 ### Can I do this without registering?
 
-Yes. Use the note button in [OpenStreetMap](https://www.openstreetmap.org).
+Yes. Use the <i class="fas fa-comment-alt"></i> note button in the map corner.
 
 ## Is there anything else to do?
 
@@ -48,32 +48,34 @@ Sure, helping hands are always welcome:
   - Research on the Internet.
   - Look out for bookcases when you're on the go.
   - Look at [the beautiful map from Binnette](https://umap.openstreetmap.fr/fr/map/osm-bookcases-and-boite-a-lire_362287#15/45.2010/5.7389), which is based on the data of [boite-a-lire](https://www.boite-a-lire.com/). [Click here for the project website from Binnette's bookcases-to-check](https://github.com/Binnette/bookcases-to-check).
+  - Checkout the [Open Bookcase Map from MapComplete](https://pietervdvn.github.io/MapComplete/bookcases.html), for a step-by-step introduction to OpenStreetMap.
 - Improve this map by your self or make suggestions. [Click here for the project website from public-bookcase](https://github.com/ToastHawaii/public-bookcase-map)
 - Exchange books.
 - Enjoy reading and life. ;)
 
 ## I have a website, can I use this map?
 
-Yes, the code is free for use, copying and modification.
+Yes. The app is licensed under the [GNU Affero General Public License v3.0](/LICENSE). The code is free for use, copying and modification if you publish under the same license.
 
-The code can also be used as a basis for your own theme map.
+The code can be used as a basis for your own theme map.
 
 ### I cannot program, how can I create my own theme map?
 
 Try one of the following services:
 
+- [MapComplete](https://pietervdvn.github.io/MapComplete/index.html) ([Wiki](https://wiki.openstreetmap.org/wiki/MapComplete))
 - [MapContrib](https://www.mapcontrib.xyz/) ([Wiki](https://wiki.openstreetmap.org/wiki/MapContrib))
 - [uMap](https://umap.openstreetmap.fr/en/) ([Wiki](https://wiki.openstreetmap.org/wiki/UMap))
 - [overpass turbo](https://overpass-turbo.eu/) ([Wiki](https://wiki.openstreetmap.org/wiki/Overpass_turbo)) You can use the "Wizard" to create a query, it also understands words like " Lake", " Bakery" and so on
 
-[Other maps based on OpenStreetMap](https://wiki.openstreetmap.org/wiki/List_of_OSM-based_services)
+[Other maps based on OpenStreetMap](https://osm-apps.zottelig.ch/)
 
 ## More
 
 - A map that shows facilities and services that are environmentally, socially and economically sustainable. [Sustainable](https://sustainable.zottelig.ch/)
 - A map with public and free facilities and offers. [Priceless](https://priceless.zottelig.ch)
 
-Support me with coffee and cake:
+Support me with coffee ☕ and cake 🍰:
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick" />
