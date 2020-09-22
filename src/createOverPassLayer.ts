@@ -1,17 +1,17 @@
 // Copyright (C) 2020 Markus Peloso
-// 
+//
 // This file is part of Public bookcase map.
-// 
+//
 // Public bookcase map is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
 // published by the Free Software Foundation, either version 3 of the
 // License, or (at your option) any later version.
-// 
+//
 // Public bookcase map is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Affero General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Affero General Public License
 // along with Public bookcase map.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -24,6 +24,7 @@ import { getJson } from "./utilities/jsonRequest";
 import { getHtmlElement, createElement } from "./utilities/html";
 import { parseOpeningHours, updateCount } from "./map";
 import * as L from "leaflet";
+import "leaflet-overpass-layer";
 import { attributeDescriptions } from "./attributeDescriptions";
 import {
   extractName,
@@ -43,7 +44,7 @@ export function createOverPassLayer<M>(
   local: any,
   color: string
 ) {
-  return new (L as any).OverPassLayer({
+  return new L.OverPassLayer({
     markerIcon: L.divIcon({
       className: "custom-div-icon",
       html: `<div style="background-color:${
@@ -51,7 +52,7 @@ export function createOverPassLayer<M>(
       };" class="marker-pin"></div><img class="${value}-icon" src="${icon}">`,
       iconSize: [36, 48],
       iconAnchor: [18, 48]
-    }),
+    }) as any,
     minZoomIndicatorEnabled: true,
     minZoomIndicatorOptions: {
       position: "bottomleft",
@@ -64,7 +65,7 @@ export function createOverPassLayer<M>(
     retryOnTimeout: true,
     cacheEnabled: true,
     cacheTTL: 86400, // 24h
-    onSuccess(data: { elements: any[] }) {
+    onSuccess(this: typeof L.OverPassLayer, data) {
       for (let i = 0; i < data.elements.length; i++) {
         const e = data.elements[i];
         if (e.id in this._ids) continue;
@@ -76,14 +77,21 @@ export function createOverPassLayer<M>(
         };
         let marker;
 
-        if (e.tags.access && e.tags.access === "no") continue;
+        if (!e.tags) throw "Unexpected undefined";
+        const tags = e.tags;
+
+        if (tags.access && tags.access === "no") continue;
+
         if (e.type === "node") {
           pos = L.latLng(e.lat, e.lon);
         } else {
+          if (!(e.center && e.center.lat && e.center.lon))
+            throw "Unexpected undefined";
           pos = L.latLng(e.center.lat, e.center.lon);
         }
+
         if (this.options.markerIcon) {
-          marker = L.marker(pos, { icon: this.options.markerIcon });
+          marker = L.marker(pos, { icon: this.options.markerIcon as any });
         } else {
           marker = L.circle(pos, 20, {
             stroke: false,
@@ -91,35 +99,36 @@ export function createOverPassLayer<M>(
             fillOpacity: 0.9
           });
         }
+
         const model = {
-          name: extractName(e.tags, local.code || "en"),
-          type: extractType(local, e.tags),
-          operator: extractOperator(e.tags),
+          name: extractName(tags, local.code || "en"),
+          type: extractType(local, tags),
+          operator: extractOperator(tags),
           address: {
             name: "",
-            postcode: e.tags["addr:postcode"] || "",
-            locality: e.tags["addr:city"] || "",
-            street: e.tags["addr:street"] || "",
-            houseNumber: e.tags["addr:housenumber"] || "",
-            level: e.tags["level"] || "",
+            postcode: tags["addr:postcode"] || "",
+            locality: tags["addr:city"] || "",
+            street: tags["addr:street"] || "",
+            houseNumber: tags["addr:housenumber"] || "",
+            level: tags["level"] || "",
             latitude: pos.lat,
             longitude: pos.lng
           },
           opening:
-            parseOpeningHours(e.tags.service_times, local.code || "en") ||
-            parseOpeningHours(e.tags.opening_hours, local.code || "en"),
+            parseOpeningHours(tags.service_times, local.code || "en") ||
+            parseOpeningHours(tags.opening_hours, local.code || "en"),
           conditionalFee:
-            e.tags.fee &&
-            (parseOpeningHours(e.tags.fee, local.code || "en") ||
-              e.tags["fee:conditional"]),
+            tags.fee &&
+            (parseOpeningHours(tags.fee, local.code || "en") ||
+              tags["fee:conditional"]),
           img: "",
           description: "",
           wikimediaDescription: "",
           wikipedia: { summary: "", url: "", image: "" }
         };
-        model.img = model.img || extractImage(e.tags) || "";
+        model.img = model.img || extractImage(tags) || "";
         model.description =
-          e.tags[`description:${local.code || "en"}`] || e.tags.description;
+          tags[`description:${local.code || "en"}`] || tags.description || "";
         const attributesGenerator = new Generator<M>(attributes);
         const linksGenerator = new Generator(links);
         const attributDescriptionGenerator = new Generator(
@@ -142,7 +151,7 @@ export function createOverPassLayer<M>(
           )}</strong>
         <div class="adr">
 
-        ${attributesGenerator.render(local, e.tags, value, {} as M)}
+        ${attributesGenerator.render(local, tags, value, {} as M)}
 
          <div class="street-address">${model.address.street} ${
             model.address.houseNumber
@@ -184,13 +193,13 @@ export function createOverPassLayer<M>(
         </div>
         <div>
           ${
-            !attributDescriptionGenerator.empty(e.tags, value, {}, local)
+            !attributDescriptionGenerator.empty(tags, value, {}, local)
               ? `
           <br />
           <small>
             ${attributDescriptionGenerator.render(
               local,
-              e.tags,
+              tags,
               value,
               {},
               `<br />`
@@ -201,10 +210,10 @@ export function createOverPassLayer<M>(
         </div>
         <div class="contact">
           ${
-            !linksGenerator.empty(e.tags, value, {}, local)
+            !linksGenerator.empty(tags, value, {}, local)
               ? `
           <br />
-          ${linksGenerator.render(local, e.tags, value, {})}`
+          ${linksGenerator.render(local, tags, value, {})}`
               : ``
           }
         </div>
@@ -278,7 +287,7 @@ export function createOverPassLayer<M>(
             }
             {
               // Enrich Data
-              const qid = e.tags.wikidata;
+              const qid = tags.wikidata;
 
               if (qid)
                 getJson("https://www.wikidata.org/w/api.php", {
@@ -395,7 +404,7 @@ export function createOverPassLayer<M>(
                     ".contact",
                     contentElement
                   ).innerHTML = !linksGenerator.empty(
-                    e.tags,
+                    tags,
                     value,
                     {
                       website: model.wikipedia.url
@@ -408,7 +417,7 @@ export function createOverPassLayer<M>(
                   )
                     ? `
     <br />
-    ${linksGenerator.render(local, e.tags, value, {
+    ${linksGenerator.render(local, tags, value, {
       website: model.wikipedia.url
         ? model.wikipedia.url
         : result.wiki
@@ -432,14 +441,14 @@ export function createOverPassLayer<M>(
                 });
 
               const wikipediaUrl =
-                e.tags[`wikipedia:${local.code || "en"}`] ||
-                e.tags.wikipedia ||
-                e.tags[`brand:wikipedia:${local.code || "en"}`] ||
-                e.tags["brand:wikipedia"] ||
-                e.tags[`network:wikipedia:${local.code || "en"}`] ||
-                e.tags["network:wikipedia"] ||
-                e.tags[`operator:wikipedia:${local.code || "en"}`] ||
-                e.tags["operator:wikipedia"];
+                tags[`wikipedia:${local.code || "en"}`] ||
+                tags.wikipedia ||
+                tags[`brand:wikipedia:${local.code || "en"}`] ||
+                tags["brand:wikipedia"] ||
+                tags[`network:wikipedia:${local.code || "en"}`] ||
+                tags["network:wikipedia"] ||
+                tags[`operator:wikipedia:${local.code || "en"}`] ||
+                tags["operator:wikipedia"];
               if (wikipediaUrl)
                 loadWikipediaSummary(wikipediaUrl, local.code || "en").then(
                   wikipedia => {
