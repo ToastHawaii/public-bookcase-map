@@ -1,17 +1,17 @@
 // Copyright (C) 2020 Markus Peloso
-// 
+//
 // This file is part of Public bookcase map.
-// 
+//
 // Public bookcase map is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
 // published by the Free Software Foundation, either version 3 of the
 // License, or (at your option) any later version.
-// 
+//
 // Public bookcase map is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Affero General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Affero General Public License
 // along with Public bookcase map.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -23,6 +23,11 @@ const template = (title: string, icon: string, value?: string) =>
   }</span>`;
 
 export const attributes: Attribute<{}>[] = [
+  {
+    check: tags => !!tags.colour,
+    template: (local, tags) =>
+      `<span title="${local.colour}" class="attribut"><i class="fas fa-circle" style="color:${tags.colour};"></i></span>`
+  },
   {
     check: (tags, value) => !!tags.capacity && value === "book-exchange",
     template: (local, tags) =>
@@ -85,7 +90,7 @@ export const attributes: Attribute<{}>[] = [
   }
 ];
 
-function wheelchairAccesText(tags: { wheelchair: string }, local: any) {
+function wheelchairAccesText(tags: { wheelchair?: string }, local: any) {
   switch (tags.wheelchair) {
     case "yes":
     case "designated":
@@ -100,7 +105,7 @@ function wheelchairAccesText(tags: { wheelchair: string }, local: any) {
   }
 }
 
-function wheelchairAccesColor(tags: { wheelchair: string }) {
+function wheelchairAccesColor(tags: { wheelchair?: string }) {
   switch (tags.wheelchair) {
     case "yes":
     case "designated":
@@ -115,7 +120,7 @@ function wheelchairAccesColor(tags: { wheelchair: string }) {
   }
 }
 
-function wheelchairAccesIcon(tags: { wheelchair: string }) {
+function wheelchairAccesIcon(tags: { wheelchair?: string }) {
   switch (tags.wheelchair) {
     case "yes":
     case "designated":

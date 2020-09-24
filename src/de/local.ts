@@ -44,6 +44,7 @@ export const local = {
   wheelchairLimited: "Limitiert Rollstuhlgerecht",
   wheelchairNo: "Nicht Rollstuhlgerecht",
   fee: "Kaufen",
+  colour: "Farbe",
   open: "Geöffnet",
   closed: "Geschlossen",
   maybeOpen: "Vielleicht geöffnet",
