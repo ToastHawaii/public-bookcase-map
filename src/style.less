@@ -77,41 +77,17 @@ h1 {
     float: left;
     color: #333;
     padding-left: 15px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
     border-radius: 20px;
     outline: none;
 
-    -webkit-transition: all 0.55s ease;
-    -moz-transition: all 0.55s ease;
-    -ms-transition: all 0.55s ease;
-    -o-transition: all 0.55s ease;
-    transition: all 0.55s ease;
-  }
-
-  input#osm-search::-webkit-input-placeholder {
-    color: #999;
-  }
-
-  input#osm-search:-moz-placeholder {
-    /* Firefox 18- */
-    color: #999;
-  }
-
-  input#osm-search::-moz-placeholder {
-    /* Firefox 19+ */
-    color: #999;
-  }
-
-  input#osm-search:-ms-input-placeholder {
-    color: #999;
+    &::placeholder {
+      color: #999;
+    }
   }
 
   button.geo {
     position: absolute;
     left: -32px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
     border-radius: 50%;
     border: none;
     background: #eee;
@@ -122,10 +98,6 @@ h1 {
   }
 
   button.icon {
-    -webkit-border-top-right-radius: 20px;
-    -webkit-border-bottom-right-radius: 20px;
-    -moz-border-radius-topright: 20px;
-    -moz-border-radius-bottomright: 20px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     border: none;
@@ -221,8 +193,6 @@ button.menu,
 a.menu {
   right: 10px;
   bottom: 25px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
   border-radius: 50%;
   border: none;
   background: #eee;
