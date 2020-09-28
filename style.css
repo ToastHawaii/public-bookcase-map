@@ -30,7 +30,8 @@ body,
   width: 100%;
 }
 
-button {
+button,
+a {
   cursor: pointer;
 }
 
@@ -216,7 +217,8 @@ h1 {
   display: block;
 }
 
-button.menu {
+button.menu,
+a.menu {
   right: 10px;
   bottom: 25px;
   -webkit-border-radius: 50%;
@@ -231,29 +233,36 @@ button.menu {
   position: fixed;
   z-index: 1000;
 }
-button.menu.donate {
+button.menu.donate,
+a.menu.donate {
   bottom: 25px;
 }
-button.menu.about {
+button.menu.about,
+a.menu.about {
   bottom: 60px;
 }
-button.menu.share {
+button.menu.share,
+a.menu.share {
   bottom: 95px;
   z-index: 1001;
 }
-button.menu.edit {
+button.menu.edit,
+a.menu.edit {
   bottom: 130px;
 }
-button.menu.note {
+button.menu.note,
+a.menu.note {
   bottom: 165px;
 }
 
-button {
+button,
+a {
   position: relative;
   text-align: center;
 }
 
-button i {
+button i,
+a i {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -267,7 +276,8 @@ button i {
   min-width: 8px;
 }
 
-button {
+button,
+a {
   outline: none;
 }
 
@@ -289,7 +299,8 @@ h1 a {
 
 .leaflet-popup .attribut .title,
 .leaflet-popup .share .title,
-button.menu .title {
+button.menu .title,
+a.menu .title {
   position: absolute;
   top: 20px;
   background: white;
@@ -302,7 +313,8 @@ button.menu .title {
   pointer-events: none;
   z-index: 1100;
 }
-button.menu .title {
+button.menu .title,
+a.menu .title {
   right: 0;
   left: auto;
 }
