@@ -21,6 +21,7 @@ import { attributes } from "./attributes";
 import { local } from "./local";
 import { local as deLocal } from "./de/local";
 import { createElement } from "./utilities/html";
+import "./style.less";
 
 initMap(
   filters,
