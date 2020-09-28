@@ -333,48 +333,50 @@ a.menu .title {
   hyphens: auto;
 }
 
-.leaflet-popup a.leaflet-popup-close-button {
+a.leaflet-popup-close-button {
   padding: 4px 4px 0 0;
   margin: 0;
   height: 20px;
 }
 
-.leaflet-popup .edit.button {
-  float: right;
-  margin-top: -3px;
-  padding: 0 6px;
-  font-size: 14px;
-}
+.leaflet-popup {
+  .edit.button {
+    float: right;
+    margin-top: -3px;
+    padding: 0 6px;
+    font-size: 14px;
+  }
 
-.leaflet-popup .share.button {
-  float: right;
-  margin-top: -3px;
-  padding: 0 6px 0 3px;
-  font-size: 14px;
-}
+  .share.button {
+    float: right;
+    margin-top: -3px;
+    padding: 0 6px 0 3px;
+    font-size: 14px;
+  }
 
-.leaflet-popup .geo a {
-  font-size: 14px;
-  text-decoration: none;
-}
+  .geo a {
+    font-size: 14px;
+    text-decoration: none;
+  }
 
-.leaflet-popup a.img {
-  font-size: 14px;
-}
+  a.img {
+    font-size: 14px;
+  }
 
-.leaflet-popup .contact a {
-  padding: 0 4px;
-  font-size: 14px;
-  margin-top: -3px;
-  text-decoration: none;
-}
+  .contact a {
+    padding: 0 4px;
+    font-size: 14px;
+    margin-top: -3px;
+    text-decoration: none;
+  }
 
-.leaflet-popup .contact a:last-of-type {
-  padding: 0 0 0 4px;
-}
+  .contact a:last-of-type {
+    padding: 0 0 0 4px;
+  }
 
-.leaflet-popup .contact a:first-of-type {
-  padding: 0 4px 0 0;
+  .contact a:first-of-type {
+    padding: 0 4px 0 0;
+  }
 }
 
 .leaflet-control-emptyIndicator {
@@ -394,10 +396,10 @@ a.menu .title {
 @media (prefers-color-scheme: dark) {
   html {
     filter: invert(100%) hue-rotate(180deg);
-  }
 
-  html img,
-  html input[type="image"] {
-    filter: invert(100%) hue-rotate(-180deg);
+    img,
+    input[type="image"] {
+      filter: invert(100%) hue-rotate(-180deg);
+    }
   }
 }
