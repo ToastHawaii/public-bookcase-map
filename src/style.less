@@ -67,87 +67,87 @@ h1 {
   width: 250px;
   vertical-align: middle;
   white-space: nowrap;
-}
 
-.container input#osm-search {
-  width: 250px;
-  height: 30px;
-  background: #ffffff;
-  border: none;
-  font-size: 10pt;
-  float: left;
-  color: #333;
-  padding-left: 15px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  outline: none;
+  input#osm-search {
+    width: 250px;
+    height: 30px;
+    background: #ffffff;
+    border: none;
+    font-size: 10pt;
+    float: left;
+    color: #333;
+    padding-left: 15px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    outline: none;
 
-  -webkit-transition: all 0.55s ease;
-  -moz-transition: all 0.55s ease;
-  -ms-transition: all 0.55s ease;
-  -o-transition: all 0.55s ease;
-  transition: all 0.55s ease;
-}
+    -webkit-transition: all 0.55s ease;
+    -moz-transition: all 0.55s ease;
+    -ms-transition: all 0.55s ease;
+    -o-transition: all 0.55s ease;
+    transition: all 0.55s ease;
+  }
 
-.container input#osm-search::-webkit-input-placeholder {
-  color: #999;
-}
+  input#osm-search::-webkit-input-placeholder {
+    color: #999;
+  }
 
-.container input#osm-search:-moz-placeholder {
-  /* Firefox 18- */
-  color: #999;
-}
+  input#osm-search:-moz-placeholder {
+    /* Firefox 18- */
+    color: #999;
+  }
 
-.container input#osm-search::-moz-placeholder {
-  /* Firefox 19+ */
-  color: #999;
-}
+  input#osm-search::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #999;
+  }
 
-.container input#osm-search:-ms-input-placeholder {
-  color: #999;
-}
+  input#osm-search:-ms-input-placeholder {
+    color: #999;
+  }
 
-.container button.geo {
-  position: absolute;
-  left: -32px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  border: none;
-  background: #eee;
-  height: 30px;
-  width: 30px;
-  color: #666;
-  font-size: 10pt;
-}
+  button.geo {
+    position: absolute;
+    left: -32px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: none;
+    background: #eee;
+    height: 30px;
+    width: 30px;
+    color: #666;
+    font-size: 10pt;
+  }
 
-.container button.icon {
-  -webkit-border-top-right-radius: 20px;
-  -webkit-border-bottom-right-radius: 20px;
-  -moz-border-radius-topright: 20px;
-  -moz-border-radius-bottomright: 20px;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border: none;
-  background: #eee;
-  height: 30px;
-  width: 30px;
-  color: #666;
-  opacity: 0;
-  font-size: 10pt;
-  -webkit-transition: all 0.55s ease;
-  -moz-transition: all 0.55s ease;
-  -ms-transition: all 0.55s ease;
-  -o-transition: all 0.55s ease;
-  transition: all 0.55s ease;
-}
+  button.icon {
+    -webkit-border-top-right-radius: 20px;
+    -webkit-border-bottom-right-radius: 20px;
+    -moz-border-radius-topright: 20px;
+    -moz-border-radius-bottomright: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: none;
+    background: #eee;
+    height: 30px;
+    width: 30px;
+    color: #666;
+    opacity: 0;
+    font-size: 10pt;
+    -webkit-transition: all 0.55s ease;
+    -moz-transition: all 0.55s ease;
+    -ms-transition: all 0.55s ease;
+    -o-transition: all 0.55s ease;
+    transition: all 0.55s ease;
+  }
 
-.container:hover button.icon,
-.container:active button.icon,
-.container:focus button.icon {
-  opacity: 1;
-  margin-left: -30px;
+  &:hover button.icon,
+  &:active button.icon,
+  &:focus button.icon {
+    opacity: 1;
+    margin-left: -30px;
+  }
 }
 
 .leaflet-control.leaflet-control-minZoomIndicator {
@@ -167,16 +167,16 @@ h1 {
   left: 50%;
   top: 50%;
   margin: -21px 0 0 -18px;
-}
 
-.marker-pin::after {
-  content: "";
-  width: 30px;
-  height: 30px;
-  margin: 3px 0 0 3px;
-  background: #fff;
-  position: absolute;
-  border-radius: 50%;
+  &::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    margin: 3px 0 0 3px;
+    background: #fff;
+    position: absolute;
+    border-radius: 50%;
+  }
 }
 
 .custom-div-icon img {
@@ -198,16 +198,16 @@ h1 {
   border-radius: 50% !important;
 }
 
-.leaflet-bar a,
-.leaflet-bar a:hover {
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  font-size: 22px;
-}
-
 .leaflet-bar {
   box-shadow: none;
+
+  a,
+  a:hover {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 22px;
+  }
 }
 
 .name {
@@ -231,41 +231,32 @@ a.menu {
   color: #666;
   font-size: 10pt;
   position: fixed;
-  z-index: 1000;
-}
-button.menu.donate,
-a.menu.donate {
-  bottom: 25px;
-}
-button.menu.about,
-a.menu.about {
-  bottom: 60px;
-}
-button.menu.share,
-a.menu.share {
-  bottom: 95px;
-  z-index: 1001;
-}
-button.menu.edit,
-a.menu.edit {
-  bottom: 130px;
-}
-button.menu.note,
-a.menu.note {
-  bottom: 165px;
-}
-
-.icon-button {
-  position: relative;
   text-align: center;
-}
+  z-index: 1000;
 
-button i,
-a i {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  &.donate {
+    bottom: 25px;
+  }
+  &.about {
+    bottom: 60px;
+  }
+  &.share {
+    bottom: 95px;
+    z-index: 1001;
+  }
+  &.edit {
+    bottom: 130px;
+  }
+  &.note {
+    bottom: 165px;
+  }
+
+  i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .attribut {
