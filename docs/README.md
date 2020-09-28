@@ -85,4 +85,4 @@ Support me with coffee ☕ and cake 🍰:
 
 ---
 
-<a href="/de/docs" hreflang="de">Deutsch</a>
+<a href="/de/docs/" hreflang="de">Deutsch</a>

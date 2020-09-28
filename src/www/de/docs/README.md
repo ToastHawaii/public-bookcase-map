@@ -82,4 +82,4 @@ Unterstütze mich mit Kaffee und Kuchen:
 
 ---
 
-<a href="/docs" hreflang="en">English</a>
+<a href="/docs/" hreflang="en">English</a>

@@ -3,26 +3,34 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
 <url>
-<loc>https://book-exchange.zottelig.ch/docs</loc>
-  <xhtml:link 
+  <loc>https://book-exchange.zottelig.ch/docs/</loc>
+  <xhtml:link
                rel="alternate"
                hreflang="de"
-               href="https://book-exchange.zottelig.ch/de/docs"/>
-    <xhtml:link 
+               href="https://book-exchange.zottelig.ch/de/docs/"/>
+  <xhtml:link
                rel="alternate"
                hreflang="en"
-               href="https://book-exchange.zottelig.ch/docs"/>
+               href="https://book-exchange.zottelig.ch/docs/"/>
+  <xhtml:link
+               rel="alternate"
+               hreflang="x-default"
+               href="https://book-exchange.zottelig.ch/docs/"/>
 
 </url>
 <url>
 <loc>https://book-exchange.zottelig.ch</loc>
-  <xhtml:link 
+  <xhtml:link
                rel="alternate"
                hreflang="de"
-               href="https://book-exchange.zottelig.ch/de"/>
-    <xhtml:link 
+               href="https://book-exchange.zottelig.ch/de/"/>
+    <xhtml:link
                rel="alternate"
                hreflang="en"
+               href="https://book-exchange.zottelig.ch"/>
+  <xhtml:link
+               rel="alternate"
+               hreflang="x-default"
                href="https://book-exchange.zottelig.ch"/>
 
 </url>
