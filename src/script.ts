@@ -20,28 +20,29 @@ import { filters } from "./filters";
 import { attributes } from "./attributes";
 import { local } from "./local";
 import { local as deLocal } from "./de/local";
-
-initMap(
-  filters,
-  attributes,
-  document.documentElement.lang === "de" ? deLocal : local
-);
-
 import { createElement } from "./utilities/html";
 
-document.addEventListener("click", e => {
-  const titleElement = document.querySelector(".attribut .title");
-  if (titleElement) titleElement.remove();
+document.addEventListener("DOMContentLoaded", () => {
+  initMap(
+    filters,
+    attributes,
+    document.documentElement.lang === "de" ? deLocal : local
+  );
 
-  for (const target of e.composedPath() as HTMLElement[]) {
-    if (target?.classList?.contains("attribut")) {
-      const titleElement = createElement("span", target.title, ["title"]);
+  document.addEventListener("click", e => {
+    const titleElement = document.querySelector(".attribut .title");
+    if (titleElement) titleElement.remove();
 
-      target.append(titleElement);
+    for (const target of e.composedPath() as HTMLElement[]) {
+      if (target?.classList?.contains("attribut")) {
+        const titleElement = createElement("span", target.title, ["title"]);
 
-      setTimeout(() => {
-        titleElement.remove();
-      }, 2000);
+        target.append(titleElement);
+
+        setTimeout(() => {
+          titleElement.remove();
+        }, 2000);
+      }
     }
-  }
+  });
 });
