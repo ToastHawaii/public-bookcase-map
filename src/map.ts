@@ -25,11 +25,11 @@ import { setHashParams, getHashParams } from "./utilities/url";
 import { Attribute } from "./Generator";
 import { getJson } from "./utilities/jsonRequest";
 import { get, set } from "./utilities/storage";
+import { delay, getRandomInt } from "./utilities/data";
+import { toString } from "./utilities/string";
 import { getHtmlElement, createElement } from "./utilities/html";
 import { createOverPassLayer, isIOS, shareLink } from "./createOverPassLayer";
 import { funding } from "./funding";
-import { delay, getRandomInt } from "./utilities/data";
-import { toString } from "./utilities/string";
 
 let map: L.Map;
 const layers: { [name: string]: L.Layer } = {};
@@ -61,7 +61,7 @@ export function initMap<M>(
   (getHtmlElement(
     ".about"
   ) as HTMLLinkElement).href = `https://book-exchange.zottelig.ch${
-    local.code ? `/${local.code}/` : ""
+    local.code ? `/${local.code}` : ""
   }/docs/`;
 
   (getHtmlElement(".donate") as HTMLLinkElement).href =
