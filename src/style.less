@@ -52,6 +52,19 @@ h1 {
   color: #333;
 }
 
+button {
+  outline: none;
+  position: relative;
+  text-align: center;
+
+  i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 .box {
   width: 250px;
   height: 30px;
@@ -220,6 +233,13 @@ a.menu {
   &.note {
     bottom: 165px;
   }
+
+  i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .attribut {
@@ -227,22 +247,6 @@ a.menu {
   padding: 0 2px;
   text-align: center;
   min-width: 8px;
-}
-
-button {
-  outline: none;
-  position: relative;
-  text-align: center;
-}
-
-button,
-a {
-  i {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
 }
 
 .img {
