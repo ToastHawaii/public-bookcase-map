@@ -95,8 +95,6 @@ h1 {
     width: 30px;
     color: #666;
     font-size: 10pt;
-    position: relative;
-    text-align: center;
   }
 
   button.icon {
@@ -222,13 +220,6 @@ a.menu {
   &.note {
     bottom: 165px;
   }
-
-  i {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
 }
 
 .attribut {
@@ -242,6 +233,16 @@ button {
   outline: none;
   position: relative;
   text-align: center;
+}
+
+button,
+a {
+  i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .img {
