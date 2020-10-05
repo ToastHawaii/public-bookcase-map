@@ -285,17 +285,21 @@ a.menu .title {
   left: auto;
 }
 
-.help .help-text:after {
-  content: attr(title);
-  display: block;
-  position: absolute;
-  right: 36px;
-  top: 7px;
-  white-space: nowrap;
-  user-select: none;
-  pointer-events: none;
+.help {
+  .help-text {
+    &:after {
+      content: attr(title);
+      display: block;
+      position: absolute;
+      right: 36px;
+      top: 7px;
+      white-space: nowrap;
+      user-select: none;
+      pointer-events: none;
 
-  animation: fade 0.5s ease-in-out backwards;
+      animation: fade 0.5s ease-in-out backwards;
+    }
+  }
 }
 
 @keyframes fade {
@@ -374,14 +378,14 @@ a.menu .title {
     font-size: 14px;
     margin-top: -3px;
     text-decoration: none;
-  }
 
-  .contact a:last-of-type {
-    padding: 0 0 0 4px;
-  }
+    &:last-of-type {
+      padding: 0 0 0 4px;
+    }
 
-  .contact a:first-of-type {
-    padding: 0 4px 0 0;
+    &:first-of-type {
+      padding: 0 4px 0 0;
+    }
   }
 }
 
