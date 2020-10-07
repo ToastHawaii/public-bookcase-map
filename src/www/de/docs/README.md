@@ -32,7 +32,7 @@ Die Karte ist so gestaltet, dass sie im Browser des Smartphones geöffnet und ve
 
 Vielen Dank für deinen Einsatz! [OpenStreetMap](https://www.openstreetmap.org) ist ein Projekt, bei welchem jeder mitarbeiten kann. Alles geht über die Webseite, die Tools sind dabei so einfach gestaltet, dass jeder sie verwenden kann.
 
-Verwende die (Öffentliche Bücherschränke Karte von MapComplete)[https://pietervdvn.github.io/MapComplete/index.html?quests=bookcases] für eine Schrittweise Einführung.
+Verwende die [Öffentliche Bücherschränke Karte von MapComplete](https://pietervdvn.github.io/MapComplete/index.html?quests=bookcases) für eine Schrittweise Einführung.
 
 Wie ein öffentlicher Bücherschrank dokumentiert werden kann ist auf dieser [Wiki Seite](https://wiki.openstreetmap.org/wiki/DE:Tag:amenity%3Dpublic_bookcase) beschrieben.
 
