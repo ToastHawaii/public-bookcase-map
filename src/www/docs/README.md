@@ -12,8 +12,6 @@ A public or open bookcase is a cabinet, shelf or box used for the exchange and s
 
 I have not found a map showing the open bookcases, street libraries, bookboxes, reading boxes, open bookshelves and reading banks from OSM. Because I find the public bookcases a good thing and want to support it, I have created this map.
 
-[View source code of this map on GitHub](https://github.com/ToastHawaii/public-bookcase-map)
-
 ### Legend
 
 - <i class="far fa-money-bill-alt"></i> Sale
@@ -34,6 +32,8 @@ You can add this map to your homescreen from your smartphone. Use the "add to ho
 
 Thank you very much for your commitment! [OpenStreetMap](https://www.openstreetmap.org) is a project that anyone can participate in. Everything goes through the website, the tools are designed so simple that anyone can use them.
 
+Checkout the [Open Bookcase Map from MapComplete](https://pietervdvn.github.io/MapComplete/index.html?quests=bookcases), for a step-by-step introduction to OpenStreetMap.
+
 How to document a public bookcase is described on this [wiki page](https://wiki.openstreetmap.org/wiki/DE:Tag:amenity%3Dpublic_bookcase).
 
 ### Can I do this without registering?
@@ -42,22 +42,45 @@ Yes. Use the <i class="fas fa-comment-alt"></i> note button in the map corner.
 
 ## Is there anything else to do?
 
-Sure, helping hands are always welcome:
+Sure, helping hands are always welcome and there is something for everyone to do.
 
-- Find bookcases and add them in [OSM](https://www.openstreetmap.org). But always check if they really exist in real life, on the field.
-  - Research on the Internet.
-  - Look out for bookcases when you're on the go.
-  - Look at [the beautiful map from Binnette](https://umap.openstreetmap.fr/fr/map/osm-bookcases-and-boite-a-lire_362287#15/45.2010/5.7389), which is based on the data of [boite-a-lire](https://www.boite-a-lire.com/). [Click here for the project website from Binnette's bookcases-to-check](https://github.com/Binnette/bookcases-to-check).
-  - Checkout the [Open Bookcase Map from MapComplete](https://pietervdvn.github.io/MapComplete/bookcases.html), for a step-by-step introduction to OpenStreetMap.
-- Improve this map by your self or make suggestions. [Click here for the project website from public-bookcase](https://github.com/ToastHawaii/public-bookcase-map)
+### Do you like to be outside?
+
+Then find public bookcases and add them in [OSM](https://www.openstreetmap.org). Always check if they really exist by visiting them.
+
+- Look at [the beautiful map from Binnette](https://umap.openstreetmap.fr/fr/map/osm-bookcases-and-boite-a-lire_362287#15/45.2010/5.7389), which is based on the data of [boite-a-lire](https://www.boite-a-lire.com/). [Click here for the project website from Binnette's bookcases-to-check](https://github.com/Binnette/bookcases-to-check).
+- Do research on the Internet.
+- Look out for bookcases when you're on the go.
+
+[Vespucci (Android)](https://wiki.openstreetmap.org/wiki/Vespucci) and [Go Map!! (iOS)](https://wiki.openstreetmap.org/wiki/Go_Map!!) are useful helpers on the road.
+
+### Do you like to take pictures?
+
+Visit already registered public bookcases and photograph them and link the picture in OpenStreetMap. The map supports the tags mapillary, flickr, wikimedia_commons and image. [Wiki page about Photo linking](https://wiki.openstreetmap.org/wiki/Photo_linking)
+
+### Do you want to translate the map into your language?
+
+The texts are located in the [src folder](https://github.com/ToastHawaii/public-bookcase-map/tree/master/src) in the files local.ts, index.html and README.md. Send me a pull request via [GitHub](https://github.com/ToastHawaii/public-bookcase-map) or [contact me directly](https://it.zottelig.ch/kontakt).
+
+### Can you program?
+
+Then improve this map and send me a Pull Requests. [Click here to go to the project website of the public bookcase map](https://github.com/ToastHawaii/public-bookcase-map)
+
+### Miscellaneous
+
+- You have an idea how the map can be extended? Send me an [issue via GitHub](https://github.com/ToastHawaii/public-bookcase-map/issues/new) or a message via [my contact page](https://it.zottelig.ch/kontakt).
+- Share this map with your friends.
 - Exchange books.
+- [Support me](https://it.zottelig.ch/%C3%BCber-mich) with coffee and cake.
 - Enjoy reading and life. ;)
 
 ## I have a website, can I use this map?
 
-Yes. The app is licensed under the [GNU Affero General Public License v3.0](/LICENSE). The code is free for use, copying and modification if you publish under the same license.
+Yes. The app is licensed under the [GNU Affero General Public License v3.0](https://github.com/ToastHawaii/public-bookcase-map/blob/master/LICENSE). The code is free for use, copying and modification if you publish under the same license.
 
 The code can be used as a basis for your own theme map.
+
+[View the source code of this map on GitHub](https://github.com/ToastHawaii/public-bookcase-map)
 
 ### I cannot program, how can I create my own theme map?
 
@@ -72,6 +95,8 @@ Try one of the following services:
 
 ## More
 
+More maps for inspiration:
+
 - A map that shows facilities and services that are environmentally, socially and economically sustainable. [Sustainable](https://sustainable.zottelig.ch/)
 - A map with public and free facilities and offers. [Priceless](https://priceless.zottelig.ch)
 
@@ -85,4 +110,4 @@ Support me with coffee ☕ and cake 🍰:
 
 ---
 
-<a href="/de/docs/" hreflang="de">Deutsch</a>
+[Deutsch](/de/docs/)

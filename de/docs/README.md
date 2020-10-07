@@ -12,8 +12,6 @@ Ein öffentlicher oder offener Bücherschrank ist ein Schrank, Regal oder Box mi
 
 Ich habe keine Karte gefunden, welche die offene Bücherschränke, Strassenbibliotheken, Bücherboxen, Leseboxen, offene Bücherregal, Hol-und-Bring Bibliotheken, Tauschbibliotheken, Lesebanken etc. anzeigt, welche so zahlreich von den fleissigen Karten Zeichner von OSM eingetragen wurden. Um diesen zu würdigen und weil ich die öffentlichen Bücherschränke eine gute Sache finde und diese unterstützen möchte, habe ich diese Karte erstellt.
 
-[Quellcode dieser Karte auf GitHub anzeigen](https://github.com/ToastHawaii/public-bookcase-map)
-
 ### Legende
 
 - <i class="far fa-money-bill-alt"></i> Verkauf
@@ -34,36 +32,70 @@ Die Karte ist so gestaltet, dass sie im Browser des Smartphones geöffnet und ve
 
 Vielen Dank für deinen Einsatz! [OpenStreetMap](https://www.openstreetmap.org) ist ein Projekt, bei welchem jeder mitarbeiten kann. Alles geht über die Webseite, die Tools sind dabei so einfach gestaltet, dass jeder sie verwenden kann.
 
-Wie ein öffentlicher Bücherschrank dokumentiert werden soll ist auf dieser [Wiki Seite](https://wiki.openstreetmap.org/wiki/DE:Tag:amenity%3Dpublic_bookcase) beschrieben.
+Verwende die (Öffentliche Bücherschränke Karte von MapComplete)[https://pietervdvn.github.io/MapComplete/index.html?quests=bookcases] für eine Schrittweise Einführung.
+
+Wie ein öffentlicher Bücherschrank dokumentiert werden kann ist auf dieser [Wiki Seite](https://wiki.openstreetmap.org/wiki/DE:Tag:amenity%3Dpublic_bookcase) beschrieben.
 
 ### Geht das auch ohne Registrierung?
 
-Ja klar. Auf [OpenStreetMap](https://www.openstreetmap.org) gibt es auch einen Knopf, über welchen ein Hinweis hinterlegt werden kann.
+Ja klar. Verwende den <i class="fas fa-comment-alt"></i> Notiz/Hinweis Knopf in der Ecke der Karte.
 
 ## Gibt es sonst was zu tun?
 
-Klar, helfende Hände sind mir immer willkommen:
+Klar, helfende Hände sind mir immer willkommen und es gibt für jeden etwas zu tun.
 
-- Finde Bücherschränke und trage diese in [OSM](https://www.openstreetmap.org) ein. Überprüfe aber immer ob diese wirklich existieren in dem du sie besuchst. - Recherchiere im Internet. - Halte Ausschau wenn du unterwegs bist. - Schau dir [die schöne Karte von Binnette](https://umap.openstreetmap.fr/fr/map/osm-bookcases-and-boite-a-lire_362287#15/45.2010/5.7389) an, welche auf den Daten von [boite-a-lire](https://www.boite-a-lire.com/) basiert. [Hier geht es zur Projekt Webseite von Binnette's bookcases-to-check](https://github.com/Binnette/bookcases-to-check)
-- Verbessere diese Karte oder mache Vorschläge wie sie verbessert werden kann. [Hier geht es zur Projekt Webseite von public-bookcase](https://github.com/ToastHawaii/public-bookcase-map)
+### Bist du gerne unterwegs?
+
+Dann finde Bücherschränke in deiner Nähe und trage diese in [OSM](https://www.openstreetmap.org) ein. Überprüfe immer ob diese wirklich existieren in dem du sie besuchst.
+
+- Schau dir [die schöne Karte von Binnette](https://umap.openstreetmap.fr/fr/map/osm-bookcases-and-boite-a-lire_362287#15/45.2010/5.7389) an, welche auf den Daten von [boite-a-lire](https://www.boite-a-lire.com/) basiert. [Hier geht es zur Projekt Webseite von Binnette's bookcases-to-check](https://github.com/Binnette/bookcases-to-check)
+- Recherchiere im Internet.
+- Halte Ausschau wenn du unterwegs bist.
+
+[Vespucci (Android)](https://wiki.openstreetmap.org/wiki/Vespucci) und [Go Map!! (iOS)](https://wiki.openstreetmap.org/wiki/Go_Map!!) sind nützliche Helfer für unterwegs.
+
+### Machst du gerne Fotos?
+
+Besuche bereits eingetragene Bücherschränke und fotografiere sie und verlinke das Bild in OpenStreetMap. Die Karte unterstütz die Tags mapillary, flickr, wikimedia_commons und image. [Wiki Seite zu Photo linking](https://wiki.openstreetmap.org/wiki/Photo_linking)
+
+### Möchtest du die Karte in deine Sprache übersetzen?
+
+Die Texte befinden sich im [src Ordner](https://github.com/ToastHawaii/priceless-map/tree/master/src) in den Dateien local.ts, index.html und README.md. Sende mir einen Pull Request über [GitHub](https://github.com/ToastHawaii/public-bookcase-map) oder [nimm direkt mit mir kontakt auf](https://it.zottelig.ch/kontakt).
+
+### Schreibs du gerne?
+
+Ergänze die Beschreibung der Einrichtungen im [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/DE:Map_Features). Eine direkten Link zur Wiki Seite findest du auf der Karte neben der Auswahl der Einrichtung über den Info Knopf <i class="fas fa-info-circle"></i>.
+
+### Kannst du Programmieren?
+
+Dann erweitere diese Karte und sende mir Pull Requests. [Hier geht es zur Projekt Webseite von der Öffentliche Bücherschränke Karte](https://github.com/ToastHawaii/public-bookcase-map)
+
+### Sonstiges
+
+- Du hast eine Idee wie die Karte erweitert werden kann? Sende mir eine [Issue über GitHub](https://github.com/ToastHawaii/public-bookcase-map/issues/new) oder eine Nachricht über meine [Kontakt Seite](https://it.zottelig.ch/kontakt).
+- Rede darüber und teile die Karte mit deinen Freunden und Bekannten.
 - Tausche Bücher.
+- [Unterstütze mich](https://it.zottelig.ch/%C3%BCber-mich) mit Kaffee und Kuchen.
 - Geniesse das Lesen und Leben. ;)
 
 ## Ich habe eine Webseite, kann ich diese Karte einbauen?
 
-Ja, der Code steht frei zur Verwendung, Kopierung und Modifizierung.
+Ja. Die Anwendung ist unter der [GNU Affero General Public License v3.0](https://github.com/ToastHawaii/public-bookcase-map/blob/master/LICENSE) lizenziert. Der Code steht frei zur Verwendung, Kopierung und Modifizierung, wenn er unter der gleichen Lizenz veröffentlichet wird.
 
 Der Code kann auch als Basis für eine eigene Themenkarte verwendet werden.
+
+[Quellcode dieser Karte auf GitHub anzeigen](https://github.com/ToastHawaii/public-bookcase-map)
 
 ### Ich kann nicht Programmieren, wie kann ich eine eigene Themenkarte erstellen?
 
 Probiere einen der folgenden Services aus:
 
+- [MapComplete](https://pietervdvn.github.io/MapComplete/index.html) ([Wiki](https://wiki.openstreetmap.org/wiki/MapComplete))
 - [MapContrib](https://www.mapcontrib.xyz/) ([Wiki](https://wiki.openstreetmap.org/wiki/MapContrib))
 - [uMap](https://umap.openstreetmap.fr/de/) ([Wiki](https://wiki.openstreetmap.org/wiki/DE:UMap))
 - [overpass turbo](https://overpass-turbo.eu/) ([Wiki](https://wiki.openstreetmap.org/wiki/DE:Overpass_turbo)) Du kannst den "Wizard" verwenden um eine Abfrage zu erstellen, dieser versteht auch deutsche Wörter wie z.B. "See", "Bäckerei", etc.
 
-[Weitere Karten basierend aus OpenStreetMap](https://wiki.openstreetmap.org/wiki/DE:List_of_OSM-based_services)
+[Weitere Karten basierend auf OpenStreetMap](https://osm-apps.zottelig.ch/)
 
 ## Weiteres
 
@@ -82,4 +114,4 @@ Unterstütze mich mit Kaffee ☕ und Kuchen 🍰:
 
 ---
 
-<a href="/docs/" hreflang="en">English</a>
+[English](/docs/)
