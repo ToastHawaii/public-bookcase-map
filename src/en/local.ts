@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Public bookcase map.  If not, see <http://www.gnu.org/licenses/>.
 
-export const local = {
+(window as any).local = {
   code: "",
 
   title: "Public bookcase map",

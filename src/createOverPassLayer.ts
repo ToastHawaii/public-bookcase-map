@@ -24,7 +24,6 @@ import { getJson } from "./utilities/jsonRequest";
 import { getHtmlElement, createElement } from "./utilities/html";
 import { parseOpeningHours, updateCount } from "./map";
 import * as L from "leaflet";
-import "leaflet-overpass-layer";
 import { attributeDescriptions } from "./attributeDescriptions";
 import {
   extractName,
@@ -36,6 +35,7 @@ import {
 } from "./data";
 import { textTruncate } from "./utilities/string";
 import { IOverPassLayer } from "leaflet-overpass-layer";
+import { delay } from "./utilities/data";
 
 export function createOverPassLayer<M>(
   value: string,
@@ -53,7 +53,7 @@ export function createOverPassLayer<M>(
       };" class="marker-pin"></div><img class="${value}-icon" src="${icon}">`,
       iconSize: [36, 48],
       iconAnchor: [18, 48]
-    }) as any,
+    }),
     minZoomIndicatorEnabled: true,
     minZoomIndicatorOptions: {
       position: "bottomleft",
@@ -72,10 +72,7 @@ export function createOverPassLayer<M>(
         if (e.id in this._ids) continue;
         this._ids[e.id] = true;
 
-        let pos: {
-          lat: number;
-          lng: number;
-        };
+        let pos: L.LatLng;
         let marker;
 
         if (!e.tags) throw "Unexpected undefined";
@@ -92,7 +89,7 @@ export function createOverPassLayer<M>(
         }
 
         if (this.options.markerIcon) {
-          marker = L.marker(pos, { icon: this.options.markerIcon as any });
+          marker = L.marker(pos, { icon: this.options.markerIcon });
         } else {
           marker = L.circle(pos, 20, {
             stroke: false,
@@ -210,13 +207,13 @@ export function createOverPassLayer<M>(
           }
         </div>
         <div class="contact" style="padding-top: 2px;">
-          ${
-            !linksGenerator.empty(tags, value, {}, local)
-              ? `
-          <br />
+        ${
+          !linksGenerator.empty(tags, value, {}, local)
+            ? `
+        <br />
           ${linksGenerator.render(local, tags, value, {})}`
-              : ``
-          }
+            : ``
+        }
         </div>
         </div>`
         );
@@ -518,7 +515,7 @@ function generateHtmlWikipediaDescription(wikipedia: {
   return `${wikipedia.summary} <a href="${wikipedia.url}" target="_blank">Wikipedia</a>`;
 }
 
-export function shareLink(
+export async function shareLink(
   url: string,
   target: HTMLElement,
   local: { linkCopied: string },
@@ -550,9 +547,8 @@ export function shareLink(
 
       target.append(titleElement);
 
-      setTimeout(() => {
-        titleElement.remove();
-      }, 2000);
+      await delay(2000);
+      titleElement.remove();
     }
   }
 }

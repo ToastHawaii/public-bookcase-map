@@ -1,26 +1,33 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const CleanCSSPlugin = require('less-plugin-clean-css');
+const CleanCSSPlugin = require("less-plugin-clean-css");
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   context: path.join(__dirname, "./"),
-  entry: "./script.ts",
+  entry: {
+    en: "./en/local.ts",
+    de: "./de/local.ts",
+    app: "./script.ts"
+  },
   output: {
-    filename: "script.js",
+    filename: "[name].js",
     path: __dirname + "/.."
   },
   plugins: [
     new HtmlWebpackPlugin({
       // Load a custom template
-      template: "./index.html",
-      filename: "./index.html"
+      template: "./en/index.html",
+      filename: "./index.html",
+      chunks: ["app", "en"]
     }),
     new HtmlWebpackPlugin({
       // Load a custom template
       template: "./de/index.html",
-      filename: "./de/index.html"
+      filename: "./de/index.html",
+      chunks: ["app", "de"]
     }),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("production")
@@ -30,20 +37,23 @@ module.exports = {
         { from: "./www" },
         {
           from: "*.css*",
-          to: "../lib/",
-          context: "../node_modules/leaflet/dist/"
+          to: __dirname + "/../lib/",
+          context: __dirname + "/../node_modules/leaflet/dist/"
         },
         {
           from: "**/*.png",
-          to: "../lib/",
-          context: "../node_modules/leaflet/dist/"
+          to: __dirname + "/../lib/",
+          context: __dirname + "/../node_modules/leaflet/dist/"
         },
         {
           from: "*.css*",
-          to: "../lib/",
-          context: "../node_modules/leaflet-overpass-layer/dist/"
+          to: __dirname + "/../lib/",
+          context: __dirname + "/../node_modules/leaflet-overpass-layer/dist/"
         }
       ]
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css"
     })
   ],
   mode: "production",
@@ -75,9 +85,7 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          {
-            loader: "style-loader" // creates style nodes from JS strings
-          },
+          MiniCssExtractPlugin.loader,
           {
             loader: "css-loader" // translates CSS into CommonJS
           },

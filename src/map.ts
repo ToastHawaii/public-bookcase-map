@@ -19,9 +19,7 @@ import * as L from "leaflet";
 import "leaflet-overpass-layer";
 import * as opening_hours from "opening_hours";
 import * as moment from "moment";
-import { Solver } from "./coloriz/Solver";
-import { Color, hexToRgb } from "./coloriz/Color";
-import { setHashParams, getHashParams } from "./utilities/url";
+import { setQueryParams, getQueryParams } from "./utilities/url";
 import { Attribute } from "./Generator";
 import { getJson } from "./utilities/jsonRequest";
 import { get, set } from "./utilities/storage";
@@ -73,7 +71,7 @@ export function initMap<M>(
 
     const bbox = map.getBounds();
     shareLink(
-      `${window.location.origin}${window.location.pathname}#b=${toString(
+      `${window.location.origin}${window.location.pathname}?b=${toString(
         bbox.getSouth(),
         4
       )},${toString(bbox.getWest(), 4)},${toString(
@@ -191,12 +189,9 @@ export function initMap<M>(
       value ||
       (document.getElementById("osm-search") as HTMLInputElement).value;
 
-    setHashParams(
-      {
-        location: value
-      },
-      hashchange
-    );
+    setQueryParams({
+      location: value
+    });
 
     getJson("https://nominatim.openstreetmap.org/search", {
       format: "json",
@@ -213,7 +208,7 @@ export function initMap<M>(
   }
 
   function hashchange() {
-    const params = getHashParams();
+    const params = getQueryParams();
 
     if (params["location"]) search(params["location"]);
     else if (params["b"]) {
@@ -233,7 +228,7 @@ export function initMap<M>(
     hashchange();
   }, 0);
 
-  const params = getHashParams();
+  const params = getQueryParams();
 
   if (params["location"]) {
     search(params["location"]);
@@ -249,29 +244,12 @@ export function initMap<M>(
     const marker = (e as L.PopupEvent & { popup: { _source: L.Marker } }).popup
       ._source;
     const latLng = marker.getLatLng();
-    setHashParams(
-      {
-        location: `${latLng.lat},${latLng.lng}`
-      },
-      hashchange
-    );
+    setQueryParams({
+      location: `${latLng.lat},${latLng.lng}`
+    });
   });
 
   let iconColors = "";
-
-  for (const f of filterOptions) {
-    if (f.color) {
-      const rgb = hexToRgb(f.color);
-      const color = new Color(rgb[0], rgb[1], rgb[2]);
-      const solver = new Solver(color);
-      const result = solver.solve();
-
-      iconColors += `.${f.value}-icon{${result.filter.replace(
-        /filter:/gi,
-        "filter: brightness(0%)"
-      )}}`;
-    }
-  }
 
   const style = createElement("style", iconColors);
   document.head.appendChild(style);
