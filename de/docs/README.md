@@ -60,7 +60,7 @@ Besuche bereits eingetragene Bücherschränke und fotografiere sie und verlinke 
 
 ### Möchtest du die Karte in deine Sprache übersetzen?
 
-Die Texte befinden sich im [src Ordner](https://github.com/ToastHawaii/priceless-map/tree/master/src) in den Dateien local.ts, index.html und README.md. Sende mir einen Pull Request über [GitHub](https://github.com/ToastHawaii/public-bookcase-map) oder [nimm direkt mit mir kontakt auf](https://it.zottelig.ch/kontakt).
+Die Texte befinden sich im [src Ordner](https://github.com/ToastHawaii/public-bookcase-map/tree/master/src) in den Dateien local.ts, index.html und README.md. Sende mir einen Pull Request über [GitHub](https://github.com/ToastHawaii/public-bookcase-map) oder [nimm direkt mit mir kontakt auf](https://it.zottelig.ch/kontakt).
 
 ### Schreibs du gerne?
 
