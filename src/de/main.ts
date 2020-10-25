@@ -15,19 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Public bookcase map.  If not, see <http://www.gnu.org/licenses/>.
 
-export function groupBy<T>(xs: T[], prop: string): { [p: string]: T[] } {
-  return xs.reduce((groups: any, item: any) => {
-    const val = item[prop];
-    groups[val] = groups[val] || [];
-    groups[val].push(item);
-    return groups;
-  }, {}) as any;
-}
+import { init } from "../init";
+import * as local from "./local";
 
-export function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-export function getRandomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+init(local.local);

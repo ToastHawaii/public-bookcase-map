@@ -15,17 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Public bookcase map.  If not, see <http://www.gnu.org/licenses/>.
 
-(window as any).local = {
+export const local = {
   code: "",
 
   title: "Public bookcase map",
   description:
     "This simple map shows public bookcases for book exchange near you.",
-
-  default: "Public bookcase",
-  bookshop: "Bookstore",
-  giveBox: "GiveBox",
-  library: "Free library",
 
   minZoomMessageNoLayer: "No layer assigned",
   minZoomMessage: "Zoom in to load locations",
@@ -74,5 +69,13 @@
     shelf: "Public bookcase",
     shelter: "Public bookcase",
     wooden_cabinet: "Public bookcase"
-  }
+  },
+  amenity: {
+    give_box: "GiveBox",
+    library: "Free library"
+  },
+  shop: {
+    books: "Bookstore"
+  },
+  default: "Public bookcase",
 };

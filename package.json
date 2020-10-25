@@ -17,16 +17,7 @@
   },
   "homepage": "https://github.com/ToastHawaii/public-bookcase-map#readme",
   "dependencies": {
-    "@babel/runtime": "7.11.2",
-    "@types/leaflet": "1.5.17",
-    "@types/md5": "2.2.0",
-    "@types/moment": "2.13.0",
-    "i18next-client": "1.11.4",
-    "leaflet-overpass-layer": "github:ToastHawaii/leaflet-overpass-layer",
-    "md5": "2.2.1",
-    "moment": "2.27.0",
-    "opening_hours": "3.5.0",
-    "country-language": "0.1.7"
+    "osm-app-component": "github:ToastHawaii/osm-app-component"
   },
   "devDependencies": {
     "@babel/core": "7.11.1",
@@ -45,6 +36,7 @@
     "less-plugin-clean-css": "1.5.1",
     "mini-css-extract-plugin": "1.0.0",
     "source-map-loader": "0.2.4",
+    "url-loader": "4.1.0",
     "typescript": "4.0.3",
     "webpack": "4.44.1",
     "webpack-cli": "3.3.12"

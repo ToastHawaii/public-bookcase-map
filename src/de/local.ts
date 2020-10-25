@@ -15,17 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Public bookcase map.  If not, see <http://www.gnu.org/licenses/>.
 
-(window as any).local ={
+export const local = {
   code: "de",
 
   title: "Öffentliche Bücherschränke Karte",
   description:
     "Dies ist eine einfache Karte, welche öffentliche Bücherschränke für das Tauschen von Büchern in ihrer Nähe anzeigt.",
-
-  default: "Öffentlicher Bücherschrank",
-  bookshop: "Buchhandlung",
-  giveBox: "GiveBox",
-  library: "Kostenlose Bibliothek",
 
   minZoomMessageNoLayer: "Keine Ebene zugewiesen",
   minZoomMessage: "Vergrössern, um Standorte zu laden",
@@ -74,5 +69,13 @@
     shelf: "Öffentliches Bücherregal",
     shelter: "Öffentliches Bücherregal",
     wooden_cabinet: "Öffentlicher Bücherschrank"
-  }
+  },
+  amenity: {
+    give_box: "GiveBox",
+    library: "Kostenlose Bibliothek"
+  },
+  shop: {
+    books: "Buchhandlung"
+  },
+  default: "Öffentlicher Bücherschrank"
 };
