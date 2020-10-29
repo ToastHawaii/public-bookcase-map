@@ -49,33 +49,8 @@ export const local = {
   closes: "Schliesst",
   thatDependsOn: "Das hängt ab von",
   route: "Routen",
-  floor: function (level: number) {
-    return `(${level}. OG)`;
-  },
-  groundFloor: function (_level: number) {
-    return `(EG)`;
-  },
-  basement: function (level: number) {
-    return `(${Math.abs(level)}. UG)`;
-  },
-  "public_bookcase:type": {
-    building: "Öffentliche Tauschbibliothek",
-    glass_cabinet: "Öffentlicher Bücherschrank",
-    metal_cabinet: "Öffentlicher Bücherschrank",
-    movable_cabinet: "Öffentlicher Bücherschrank",
-    phone_box: "Öffentliche Buchkabine",
-    reading_box: "Öffentliche Bücherbox",
-    sculpture: "Öffentlicher Bücherschrank",
-    shelf: "Öffentliches Bücherregal",
-    shelter: "Öffentliches Bücherregal",
-    wooden_cabinet: "Öffentlicher Bücherschrank"
-  },
   amenity: {
-    give_box: "GiveBox",
     library: "Kostenlose Bibliothek"
-  },
-  shop: {
-    books: "Buchhandlung"
   },
   default: "Öffentlicher Bücherschrank"
 };

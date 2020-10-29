@@ -49,33 +49,8 @@ export const local = {
   closes: "Closes",
   thatDependsOn: "That depends on",
   route: "Route",
-  floor: function (level: number) {
-    return `(${level}F)`;
-  },
-  groundFloor: function (_level: number) {
-    return `(GF)`;
-  },
-  basement: function (level: number) {
-    return `(B${Math.abs(level)}F)`;
-  },
-  "public_bookcase:type": {
-    building: "Public bookcase",
-    glass_cabinet: "Public bookcase",
-    metal_cabinet: "Public bookcase",
-    movable_cabinet: "Public bookcase",
-    phone_box: "Public bookcase",
-    reading_box: "Public bookcase",
-    sculpture: "Public bookcase",
-    shelf: "Public bookcase",
-    shelter: "Public bookcase",
-    wooden_cabinet: "Public bookcase"
-  },
   amenity: {
-    give_box: "GiveBox",
     library: "Free library"
   },
-  shop: {
-    books: "Bookstore"
-  },
-  default: "Public bookcase",
+  default: "Public bookcase"
 };
