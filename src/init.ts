@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Public bookcase map.  If not, see <http://www.gnu.org/licenses/>.
 
-import { initMap } from "osm-app-component";
+import { initMap } from "../../osm-app-component/src/index";
 import { filters } from "./filters";
 import "osm-app-component/dist/main.css";
 import { attributes } from "./attributes";
