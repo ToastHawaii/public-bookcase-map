@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/ToastHawaii/public-bookcase-map"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "ToastHawaii",
+  "license": "AGPL",
   "bugs": {
     "url": "https://github.com/ToastHawaii/public-bookcase-map/issues"
   },
