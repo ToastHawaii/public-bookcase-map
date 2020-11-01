@@ -12,23 +12,28 @@ module.exports = {
   },
   output: {
     filename: "[name]/main.js",
-    path: __dirname + "/.."
+    path: __dirname + "/../dist"
   },
   plugins: [
     new HtmlWebpackPlugin({
-      // Load a custom template
       template: "./en/index.html",
       filename: "./index.html",
       chunks: ["en"]
     }),
     new HtmlWebpackPlugin({
-      // Load a custom template
       template: "./de/index.html",
       filename: "./de/index.html",
       chunks: ["de"]
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: "./www" }]
+      patterns: [
+        { from: "./www" },
+        {
+          context: "../node_modules/osm-app-component/dist/",
+          from: "*/local.js",
+          to: "[path]/[path][name].[ext]"
+        }
+      ]
     }),
     new MiniCssExtractPlugin({
       filename: "[name]/main.css"
@@ -81,13 +86,6 @@ module.exports = {
             }
           }
         ]
-      },
-      {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        loader: "url-loader",
-        options: {
-          limit: 10000
-        }
       }
     ]
   }
