@@ -23,8 +23,8 @@ export const local = {
     "This simple map shows public bookcases for book exchange near you.",
 
   minZoomMessageNoLayer: "No layer assigned",
-  minZoomMessage: "Zoom in to load locations",
-  emptyIndicator: "No locations found",
+  minZoomMessage: "Zoom in to load bookcases",
+  emptyIndicator: "No bookcases found in this area",
   linkCopied: "Link copied to the clipboard",
   capacity: "Capacity",
   freeToGive: "Free to give",

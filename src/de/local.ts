@@ -23,8 +23,8 @@ export const local = {
     "Dies ist eine einfache Karte, welche öffentliche Bücherschränke für das Tauschen von Büchern in ihrer Nähe anzeigt.",
 
   minZoomMessageNoLayer: "Keine Ebene zugewiesen",
-  minZoomMessage: "Vergrössern, um Standorte zu laden",
-  emptyIndicator: "Keine Orte gefunden",
+  minZoomMessage: "Zoome hinein, um Bücherschränke zu laden",
+  emptyIndicator: "Keine Bücherschränke in diesem Bereich gefunden",
   linkCopied: "Link in die Zwischenablage kopiert",
   capacity: "Kapazität",
   freeToGive: "Nur bringen",
@@ -50,7 +50,7 @@ export const local = {
   thatDependsOn: "Das hängt ab von",
   route: "Routen",
   amenity: {
-    library: "Kostenlose Bibliothek"
+    library: "Kostenlose Bibliothek",
   },
-  default: "Öffentlicher Bücherschrank"
+  default: "Öffentlicher Bücherschrank",
 };
