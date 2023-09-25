@@ -1,0 +1,26 @@
+{
+   "data_format": 1,
+   "project": {
+       "name": "Public bookcase map",
+       "description": "This map shows public bookcases near you.",
+       "project_url": "https://book-exchange.zottelig.ch/",
+       "doc_url": "https://book-exchange.zottelig.ch/docs/",
+       "icon_url": "https://book-exchange.zottelig.ch/icons/favicon.ico",
+       "contact_name": "Markus",
+       "contact_email": "mar.pel@protonmail.com"
+   },
+   "tags": [
+    {
+        "key": "amenity",
+        "value": "public_bookcase"
+    },
+    {
+        "key": "amenity",
+        "value": "give_box"
+    },
+    {
+        "key": "amenity",
+        "value": "freeshop"
+    }
+   ]
+}

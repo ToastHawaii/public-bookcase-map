@@ -53,7 +53,7 @@ export const filters: {
     ${nw(`["shop"="charity"]["books"]`)}
 
     // FreeStore
-    ${nw(`["shop"="freestore"]`)}
+    ${nw(`["amenity"="freeshop"]`)}
     ${nw(`["shop"="charity"]["payment:none"="yes"]`)}
     ${nw(`["shop"="second_hand"]["payment:none"="yes"]`)}
 
@@ -63,8 +63,7 @@ export const filters: {
     edit: [
       "amenity=public_bookcase",
       "amenity=give_box",
-      "amenity=library",
-      "shop"
+      "amenity=library"
     ],
     tags: ["amenity=public_bookcase", "amenity=give_box", "amenity=library"]
   }
