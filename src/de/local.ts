@@ -31,6 +31,7 @@ export const local = {
   freeToTake: "Nur mitnehmen",
   freeToTakeOrGive: "Mitnehmen und bringen",
   borrow: "Nur ausleihen",
+  giveBox: "Give Box",
   indoor: "Drinnen",
   light: "Beleuchtet",
   customersOnly: "Nur für Besucher",

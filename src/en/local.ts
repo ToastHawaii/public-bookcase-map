@@ -31,6 +31,7 @@ export const local = {
   freeToTake: "Free to take",
   freeToTakeOrGive: "Free to take or give",
   borrow: "Borrow only",
+  giveBox: "Give Box",
   indoor: "Indoor",
   light: "Lit",
   covered: "Covered",
