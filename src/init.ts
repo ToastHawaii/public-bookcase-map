@@ -19,14 +19,12 @@ import { initMap } from "osm-app-component";
 import { filters } from "./filters";
 import "osm-app-component/dist/main.css";
 import { attributes } from "./attributes";
-import { attributeDescriptions } from "./attributeDescriptions";
 
 export function init(local: any) {
   initMap(
     "https://book-exchange.zottelig.ch/",
     filters,
     attributes,
-    attributeDescriptions,
     local,
     tags => {
       if (tags.access && tags.access === "no") return true;

@@ -48,7 +48,6 @@ export const local = {
   opens: "Opens",
   closes: "Closes",
   thatDependsOn: "That depends on",
-  route: "Route",
   amenity: {
     library: "Free library"
   },

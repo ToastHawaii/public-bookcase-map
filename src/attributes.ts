@@ -18,76 +18,87 @@
 import { Attribute } from "./Generator";
 
 const template = (title: string, icon: string, value?: string) =>
-  `<span title="${title}" class="attribut"><i class="${icon}"></i>${
+  `<div class="attribut"><i class="${icon}"></i>${
     value !== undefined ? " " + value : ""
-  }</span>`;
+  } ${title}</div>`;
 
 export const attributes: Attribute<{}>[] = [
   {
-    check: tags => !!tags.colour,
+    check: (tags) => !!tags.colour,
     template: (local, tags) =>
-      `<span title="${local.colour}" class="attribut"><i class="fas fa-circle" style="color:${tags.colour};"></i></span>`
+      `<div class="attribut"><i class="fas fa-circle" style="color:${tags.colour};"></i> ${local.colour}</div>`,
   },
   {
     check: (tags, value) => !!tags.capacity && value === "book-exchange",
     template: (local, tags) =>
-      template(local.capacity, "fas fa-book", tags.capacity)
+      template(local.capacity, "fas fa-book", tags.capacity),
   },
   {
-    check: tags => tags["reuse:policy"] === "free_to_take",
-    template: local => template(local.freeToTake, "fas fa-long-arrow-alt-left")
+    check: (tags) => tags["reuse:policy"] === "free_to_take",
+    template: (local) =>
+      template(local.freeToTake, "fas fa-long-arrow-alt-left"),
   },
   {
-    check: tags =>
+    check: (tags) =>
       tags["reuse:policy"] === "free_to_take_or_give" ||
       (!tags["reuse:policy"] &&
         (tags["amenity"] === "reuse" ||
           hasPropThatStartsWith(tags, "reuse:", "yes"))),
-    template: local => template(local.freeToTakeOrGive, "fas fa-exchange-alt")
+    template: (local) =>
+      template(local.freeToTakeOrGive, "fas fa-exchange-alt"),
   },
   {
-    check: tags => tags.amenity === "library" && tags.library !== "booksharing",
-    template: local => template(local.borrow, "fas fa-redo-alt")
+    check: (tags) =>
+      tags.amenity === "library" && tags.library !== "booksharing",
+    template: (local) => template(local.borrow, "fas fa-redo-alt"),
   },
   {
-    check: tags => tags.amenity === "give_box",
-    template: local => template(local.giveBox, "fas fa-gift")
+    check: (tags) => tags.amenity === "give_box",
+    template: (local) => template(local.giveBox, "fas fa-gift"),
   },
   {
-    check: tags =>
+    check: (tags) =>
       tags.location === "indoor" ||
       tags["public_bookcase:type"] === "building" ||
       !!(tags.indoor && tags.indoor !== "no") ||
       !!(tags.building && tags.building !== "no"),
-    template: local => template(local.indoor, "far fa-building")
+    template: (local) => template(local.indoor, "far fa-building"),
   },
   {
-    check: tags =>
+    check: (tags) =>
       (!!tags.covered && tags.covered !== "no") || tags.amenity === "shelter",
-    template: local => template(local.covered, "fas fa-chevron-up")
+    template: (local) => template(local.covered, "fas fa-chevron-up"),
   },
   {
-    check: tags => tags.lit === "yes",
-    template: local => template(local.light, "far fa-lightbulb")
+    check: (tags) => tags.lit === "yes",
+    template: (local) => template(local.light, "far fa-lightbulb"),
   },
   {
-    check: tags => (tags.fee && tags.fee !== "no") || !!tags.shop,
-    template: local => template(local.fee, "far fa-money-bill-alt")
+    check: (tags) => (tags.fee && tags.fee !== "no") || !!tags.shop,
+    template: (local) => template(local.fee, "far fa-money-bill-alt"),
   },
   {
-    check: tags => tags.access === "customers",
-    template: local => template(local.customersOnly, "fas fa-ticket-alt")
+    check: (tags) => tags.access === "customers",
+    template: (local) => template(local.customersOnly, "fas fa-ticket-alt"),
   },
   {
-    check: tags => !!wheelchairAccesIcon(tags),
+    check: (tags) => !!wheelchairAccesIcon(tags),
     template: (local, tags) =>
-      `<span title="${wheelchairAccesText(
-        tags,
-        local
-      )}" class="attribut"><i class="fab fa-accessible-icon"></i> <i class="fas fa-${wheelchairAccesIcon(
+      `<div class="attribut"><i class="fab fa-accessible-icon"></i> <i class="fas fa-${wheelchairAccesIcon(
         tags
-      )}" style="color: ${wheelchairAccesColor(tags)};"></i></span>`
-  }
+      )}" style="color: ${wheelchairAccesColor(
+        tags
+      )};"></i> ${wheelchairAccesText(tags, local)}${
+        !!tags.wheelchair &&
+        !!(
+          tags["wheelchair:description:" + (local.code || "en")] ||
+          tags["wheelchair:description"]
+        )
+          ? ": " + tags["wheelchair:description:" + (local.code || "en")] ||
+            tags["wheelchair:description"]
+          : ""
+      }</div>`,
+  },
 ];
 
 function wheelchairAccesText(tags: { wheelchair?: string }, local: any) {
