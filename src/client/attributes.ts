@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Public bookcase map.  If not, see <http://www.gnu.org/licenses/>.
 
+import { TFunction } from "i18next";
 import { Attribute } from "../osm-app-component/Generator";
-
 
 const template = (title: string, icon: string, value?: string) =>
   `<div class="attribut"><i class="${icon}"></i>${
@@ -26,18 +26,19 @@ const template = (title: string, icon: string, value?: string) =>
 export const attributes: Attribute<{}>[] = [
   {
     check: (tags) => !!tags.colour,
-    template: (local, tags) =>
-      `<div class="attribut"><i class="fas fa-circle" style="color:${tags.colour};"></i> ${local.colour}</div>`,
+    template: (t, tags) =>
+      `<div class="attribut"><i class="fas fa-circle" style="color:${
+        tags.colour
+      };"></i> ${t("colour")}</div>`,
   },
   {
     check: (tags, value) => !!tags.capacity && value === "book-exchange",
-    template: (local, tags) =>
-      template(local.capacity, "fas fa-book", tags.capacity),
+    template: (t, tags) =>
+      template(t("capacity"), "fas fa-book", tags.capacity),
   },
   {
     check: (tags) => tags["reuse:policy"] === "free_to_take",
-    template: (local) =>
-      template(local.freeToTake, "fas fa-long-arrow-alt-left"),
+    template: (t) => template(t("freeToTake"), "fas fa-long-arrow-alt-left"),
   },
   {
     check: (tags) =>
@@ -45,17 +46,16 @@ export const attributes: Attribute<{}>[] = [
       (!tags["reuse:policy"] &&
         (tags["amenity"] === "reuse" ||
           hasPropThatStartsWith(tags, "reuse:", "yes"))),
-    template: (local) =>
-      template(local.freeToTakeOrGive, "fas fa-exchange-alt"),
+    template: (t) => template(t("freeToTakeOrGive"), "fas fa-exchange-alt"),
   },
   {
     check: (tags) =>
       tags.amenity === "library" && tags.library !== "booksharing",
-    template: (local) => template(local.borrow, "fas fa-redo-alt"),
+    template: (t) => template(t("borrow"), "fas fa-redo-alt"),
   },
   {
     check: (tags) => tags.amenity === "give_box",
-    template: (local) => template(local.giveBox, "fas fa-gift"),
+    template: (t) => template(t("giveBox"), "fas fa-gift"),
   },
   {
     check: (tags) =>
@@ -63,54 +63,54 @@ export const attributes: Attribute<{}>[] = [
       tags["public_bookcase:type"] === "building" ||
       !!(tags.indoor && tags.indoor !== "no") ||
       !!(tags.building && tags.building !== "no"),
-    template: (local) => template(local.indoor, "far fa-building"),
+    template: (t) => template(t("indoor"), "far fa-building"),
   },
   {
     check: (tags) =>
       (!!tags.covered && tags.covered !== "no") || tags.amenity === "shelter",
-    template: (local) => template(local.covered, "fas fa-chevron-up"),
+    template: (t) => template(t("covered"), "fas fa-chevron-up"),
   },
   {
     check: (tags) => tags.lit === "yes",
-    template: (local) => template(local.light, "far fa-lightbulb"),
+    template: (t) => template(t("light"), "far fa-lightbulb"),
   },
   {
     check: (tags) => (tags.fee && tags.fee !== "no") || !!tags.shop,
-    template: (local) => template(local.fee, "far fa-money-bill-alt"),
+    template: (t) => template(t("fee"), "far fa-money-bill-alt"),
   },
   {
     check: (tags) => tags.access === "customers",
-    template: (local) => template(local.customersOnly, "fas fa-ticket-alt"),
+    template: (t) => template(t("customersOnly"), "fas fa-ticket-alt"),
   },
   {
     check: (tags) => !!wheelchairAccesIcon(tags),
-    template: (local, tags) =>
+    template: (t, tags) =>
       `<div class="attribut"><i class="fab fa-accessible-icon"></i> <i class="fas fa-${wheelchairAccesIcon(
         tags
       )}" style="color: ${wheelchairAccesColor(
         tags
-      )};"></i> ${wheelchairAccesText(tags, local)}${
+      )};"></i> ${wheelchairAccesText(tags, t)}${
         !!tags.wheelchair &&
         !!(
-          tags["wheelchair:description:" + (local.code || "en")] ||
+          tags["wheelchair:description:" + t("code")] ||
           tags["wheelchair:description"]
         )
-          ? ": " + tags["wheelchair:description:" + (local.code || "en")] ||
+          ? ": " + tags["wheelchair:description:" + t("code")] ||
             tags["wheelchair:description"]
           : ""
       }</div>`,
   },
 ];
 
-function wheelchairAccesText(tags: { wheelchair?: string }, local: any) {
+function wheelchairAccesText(tags: { wheelchair?: string }, t: TFunction<"translation", undefined>) {
   switch (tags.wheelchair) {
     case "yes":
     case "designated":
-      return local.wheelchairYes;
+      return t("wheelchairYes");
     case "limited":
-      return local.wheelchairLimited;
+      return t("wheelchairLimited");
     case "no":
-      return local.wheelchairNo;
+      return t("wheelchairNo");
     default:
       // do not display for others values or undefined
       return "";

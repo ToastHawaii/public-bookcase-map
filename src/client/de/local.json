@@ -1,0 +1,36 @@
+{
+  "title": "Öffentliche Bücherschränke Karte",
+  "description": "Dies ist eine einfache Karte, welche öffentliche Bücherschränke für das Tauschen von Büchern in ihrer Nähe anzeigt.",
+
+  "minZoomMessageNoLayer": "Keine Ebene zugewiesen",
+  "minZoomMessage": "Zoome hinein, um Bücherschränke zu laden",
+  "emptyIndicator": "Keine Bücherschränke in diesem Bereich gefunden",
+  "linkCopied": "Link in die Zwischenablage kopiert",
+  "capacity": "Kapazität",
+  "freeToGive": "Nur bringen",
+  "freeToTake": "Nur mitnehmen",
+  "freeToTakeOrGive": "Mitnehmen und bringen",
+  "borrow": "Nur ausleihen",
+  "giveBox": "Give Box",
+  "indoor": "Drinnen",
+  "light": "Beleuchtet",
+  "customersOnly": "Nur für Besucher",
+  "covered": "Überdacht",
+  "wheelchairYes": "Rollstuhlgerecht",
+  "wheelchairLimited": "Limitiert Rollstuhlgerecht",
+  "wheelchairNo": "Nicht Rollstuhlgerecht",
+  "fee": "Kaufen",
+  "colour": "Farbe",
+  "open": "Geöffnet",
+  "closed": "Geschlossen",
+  "maybeOpen": "Vielleicht geöffnet",
+  "maybeOpens": "Öffnet vielleicht",
+  "maybeCloses": "Schliesst vielleicht",
+  "opens": "Öffnet",
+  "closes": "Schliesst",
+  "thatDependsOn": "Das hängt ab von",
+  "amenity": {
+    "library": "Kostenlose Bibliothek"
+  },
+  "def": "Öffentlicher Bücherschrank"
+}

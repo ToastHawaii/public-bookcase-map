@@ -6,10 +6,3 @@ defaults:
       title: "Public bookcases"
       description: "A map with public bookcases for book exchange. The map is based on OSM data."
       base: "/"
-  - scope:
-      path: "de/docs/README.md"
-    values:
-      lang: "de"
-      title: "Öffentliche Bücherschränke"
-      description: "Eine Karte mit öffentlichen Bücherschränken für das Tauschen von Büchern. Die Karte basiert auf OSM Daten."
-      base: "/de/"

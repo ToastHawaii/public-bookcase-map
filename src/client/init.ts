@@ -19,8 +19,9 @@ import { initMap } from "../osm-app-component";
 import { filters } from "./filters";
 import "../osm-app-component/style.scss";
 import { attributes } from "./attributes";
+import { TFunction } from "i18next";
 
-export function init(local: any) {
+export function init(local: TFunction<"translation", undefined>) {
   initMap(
     "https://book-exchange.zottelig.ch/",
     filters,

@@ -18,7 +18,6 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { init } from "../client/init";
-import { local } from "../client/en/local";
 import "./initI18next";
 
 function setMeta(name: string, value: string) {
@@ -31,7 +30,7 @@ export function App() {
   let { t } = useTranslation();
 
   useEffect(() => {
-    init(local);
+    init(t);
   });
   
   useEffect(() => {
