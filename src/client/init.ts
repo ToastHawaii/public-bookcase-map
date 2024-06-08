@@ -17,7 +17,7 @@
 
 import { initMap } from "../osm-app-component";
 import { filters } from "./filters";
-import "../osm-app-component/style.less";
+import "../osm-app-component/style.scss";
 import { attributes } from "./attributes";
 
 export function init(local: any) {

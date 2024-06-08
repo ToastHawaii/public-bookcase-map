@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with osm-app-component.  If not, see <http://www.gnu.org/licenses/>.
 
-import * as moment from "moment";
+import moment from "moment";
 import { getOrDefault } from "./data";
 
 export function toTitle(model: {
@@ -118,7 +118,7 @@ export function toSeasonal(
 ) {
   return value
     .split(";")
-    .map(v => getOrDefault(local, "seasonal")[v])
+    .map((v) => getOrDefault(local, "seasonal")[v])
     .join(", ");
 }
 

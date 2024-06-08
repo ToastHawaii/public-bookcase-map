@@ -25,7 +25,8 @@ body {
 
 html,
 body,
-#map {
+#map,
+#root {
   height: 100%;
   width: 100%;
 }
@@ -202,7 +203,7 @@ table.osm-data {
     padding: 1px;
   }
 
-  .filters-clear{
+  .filters-clear {
     background: white;
     width: 30px;
     height: 30px;
@@ -223,7 +224,8 @@ table.osm-data {
     width: 0px;
     height: 60px;
 
-    .right-collapse, .filters-clear {
+    .right-collapse,
+    .filters-clear {
       right: auto;
       left: 10px;
     }
@@ -485,7 +487,6 @@ a.menu {
   }
 }
 
-
 .info-container {
   position: absolute;
   top: 80px;
@@ -681,7 +682,9 @@ a.menu .title {
   hyphens: auto;
 }
 
-.count{float: right;}
+.count {
+  float: right;
+}
 
 .leaflet-popup {
   .leaflet-popup-content {
@@ -708,8 +711,7 @@ a.menu .title {
     font-size: 14px;
   }
 
-  .attributes{
-
+  .attributes {
     padding-top: 2px;
   }
 
@@ -717,19 +719,19 @@ a.menu .title {
     padding-top: 2px;
 
     a {
-    padding: 0 5px;
-    font-size: 14px;
-    margin-top: -3px;
-    text-decoration: none;
+      padding: 0 5px;
+      font-size: 14px;
+      margin-top: -3px;
+      text-decoration: none;
 
-    &:last-of-type {
-      padding: 0 0 0 5px;
-    }
+      &:last-of-type {
+        padding: 0 0 0 5px;
+      }
 
-    &:first-of-type {
-      padding: 0 5px 0 0;
+      &:first-of-type {
+        padding: 0 5px 0 0;
+      }
     }
-  }
   }
 }
 
@@ -757,7 +759,7 @@ html.theme-mode-dark {
 
   .leaflet-tile-container img,
   .leaflet-tile-container input[type="image"] {
-      filter: none;
+    filter: none;
   }
 
   #filters {
@@ -803,7 +805,7 @@ html.theme-mode-dark {
   }
 }
 
-.theme-mode-system {  
+.theme-mode-system {
   .theme-mode-system-visible {
     display: block;
   }

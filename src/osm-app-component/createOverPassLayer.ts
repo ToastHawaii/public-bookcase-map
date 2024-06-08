@@ -36,7 +36,7 @@ import { textTruncate } from "./utilities/string";
 import "leaflet-overpass-layer";
 import { delay } from "./utilities/data";
 
-export function createOverPassLayer<M>(
+export function createOverPassLayer<M extends {}>(
   group: string,
   value: string,
   icon: string,

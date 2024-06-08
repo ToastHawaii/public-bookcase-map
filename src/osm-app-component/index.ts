@@ -37,7 +37,7 @@ import BigNumber from "bignumber.js";
 import { funding } from "./funding";
 import "leaflet/dist/leaflet.css";
 import "leaflet-overpass-layer/dist/OverPassLayer.css";
-import "./style.less";
+import "./style.scss";
 import "details-element-polyfill";
 
 // Fix: https://github.com/Leaflet/Leaflet/issues/4968
@@ -161,8 +161,8 @@ export async function initMap<M>(
     ?.addEventListener("click", () => {
       const inputs = getHtmlElements("#filters input");
 
-      for (const input of inputs.filter((i) => i.checked)) {
-        input.checked = false;
+      for (const input of inputs.filter((i: any) => i.checked)) {
+        (input as any).checked = false;
         input.dispatchEvent(new Event("change"));
       }
     });
@@ -854,11 +854,15 @@ data-taginfo-taglist-options='{"with_count": true, "lang": "${local.code}"}'>
 
             updateCount(local, minZoom);
 
-            if (offers.length >= 1) {
-              getHtmlElement("#filters .filters-clear").style.display = "";
-            } else {
-              getHtmlElement("#filters .filters-clear").style.display = "none";
-            }
+            const filter = document.querySelector<HTMLElement>(
+              "#filters .filters-clear"
+            );
+            if (filter)
+              if (offers.length >= 1) {
+                filter.style.display = "";
+              } else {
+                filter.style.display = "none";
+              }
           }
         );
       }
@@ -866,11 +870,13 @@ data-taginfo-taglist-options='{"with_count": true, "lang": "${local.code}"}'>
     }
   }
 
-  if (offers.length >= 1) {
-    getHtmlElement("#filters .filters-clear").style.display = "";
-  } else {
-    getHtmlElement("#filters .filters-clear").style.display = "none";
-  }
+  const filter = document.querySelector<HTMLElement>("#filters .filters-clear");
+  if (filter)
+    if (offers.length >= 1) {
+      filter.style.display = "";
+    } else {
+      filter.style.display = "none";
+    }
 }
 
 function init<M>(
@@ -890,7 +896,7 @@ function init<M>(
     value,
     icon,
     query,
-    attributes,
+    attributes as any,
     local,
     color,
     minZoom,
