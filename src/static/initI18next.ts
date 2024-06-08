@@ -4,6 +4,10 @@ import { initReactI18next } from "react-i18next";
 import * as en from "./locales/en.json";
 import * as de from "./locales/de.json";
 
+i18next.on("languageChanged", function (lng) {
+  document.documentElement.setAttribute("lang", lng);
+});
+
 i18next
   .use(LanguageDetector)
   .use(initReactI18next) // passes i18n down to react-i18next

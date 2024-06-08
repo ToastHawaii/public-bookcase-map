@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Public bookcase map.  If not, see <http://www.gnu.org/licenses/>.
 
-import React from "react";
+import React, { useEffect } from "react";
 import "./initI18next";
 import { useTranslation } from "react-i18next";
 import { App } from "./App";
@@ -26,25 +26,24 @@ export function Root(attributes: {
   baseUrl: string;
 }) {
   let { t } = useTranslation();
-  let a = (key: string) => t(key, { lng: attributes.lang });
   return (
     <html className="help" lang={attributes.lang}>
       <head>
-        <title>{a("meta.title")}</title>
+        <title>{t("meta.title")}</title>
         <meta charSet="utf-8" />
         <link rel="manifest" href={`/manifest.${attributes.lang}.json`} />
         <meta
           name="viewport"
           content="width=device-width, target-densitydpi=device-dpi, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
-        <meta name="description" content={a("meta.description")} />
+        <meta name="description" content={t("meta.description")} />
 
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="application-name" content={a("meta.titleShort")} />
+        <meta name="application-name" content={t("meta.titleShort")} />
         <meta
           name="apple-mobile-web-app-title"
-          content={a("meta.titleShort")}
+          content={t("meta.titleShort")}
         />
         <meta name="theme-color" content={attributes.color} />
         <meta name="msapplication-navbutton-color" content={attributes.color} />

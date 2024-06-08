@@ -21,11 +21,24 @@ import { init } from "../client/init";
 import { local } from "../client/en/local";
 import "./initI18next";
 
+function setMeta(name: string, value: string) {
+  document
+    .querySelector("meta[name='" + name + "']")
+    ?.setAttribute("value", value);
+}
+
 export function App() {
   let { t } = useTranslation();
 
   useEffect(() => {
     init(local);
+  });
+  
+  useEffect(() => {
+    document.title = t("meta.title");
+    setMeta("description", t("meta.description"));
+    setMeta("application-name", t("meta.titleShort"));
+    setMeta("apple-mobile-web-app-title", t("meta.titleShort"));
   });
 
   return (
