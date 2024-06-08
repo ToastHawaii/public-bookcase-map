@@ -1,40 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<html className="help" lang="en">
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>   
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+<head>
+  <title></title>
+  <meta charSet="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#734a08" />
+  <meta name="msapplication-navbutton-color" content="#734a08" />
+  <meta name="msapplication-starturl" content="/" />
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+  <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/icons/favicon-16x16.png" />
+  <link rel="mask-icon" href="%PUBLIC_URL%/icons/safari-pinned-tab.svg" color="#734a08" />
+  <link rel="shortcut icon" href="%PUBLIC_URL%/icons/favicon.ico" />
+  <meta name="msapplication-TileColor" content="#734a08" />
+  <meta name="msapplication-config" content="%PUBLIC_URL%/icons/browserconfig.xml" />
+
+  <link rel="stylesheet" href="%PUBLIC_URL%/lib/leaflet.css" type="text/css" />
+  <link rel="stylesheet" href="%PUBLIC_URL%/lib/OverPassLayer.css" type="text/css" />
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+
+  <meta name="monetization" content="$ilp.uphold.com/BwpBDr48YqPi" />
+
+  <script src="%PUBLIC_URL%/serviceWorkerRegister.js"></script>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <script async src="https://code.jquery.com/jquery-1.12.4.min.js"
+          integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+          crossOrigin="anonymous"></script>
+  <script async type="text/javascript"
+          src="https://taginfo.openstreetmap.org/js/taglists.js"></script>
+</body>
+
 </html>
