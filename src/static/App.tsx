@@ -15,27 +15,30 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Public bookcase map.  If not, see <http://www.gnu.org/licenses/>.
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { init } from "../client/init";
 import { local } from "../client/en/local";
 import "./initI18next";
 
-export function App(props: { lang: string; color: string; baseUrl: string }) {
+export function App() {
   let { t } = useTranslation();
-  let i18n = (key: string) => t(key, { lng: props.lang });
+
+  useEffect(() => {
+    init(local);
+  });
 
   return (
     <>
       <div id="map"></div>
       <h1>
-        <a href={`${props.baseUrl}docs/`}>
+        <a href={`/docs/`}>
           <img
             className="book-exchange-icon"
             src="https://wiki.openstreetmap.org/w/images/b/b2/Public_bookcase-14.svg"
             style={{ width: "24px", verticalAlign: "text-bottom" }}
           />
-          {i18n("meta.titleShort")}
+          {t("meta.titleShort")}
         </a>
       </h1>
       <div className="box">
@@ -47,7 +50,7 @@ export function App(props: { lang: string; color: string; baseUrl: string }) {
             <input
               type="search"
               id="osm-search"
-              placeholder={i18n("search.placeholder")}
+              placeholder={t("search.placeholder")}
               required
             />
             <button className="icon" type="submit">
@@ -64,14 +67,14 @@ export function App(props: { lang: string; color: string; baseUrl: string }) {
           <small>
             <details>
               <summary>
-                <strong>{i18n("info.osmTags")}</strong>
+                <strong>{t("info.osmTags")}</strong>
               </summary>
               <br />
               <div className="wiki"></div>
-              <strong>{i18n("info.query")}</strong>
+              <strong>{t("info.query")}</strong>
               <code className="query"></code>
               <a className="link" target="_blank">
-                {i18n("info.overpassTurbo")}
+                {t("info.overpassTurbo")}
               </a>
             </details>
           </small>
@@ -83,52 +86,52 @@ export function App(props: { lang: string; color: string; baseUrl: string }) {
         <button
           className="menu note help-text"
           type="button"
-          title={i18n("menu.note")}
+          title={t("menu.note")}
         >
           <i className="fas fa-comment-alt"></i>
         </button>
         <button
           className="menu edit help-text"
           type="button"
-          title={i18n("menu.edit")}
+          title={t("menu.edit")}
         >
           <i className="fas fa-pencil-alt"></i>
         </button>
         <button
           className="menu share help-text"
           type="button"
-          title={i18n("menu.share")}
+          title={t("menu.share")}
         >
           <i className="fas fa-share-alt"></i>
         </button>
         <button
           className="menu theme theme-mode-dark-visible help-text"
           type="button"
-          title={i18n("menu.theme")}
+          title={t("menu.theme")}
         >
           <i className="fas fa-circle"></i>
         </button>
         <button
           className="menu theme theme-mode-light-visible help-text"
           type="button"
-          title={i18n("menu.theme")}
+          title={t("menu.theme")}
         >
           <i className="far fa-circle"></i>
         </button>
         <button
           className="menu theme theme-mode-system-visible help-text"
           type="button"
-          title={i18n("menu.theme")}
+          title={t("menu.theme")}
         >
           <i className="fas fa-adjust"></i>
         </button>
-        <a className="menu about help-text" title={i18n("menu.about")}>
+        <a className="menu about help-text" title={t("menu.about")}>
           <i className="fas fa-info"></i>
         </a>
         <a
           className="menu donate help-text"
           target="_blank"
-          title={i18n("menu.donate")}
+          title={t("menu.donate")}
         >
           <i className="fas fa-mug-hot"></i>
         </a>
@@ -139,7 +142,3 @@ export function App(props: { lang: string; color: string; baseUrl: string }) {
     </>
   );
 }
-
-setTimeout(()=>{
-  init(local);
-},1000)

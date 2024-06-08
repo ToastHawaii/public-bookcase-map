@@ -8,6 +8,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App baseUrl="/" color="#734a08" lang="en" />
+    <App />
   </React.StrictMode>
 );

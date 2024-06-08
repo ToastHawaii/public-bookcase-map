@@ -91,11 +91,7 @@ export function Root(attributes: {
       </head>
 
       <body>
-        <App
-          lang={attributes.lang}
-          baseUrl={attributes.baseUrl}
-          color={attributes.color}
-        ></App>
+        <App></App>
         <script
           async
           src="https://code.jquery.com/jquery-1.12.4.min.js"
