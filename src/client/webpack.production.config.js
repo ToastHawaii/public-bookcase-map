@@ -13,16 +13,16 @@ module.exports = {
   },
   output: {
     filename: "[name]/main.js",
-    path: __dirname + "/../docs",
+    path: __dirname + "/../../docs",
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./en/index.html",
+      template: "../_temp/en/index.html",
       filename: "./index.html",
       chunks: ["en"],
     }),
     new HtmlWebpackPlugin({
-      template: "./de/index.html",
+      template: "../_temp/de/index.html",
       filename: "./de/index.html",
       chunks: ["de"],
     }),
@@ -32,11 +32,6 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: "./www" },
-        {
-          context: "../node_modules/osm-app-component/dist/",
-          from: "*/local.js",
-          to: "[path]/[path][name][ext]",
-        },
         { from: "./www/LICENSE", to: "[path]/../../[name][ext]" },
         { from: "./www/docs/README.md", to: "[path]/../../[name][ext]" },
       ],
@@ -87,6 +82,13 @@ module.exports = {
             },
           },
         ],
+      },
+      {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        loader: "url-loader",
+        options: {
+          limit: 10000,
+        },
       },
     ],
   },

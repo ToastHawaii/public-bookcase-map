@@ -146,22 +146,26 @@ export async function initMap<M>(
     getHtmlElement(".menu-group").classList.toggle("collapsed");
   });
 
-  getHtmlElement("#filters .right-collapse").addEventListener("click", () => {
-    if (document.getElementById("filters")?.className) {
-      document.getElementById("filters")?.classList.remove("right-collapsed");
-    } else {
-      document.getElementById("filters")?.classList.add("right-collapsed");
-    }
-  });
+  document
+    .querySelector("#filters .right-collapse")
+    ?.addEventListener("click", () => {
+      if (document.getElementById("filters")?.className) {
+        document.getElementById("filters")?.classList.remove("right-collapsed");
+      } else {
+        document.getElementById("filters")?.classList.add("right-collapsed");
+      }
+    });
 
-  getHtmlElement("#filters .filters-clear").addEventListener("click", () => {
-    const inputs = getHtmlElements("#filters input");
+  document
+    .querySelector("#filters .filters-clear")
+    ?.addEventListener("click", () => {
+      const inputs = getHtmlElements("#filters input");
 
-    for (const input of inputs.filter((i) => i.checked)) {
-      input.checked = false;
-      input.dispatchEvent(new Event("change"));
-    }
-  });
+      for (const input of inputs.filter((i) => i.checked)) {
+        input.checked = false;
+        input.dispatchEvent(new Event("change"));
+      }
+    });
 
   (getHtmlElement(".about") as HTMLLinkElement).href = combine(
     baseUrl,

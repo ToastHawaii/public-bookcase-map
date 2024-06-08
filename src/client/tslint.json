@@ -1,17 +1,8 @@
 {
   "rules": {
-    "arrow-parens": [
-      true,
-      "ban-single-arg-parens"
-    ],
-    "indent": [
-      true,
-      "spaces"
-    ],
-    "max-line-length": [
-      true,
-      120
-    ],
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "indent": [true, "spaces"],
+    "max-line-length": [true, 120],
     "no-console": false,
     "no-namespace": false,
     "object-literal-sort-keys": false,
@@ -28,21 +19,11 @@
     "triple-equals": true,
     "use-isnan": true,
     "class-name": true,
-    "interface-name": [
-      true,
-      "never-prefix"
-    ],
+    "interface-name": [true, "never-prefix"],
     "no-angle-bracket-type-assertion": true,
     "one-variable-per-declaration": true,
-    "quotemark": [
-      true,
-      "double",
-      "avoid-escape"
-    ],
-    "semicolon": [
-      true,
-      "always"
-    ],
+    "quotemark": [true, "double", "avoid-escape"],
+    "semicolon": [true, "always"],
     "variable-name": [
       true,
       "ban-keywords",
