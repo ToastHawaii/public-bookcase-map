@@ -19,21 +19,128 @@ import * as fs from "fs";
 import prettier from "prettier";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-import { useTranslation } from "react-i18next";
 import "./initI18next";
+import { useTranslation } from "react-i18next";
 
-function Logo() {
+function App(props: { lang: string; color: string; baseUrl: string }) {
+  let { t } = useTranslation();
+  let i18n = (key: string) => t(key, { lng: props.lang });
   return (
-    <img
-      className="book-exchange-icon"
-      src="https://wiki.openstreetmap.org/w/images/b/b2/Public_bookcase-14.svg"
-      style={{ width: "24px", verticalAlign: "text-bottom" }}
-    />
+    <>
+      <div id="map"></div>
+      <h1>
+        <a href={`${props.baseUrl}docs/`}>
+          <img
+            className="book-exchange-icon"
+            src="https://wiki.openstreetmap.org/w/images/b/b2/Public_bookcase-14.svg"
+            style={{ width: "24px", verticalAlign: "text-bottom" }}
+          />
+          {i18n("meta.titleShort")}
+        </a>
+      </h1>
+      <div className="box">
+        <div className="container">
+          <form className="search">
+            <button className="geo" type="button">
+              <i className="far fa-dot-circle"></i>
+            </button>
+            <input
+              type="search"
+              id="osm-search"
+              placeholder={i18n("search.placeholder")}
+              required
+            />
+            <button className="icon" type="submit">
+              <i className="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div className="info-container">
+        <div className="info">
+          <h4></h4>
+          <span className="text"></span>
+          <hr />
+          <small>
+            <details>
+              <summary>
+                <strong>{i18n("info.osmTags")}</strong>
+              </summary>
+              <br />
+              <div className="wiki"></div>
+              <strong>{i18n("info.query")}</strong>
+              <code className="query"></code>
+              <a className="link" target="_blank">
+                {i18n("info.overpassTurbo")}
+              </a>
+            </details>
+          </small>
+          <small className="external"></small>
+        </div>
+        <button className="close-button">×</button>
+      </div>
+      <div className="menu-group collapsed">
+        <button
+          className="menu note help-text"
+          type="button"
+          title={i18n("menu.note")}
+        >
+          <i className="fas fa-comment-alt"></i>
+        </button>
+        <button
+          className="menu edit help-text"
+          type="button"
+          title={i18n("menu.edit")}
+        >
+          <i className="fas fa-pencil-alt"></i>
+        </button>
+        <button
+          className="menu share help-text"
+          type="button"
+          title={i18n("menu.share")}
+        >
+          <i className="fas fa-share-alt"></i>
+        </button>
+        <button
+          className="menu theme theme-mode-dark-visible help-text"
+          type="button"
+          title={i18n("menu.theme")}
+        >
+          <i className="fas fa-circle"></i>
+        </button>
+        <button
+          className="menu theme theme-mode-light-visible help-text"
+          type="button"
+          title={i18n("menu.theme")}
+        >
+          <i className="far fa-circle"></i>
+        </button>
+        <button
+          className="menu theme theme-mode-system-visible help-text"
+          type="button"
+          title={i18n("menu.theme")}
+        >
+          <i className="fas fa-adjust"></i>
+        </button>
+        <a className="menu about help-text" title={i18n("menu.about")}>
+          <i className="fas fa-info"></i>
+        </a>
+        <a
+          className="menu donate help-text"
+          target="_blank"
+          title={i18n("menu.donate")}
+        >
+          <i className="fas fa-mug-hot"></i>
+        </a>
+      </div>
+      <a className="menu toggle">
+        <i className="fas fa-ellipsis-v"></i>
+      </a>
+    </>
   );
 }
 
 render({
-  logo: <Logo />,
   color: "#734a08",
   locals: [
     {
@@ -48,7 +155,6 @@ render({
 });
 
 function render(customize: {
-  logo: React.ReactElement;
   color: string;
   locals: {
     code: string;
@@ -57,9 +163,11 @@ function render(customize: {
 }) {
   for (const local of customize.locals) {
     const html = ReactDOMServer.renderToStaticMarkup(
-      <App lang={local.code} color={customize.color} baseUrl={local.baseUrl}>
-        {customize.logo}
-      </App>
+      <Root
+        lang={local.code}
+        color={customize.color}
+        baseUrl={local.baseUrl}
+      ></Root>
     );
     const htmlWDoc = "<!DOCTYPE html>" + html;
     const prettyHtml = prettier.format(htmlWDoc, { parser: "html" });
@@ -100,12 +208,7 @@ function writeFileSyncRecursive(filename, content?, charset?) {
   fs.writeFileSync(root + filepath, content, charset);
 }
 
-function App(attributes: {
-  lang: string;
-  color: string;
-  baseUrl: string;
-  children: any;
-}) {
+function Root(attributes: { lang: string; color: string; baseUrl: string }) {
   let { t } = useTranslation();
   let a = (key: string) => t(key, { lng: attributes.lang });
   return (
@@ -172,112 +275,11 @@ function App(attributes: {
       </head>
 
       <body>
-        <div id="map"></div>
-        <h1>
-          <a href={`${attributes.baseUrl}docs/`}>
-            {attributes.children}
-            {a("meta.titleShort")}
-          </a>
-        </h1>
-        <div className="box">
-          <div className="container">
-            <form className="search">
-              <button className="geo" type="button">
-                <i className="far fa-dot-circle"></i>
-              </button>
-              <input
-                type="search"
-                id="osm-search"
-                placeholder={a("search.placeholder")}
-                required
-              />
-              <button className="icon" type="submit">
-                <i className="fas fa-search"></i>
-              </button>
-            </form>
-          </div>
-        </div>
-        <div className="info-container">
-          <div className="info">
-            <h4></h4>
-            <span className="text"></span>
-            <hr />
-            <small>
-              <details>
-                <summary>
-                  <strong>{a("info.osmTags")}</strong>
-                </summary>
-                <br />
-                <div className="wiki"></div>
-                <strong>{a("info.query")}</strong>
-                <code className="query"></code>
-                <a className="link" target="_blank">
-                  {a("info.overpassTurbo")}
-                </a>
-              </details>
-            </small>
-            <small className="external"></small>
-          </div>
-          <button className="close-button">×</button>
-        </div>
-
-        <div className="menu-group collapsed">
-          <button
-            className="menu note help-text"
-            type="button"
-            title={a("menu.note")}
-          >
-            <i className="fas fa-comment-alt"></i>
-          </button>
-          <button
-            className="menu edit help-text"
-            type="button"
-            title={a("menu.edit")}
-          >
-            <i className="fas fa-pencil-alt"></i>
-          </button>
-          <button
-            className="menu share help-text"
-            type="button"
-            title={a("menu.share")}
-          >
-            <i className="fas fa-share-alt"></i>
-          </button>
-          <button
-            className="menu theme theme-mode-dark-visible help-text"
-            type="button"
-            title={a("menu.theme")}
-          >
-            <i className="fas fa-circle"></i>
-          </button>
-          <button
-            className="menu theme theme-mode-light-visible help-text"
-            type="button"
-            title={a("menu.theme")}
-          >
-            <i className="far fa-circle"></i>
-          </button>
-          <button
-            className="menu theme theme-mode-system-visible help-text"
-            type="button"
-            title={a("menu.theme")}
-          >
-            <i className="fas fa-adjust"></i>
-          </button>
-          <a className="menu about help-text" title={a("menu.about")}>
-            <i className="fas fa-info"></i>
-          </a>
-          <a
-            className="menu donate help-text"
-            target="_blank"
-            title={a("menu.donate")}
-          >
-            <i className="fas fa-mug-hot"></i>
-          </a>
-        </div>
-        <a className="menu toggle">
-          <i className="fas fa-ellipsis-v"></i>
-        </a>
+        <App
+          lang={attributes.lang}
+          baseUrl={attributes.baseUrl}
+          color={attributes.color}
+        ></App>
         <script
           async
           src="https://code.jquery.com/jquery-1.12.4.min.js"
