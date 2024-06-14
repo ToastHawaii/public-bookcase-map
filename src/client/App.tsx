@@ -17,7 +17,7 @@
 
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { init } from "../client/init";
+import { init } from "./init";
 import "./initI18next";
 
 function setMeta(name: string, value: string) {
@@ -32,7 +32,7 @@ export function App() {
   useEffect(() => {
     init(t);
   });
-  
+
   useEffect(() => {
     document.title = t("meta.title");
     setMeta("description", t("meta.description"));
