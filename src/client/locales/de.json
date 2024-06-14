@@ -9,6 +9,18 @@
   "search": {
     "placeholder": "Einen Ort suchen"
   },
+  "intro": {
+    "title": "Öffentliche Bücherschränke",
+    "tagline": "Dies ist eine einfache Karte, welche öffentliche Bücherschränke in ihrer Nähe anzeigt.",
+    "description": "Ein öffentlicher oder offener Bücherschrank ist ein Schrank, Regal oder Box mit Büchern zum Tauschen. Der öffentliche Bücherschrank steht der Allgemeinheit zur Verfügung. Es können Bücher gebracht und mitgenommen werden. Das Tauschen ist kostenlos, anonym und ohne jegliche Formalitäten.",
+    "osm": "Die Informationen werden von <o>OpenStreetMap</o> geladen. <e>Füge dir bekannte Orte hinzu.</e>",
+    "license": "Die Anwendung ist unter der <l>GNU Affero General Public License v3.0</l> lizenziert. Der <c>Code</c> steht frei zur Verwendung, Kopierung und Modifizierung, wenn er unter der gleichen Lizenz veröffentlichet wird.",
+    "translate": "Hilf übersetzen",
+    "translationStatus": "Stand der Übersetzung",
+    "contribute": "Wie du zu OpenStreetMap beitragen kannst",
+    "moreApps": "Mehr Apps basierend auf OpenStreetMap",
+    "aboutMe": "Über mich"
+  },
   "info": {
     "osmTags": "Dokumentation",
     "query": "Abfrage",

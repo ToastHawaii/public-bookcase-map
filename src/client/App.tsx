@@ -16,7 +16,7 @@
 // along with Public bookcase map.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { init } from "./init";
 import "./initI18next";
 
@@ -44,12 +44,12 @@ export function App() {
     <>
       <div id="map"></div>
       <h1>
-        <a href={`/docs/`}>
+        <a href="/">
           <img
             className="book-exchange-icon"
             src="https://wiki.openstreetmap.org/w/images/b/b2/Public_bookcase-14.svg"
             style={{ width: "24px", verticalAlign: "text-bottom" }}
-          />
+          />{" "}
           {t("meta.titleShort")}
         </a>
       </h1>
@@ -71,6 +71,7 @@ export function App() {
           </form>
         </div>
       </div>
+      {Intro()}
       <div className="info-container">
         <div className="info">
           <h4></h4>
@@ -137,9 +138,9 @@ export function App() {
         >
           <i className="fas fa-adjust"></i>
         </button>
-        <a className="menu about help-text" title={t("menu.about")}>
+        <button className="menu about help-text" title={t("menu.about")}>
           <i className="fas fa-info"></i>
-        </a>
+        </button>
         <a
           className="menu donate help-text"
           target="_blank"
@@ -152,5 +153,109 @@ export function App() {
         <i className="fas fa-ellipsis-v"></i>
       </a>
     </>
+  );
+}
+function Intro() {
+  const { t } = useTranslation();
+
+  return (
+    <div className="intro-container" style={{ display: "block" }}>
+      <div className="info">
+        <h4>{t("intro.title")}</h4>
+
+        <p>{t("intro.tagline")}</p>
+        <p>{t("intro.description")}</p>
+
+        <p>
+          <Trans
+            i18nKey="intro.osm"
+            components={{
+              o: <a href="https://www.openstreetmap.org" />,
+              e: <a href="#" className="edit" />,
+            }}
+          ></Trans>
+        </p>
+
+        <p>
+          <Trans
+            i18nKey="intro.license"
+            components={{
+              l: (
+                <a href="https://github.com/ToastHawaii/public-bookcase-map/blob/master/LICENSE" />
+              ),
+              c: (
+                <a href="https://github.com/ToastHawaii/public-bookcase-map" />
+              ),
+            }}
+          ></Trans>
+        </p>
+
+        <div className="responsive-table">
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <a href="/?lang=en">English</a>
+                </td>
+                <td>
+                  <a href="/?lang=de">Deutsch</a>
+                </td>
+                {/* <td>
+                  <a href="/?lang=es">Español</a>
+                </td>
+                <td>
+                  <a href="/?lang=fr">Français</a>
+                </td>
+                <td>
+                  <a href="/?lang=pl">Polski</a>
+                </td>
+                <td>
+                  <a href="https://hosted.weblate.org/engage/public-bookcase-map/">
+                    {t("intro.translate")}
+                  </a>
+                </td> */}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        {/*
+        <p>
+          <a href="https://hosted.weblate.org/engage/public-bookcase-map/">
+            <img
+              src="https://hosted.weblate.org/widgets/public-bookcase-map/-/svg-badge.svg"
+              alt={t("intro.translationStatus")}
+            />
+          </a>
+        </p> */}
+
+        <hr />
+
+        <ul>
+          <li>
+            <a href="https://wiki.openstreetmap.org/wiki/How_to_contribute">
+              {t("intro.contribute")}
+            </a>
+          </li>
+          <li>
+            <a href="https://osm-apps.zottelig.ch/">{t("intro.moreApps")}</a>
+          </li>
+          <li>
+            <a href="https://wiki.openstreetmap.org/wiki/User:ToastHawaii">
+              {t("intro.aboutMe")}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <button
+        className="close-button"
+        onClick={() => {
+          (
+            document.querySelector(".intro-container") as HTMLElement
+          ).style.display = "none";
+        }}
+      >
+        ×
+      </button>
+    </div>
   );
 }

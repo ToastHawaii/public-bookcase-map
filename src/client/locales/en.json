@@ -9,6 +9,18 @@
   "search": {
     "placeholder": "Search a location"
   },
+  "intro": {
+    "title": "Public bookcase",
+    "tagline": "This simple map shows public bookcases near you.",
+    "description": "A public or open bookcase is a cabinet, shelf or box used for the exchange and storage of books. The public bookcase is available to the general public. The exchange is free of charge, anonymous and without any formalities.",
+    "osm": "The information is loaded from <o>OpenStreetMap</o>. <e>Add places you know.</e>",
+    "license": "The app is licensed under the <l>GNU Affero General Public License v3.0</l>. The <c>code</c> is free for use, copying and modification if you publish under the same license.",
+    "translate": "Help translate",
+    "translationStatus": "Translation status",
+    "contribute": "How to contribute to OpenStreetMap",
+    "moreApps": "More apps based on OpenStreetMap",
+    "aboutMe": "About me"
+  },
   "info": {
     "osmTags": "Documentation",
     "query": "Query",
