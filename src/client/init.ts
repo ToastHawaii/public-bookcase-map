@@ -21,12 +21,12 @@ import "../osm-app-component/style.scss";
 import { attributes } from "./attributes";
 import { TFunction } from "i18next";
 
-export function init(local: TFunction<"translation", undefined>) {
+export function init(t: TFunction<"translation", undefined>) {
   initMap(
     "https://book-exchange.zottelig.ch/",
     filters,
     attributes,
-    local,
+    t,
     tags => {
       if (tags.access && tags.access === "no") return true;
       return false;
