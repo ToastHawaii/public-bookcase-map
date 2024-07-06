@@ -1,13 +1,8 @@
 {
-  "code": "de",
-
   "meta": {
     "title": "Öffentliche Bücherschränke Karte",
     "titleShort": "Bücherschränke",
     "description": "Diese Karte zeigt öffentliche Bücherschränke für das Tauschen von Büchern in ihrer Nähe an."
-  },
-  "search": {
-    "placeholder": "Einen Ort suchen"
   },
   "intro": {
     "title": "Öffentliche Bücherschränke",
@@ -21,27 +16,10 @@
     "moreApps": "Mehr Apps basierend auf OpenStreetMap",
     "aboutMe": "Über mich"
   },
-  "info": {
-    "osmTags": "Dokumentation",
-    "query": "Abfrage",
-    "overpassTurbo": "overpass-turbo"
-  },
-  "menu": {
-    "note": "Hinweis für Kartographen hinzufügen",
-    "edit": "Karte bearbeiten",
-    "share": "Ort teilen",
-    "theme": "Theme ändern",
-    "about": "Über diese Seite",
-    "donate": "Mich unterstützen"
-  },
 
   "title": "Öffentliche Bücherschränke Karte",
   "description": "Dies ist eine einfache Karte, welche öffentliche Bücherschränke für das Tauschen von Büchern in ihrer Nähe anzeigt.",
 
-  "minZoomMessageNoLayer": "Keine Ebene zugewiesen",
-  "minZoomMessage": "Zoome hinein, um Bücherschränke zu laden",
-  "emptyIndicator": "Keine Bücherschränke in diesem Bereich gefunden",
-  "linkCopied": "Link in die Zwischenablage kopiert",
   "capacity": "Kapazität",
   "freeToGive": "Nur bringen",
   "freeToTake": "Nur mitnehmen",
@@ -57,14 +35,6 @@
   "wheelchairNo": "Nicht Rollstuhlgerecht",
   "fee": "Kaufen",
   "colour": "Farbe",
-  "open": "Geöffnet",
-  "closed": "Geschlossen",
-  "maybeOpen": "Vielleicht geöffnet",
-  "maybeOpens": "Öffnet vielleicht",
-  "maybeCloses": "Schliesst vielleicht",
-  "opens": "Öffnet",
-  "closes": "Schliesst",
-  "thatDependsOn": "Das hängt ab von",
   "amenity": {
     "library": "Kostenlose Bibliothek"
   },

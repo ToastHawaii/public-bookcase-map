@@ -1,13 +1,8 @@
 {
-  "code": "en",
-
   "meta": {
     "title": "Public bookcase map",
     "description": "This map shows public bookcases for book exchange near you.",
     "titleShort": "Public bookcase"
-  },
-  "search": {
-    "placeholder": "Search a location"
   },
   "intro": {
     "title": "Public bookcase",
@@ -21,27 +16,10 @@
     "moreApps": "More apps based on OpenStreetMap",
     "aboutMe": "About me"
   },
-  "info": {
-    "osmTags": "Documentation",
-    "query": "Query",
-    "overpassTurbo": "overpass-turbo"
-  },
-  "menu": {
-    "note": "Add note for mappers",
-    "edit": "Edit map",
-    "share": "Share place",
-    "theme": "Change theme",
-    "about": "About this site",
-    "donate": "Support me"
-  },
 
   "title": "Public bookcase map",
   "description": "This simple map shows public bookcases for book exchange near you.",
 
-  "minZoomMessageNoLayer": "No layer assigned",
-  "minZoomMessage": "Zoom in to load bookcases",
-  "emptyIndicator": "No bookcases found in this area",
-  "linkCopied": "Link copied to the clipboard",
   "capacity": "Capacity",
   "freeToGive": "Free to give",
   "freeToTake": "Free to take",
@@ -57,14 +35,6 @@
   "wheelchairNo": "Not wheelchair accessible",
   "fee": "Sale",
   "colour": "Color",
-  "open": "Open",
-  "closed": "Closed",
-  "maybeOpen": "Maybe open",
-  "maybeOpens": "Maybe opens",
-  "maybeCloses": "Maybe closes",
-  "opens": "Opens",
-  "closes": "Closes",
-  "thatDependsOn": "That depends on",
   "amenity": {
     "library": "Free library"
   },
