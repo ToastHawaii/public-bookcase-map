@@ -60,11 +60,12 @@ export const filters: {
     ${nw(`["shop"="charity"]["fee"="no"]`)}
     ${nw(`["shop"="second_hand"]["fee"="no"]`)}`,
     color: "#A0522D",
-    edit: [
+    edit: ["amenity=public_bookcase", "amenity=give_box", "amenity=library"],
+    tags: [
       "amenity=public_bookcase",
       "amenity=give_box",
-      "amenity=library"
+      "amenity=library",
+      "amenity=freeshop",
     ],
-    tags: ["amenity=public_bookcase", "amenity=give_box", "amenity=library"]
-  }
+  },
 ];
