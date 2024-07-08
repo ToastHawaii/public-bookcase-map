@@ -20,6 +20,8 @@
   "title": "Public bookcase map",
   "description": "This simple map shows public bookcases for book exchange near you.",
 
+  "type.book-exchange.name": "Public bookcase",
+
   "capacity": "Capacity",
   "freeToGive": "Free to give",
   "freeToTake": "Free to take",

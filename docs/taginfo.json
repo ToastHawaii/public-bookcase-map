@@ -12,19 +12,23 @@
   "tags": [
     {
       "key": "amenity",
-      "value": "public_bookcase"
+      "value": "public_bookcase",
+      "doc_url": "https://book-exchange.zottelig.ch/?offers=education/book-exchange&info=education/book-exchange"
     },
     {
       "key": "amenity",
-      "value": "give_box"
+      "value": "give_box",
+      "doc_url": "https://book-exchange.zottelig.ch/?offers=education/book-exchange&info=education/book-exchange"
     },
     {
       "key": "amenity",
-      "value": "library"
+      "value": "library",
+      "doc_url": "https://book-exchange.zottelig.ch/?offers=education/book-exchange&info=education/book-exchange"
     },
     {
       "key": "amenity",
-      "value": "freeshop"
+      "value": "freeshop",
+      "doc_url": "https://book-exchange.zottelig.ch/?offers=education/book-exchange&info=education/book-exchange"
     }
   ]
 }
