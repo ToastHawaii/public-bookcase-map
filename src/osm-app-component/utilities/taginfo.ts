@@ -22,6 +22,7 @@ export function printTagInfoList(
               )
               .join(", "),
             doc_url: `${urlBase}?offers=${fs[0].group}/${fs[0].value}&info=${fs[0].group}/${fs[0].value}`,
+            icon_url: fs[0].icon,
           };
         }
         return {
@@ -32,6 +33,7 @@ export function printTagInfoList(
             )
             .join(", "),
           doc_url: `${urlBase}?offers=${fs[0].group}/${fs[0].value}&info=${fs[0].group}/${fs[0].value}`,
+          icon_url: fs[0].icon,
         };
       })
     )

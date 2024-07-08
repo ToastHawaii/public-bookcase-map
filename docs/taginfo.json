@@ -13,22 +13,26 @@
     {
       "key": "amenity",
       "value": "public_bookcase",
-      "doc_url": "https://book-exchange.zottelig.ch/?offers=education/book-exchange&info=education/book-exchange"
+      "doc_url": "https://book-exchange.zottelig.ch/?offers=education/book-exchange&info=education/book-exchange",
+      "icon_url": "https://wiki.openstreetmap.org/w/images/b/b2/Public_bookcase-14.svg"
     },
     {
       "key": "amenity",
       "value": "give_box",
-      "doc_url": "https://book-exchange.zottelig.ch/?offers=education/book-exchange&info=education/book-exchange"
+      "doc_url": "https://book-exchange.zottelig.ch/?offers=education/book-exchange&info=education/book-exchange",
+      "icon_url": "https://wiki.openstreetmap.org/w/images/b/b2/Public_bookcase-14.svg"
     },
     {
       "key": "amenity",
       "value": "library",
-      "doc_url": "https://book-exchange.zottelig.ch/?offers=education/book-exchange&info=education/book-exchange"
+      "doc_url": "https://book-exchange.zottelig.ch/?offers=education/book-exchange&info=education/book-exchange",
+      "icon_url": "https://wiki.openstreetmap.org/w/images/b/b2/Public_bookcase-14.svg"
     },
     {
       "key": "amenity",
       "value": "freeshop",
-      "doc_url": "https://book-exchange.zottelig.ch/?offers=education/book-exchange&info=education/book-exchange"
+      "doc_url": "https://book-exchange.zottelig.ch/?offers=education/book-exchange&info=education/book-exchange",
+      "icon_url": "https://wiki.openstreetmap.org/w/images/b/b2/Public_bookcase-14.svg"
     }
   ]
 }
