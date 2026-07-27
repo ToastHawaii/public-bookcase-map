@@ -20,7 +20,7 @@ import { httpRegex } from "./url";
 import { startsWithIgnoreCase } from "./string";
 
 export async function isImage(src: string) {
-  return new Promise<boolean>(resolve => {
+  return new Promise<boolean>((resolve) => {
     const img = new Image();
     img.addEventListener("load", () => {
       resolve(true);
@@ -73,14 +73,22 @@ export function toWikimediaCommonsUrl(source: string) {
   const hash = md5(fileName);
   return `https://upload.wikimedia.org/wikipedia/commons/thumb/${hash.substring(
     0,
-    1
-  )}/${hash.substring(0, 2)}/${fileName}/320px-${fileName}`;
+    1,
+  )}/${hash.substring(0, 2)}/${fileName}/330px-${fileName}`;
 }
 
-export function toMapillaryUrl(mapillary: string) {
-  if (!mapillary) return undefined;
+export function toPanoramaxUrl(value: string) {
+  if (!value) return undefined;
 
-  if (httpRegex.test(mapillary)) return mapillary;
+  if (httpRegex.test(value)) return value;
 
-  return `https://www.mapillary.com/map/im/${mapillary}`;
+  return ` https://api.panoramax.xyz/api/pictures/${value}/thumb.jpg`;
+}
+
+export function toMapillaryUrl(value: string) {
+  if (!value) return undefined;
+
+  if (httpRegex.test(value)) return value;
+
+  return `https://www.mapillary.com/map/im/${value}`;
 }

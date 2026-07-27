@@ -1,3 +1,7 @@
 {
-    "licenser.projectName": "Public bookcase map"
+  "licenser.projectName": "Public bookcase map",
+  "i18n-ally.localesPaths": [
+    "src/client/locales",
+    "src/osm-app-component/locales"
+  ]
 }
